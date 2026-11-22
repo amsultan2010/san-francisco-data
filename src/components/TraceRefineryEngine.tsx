@@ -165,19 +165,19 @@ export function TraceRefineryEngine() {
     <section
       id="refinery"
       ref={sectionRef}
-      className="bg-[var(--sf-white)] text-[var(--sf-ink)] py-20 lg:py-24 border-t border-[var(--sf-hairline)]"
+      className="bg-[var(--sf-white)] text-[var(--sf-ink)] py-14 sm:py-20 lg:py-24 border-t border-[var(--sf-hairline)]"
     >
       <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8">
         {/* Asymmetric Wide Editorial Header */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-6">
-            <h2 className="refinery-header-reveal font-optima text-[clamp(2.1rem,3.6vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
+            <h2 className="refinery-header-reveal font-optima text-[clamp(1.85rem,3.6vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
               We partner with companies who{" "}
               <span className="text-[var(--sf-red)]">push their agents past their limits</span>
             </h2>
           </div>
-          <div className="lg:col-span-6 lg:text-right">
-            <p className="refinery-header-reveal font-garamond text-[21px] sm:text-[23px] leading-[1.52] text-[var(--sf-ink-muted)] lg:ml-auto lg:max-w-[48ch]">
+          <div className="lg:col-span-6 text-left lg:text-right">
+            <p className="refinery-header-reveal font-garamond text-[19px] sm:text-[23px] leading-[1.52] text-[var(--sf-ink-muted)] lg:ml-auto lg:max-w-[48ch]">
               Every time a deployed agent breaks on real work, it exposes a frontier capability
               gap. We turn those partner-permissioned sessions into deterministic reinforcement
               learning environments and ungameable verifiers.
@@ -186,7 +186,7 @@ export function TraceRefineryEngine() {
         </div>
 
         {/* One Continuous Simple 4-Stage Refinery Diagram */}
-        <div ref={diagramRef} className="mt-10">
+        <div ref={diagramRef} className="mt-7 sm:mt-10">
           <TracePipelineCanvas
             activeStage={activeIndex}
             runTrigger={runTrigger}
@@ -198,11 +198,11 @@ export function TraceRefineryEngine() {
           />
         </div>
 
-        {/* 4 Stage Cards Directly Aligned Below */}
+        {/* 4 Stage Cards Directly Aligned Below (2x2 on mobile, 4-col on desktop) */}
         <div
           role="tablist"
           aria-label="Trace to RL refinery stages"
-          className="refinery-pipeline-grid mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4"
+          className="refinery-pipeline-grid mt-3.5 sm:mt-4 grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4"
         >
           {REFINERY_STAGES.map((stage, idx) => {
             const isActive = idx === activeIndex;
@@ -223,7 +223,7 @@ export function TraceRefineryEngine() {
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => handleManualSelect(idx)}
                 onKeyDown={(e) => handleTabKeyDown(e, idx)}
-                className={`refinery-node-reveal sf-pressable sf-squircle group w-full text-left px-6 py-5 border cursor-pointer flex items-center justify-between gap-4 ${
+                className={`refinery-node-reveal sf-pressable sf-squircle group w-full text-left px-3.5 py-3.5 sm:px-6 sm:py-5 border cursor-pointer flex items-center justify-between gap-2.5 sm:gap-4 ${
                   isActive
                     ? "bg-[var(--sf-red)] text-[var(--sf-white)] border-[var(--sf-red)] shadow-[0_12px_28px_rgba(204,50,0,0.2)]"
                     : isPast
@@ -233,14 +233,14 @@ export function TraceRefineryEngine() {
               >
                 <div className="min-w-0">
                   <div
-                    className={`font-optima text-[20px] font-medium leading-[1.2] ${
+                    className={`font-optima text-[15.5px] sm:text-[20px] font-medium leading-[1.2] ${
                       isActive ? "text-[var(--sf-white)]" : "text-[var(--sf-ink)]"
                     }`}
                   >
                     {stage.shortTitle}
                   </div>
                   <div
-                    className={`mt-1 font-garamond text-[19px] leading-[1.3] ${
+                    className={`mt-0.5 sm:mt-1 font-garamond text-[14.5px] sm:text-[19px] leading-[1.28] ${
                       isActive ? "text-[var(--sf-white-muted)]" : "text-[var(--sf-ink-muted)]"
                     }`}
                   >
@@ -249,7 +249,7 @@ export function TraceRefineryEngine() {
                 </div>
                 <Icon
                   aria-hidden="true"
-                  className={`h-8 w-8 shrink-0 ${
+                  className={`h-5 w-5 sm:h-8 sm:w-8 shrink-0 ${
                     isActive ? "text-[var(--sf-white)]" : "text-[var(--sf-red)]"
                   }`}
                   strokeWidth={1.6}
@@ -265,7 +265,7 @@ export function TraceRefineryEngine() {
           ref={stagePanelRef}
           role="tabpanel"
           aria-labelledby={`tab-${activeStage.id}`}
-          className="sf-squircle mt-5 border border-[var(--sf-hairline-strong)] bg-[var(--sf-white)] shadow-[0_20px_50px_rgba(17,16,14,0.06)] overflow-hidden"
+          className="sf-squircle mt-4 sm:mt-5 border border-[var(--sf-hairline-strong)] bg-[var(--sf-white)] shadow-[0_20px_50px_rgba(17,16,14,0.06)] overflow-hidden"
         >
           <div className="h-[3px] w-full bg-[var(--sf-paper)] overflow-hidden" aria-hidden="true">
             <div
@@ -276,37 +276,37 @@ export function TraceRefineryEngine() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12">
             {/* Left: Explanation + Input -> Output */}
-            <div className="lg:col-span-5 p-7 sm:p-9 lg:p-10 flex flex-col justify-between lg:border-r lg:border-[var(--sf-hairline)]">
+            <div className="lg:col-span-5 p-5 sm:p-9 lg:p-10 flex flex-col justify-between lg:border-r lg:border-[var(--sf-hairline)]">
               <div>
-                <h3 className="refinery-animate-item font-optima text-[clamp(1.6rem,2.3vw,2.05rem)] font-medium leading-[1.18] tracking-[-0.015em] text-[var(--sf-ink)] text-balance">
+                <h3 className="refinery-animate-item font-optima text-[clamp(1.45rem,2.3vw,2.05rem)] font-medium leading-[1.18] tracking-[-0.015em] text-[var(--sf-ink)] text-balance">
                   {activeStage.title}
                 </h3>
 
-                <p className="refinery-animate-item mt-3.5 font-garamond text-[20.5px] leading-[1.56] text-[var(--sf-ink-muted)]">
+                <p className="refinery-animate-item mt-3 font-garamond text-[19px] sm:text-[20.5px] leading-[1.54] text-[var(--sf-ink-muted)]">
                   {activeStage.detail}
                 </p>
 
-                <div className="refinery-animate-item mt-6 border-t border-[var(--sf-hairline)] divide-y divide-[var(--sf-hairline)]">
-                  <div className="py-4">
-                    <div className="font-optima text-[16px] font-medium text-[var(--sf-ink-muted)]">
+                <div className="refinery-animate-item mt-5 sm:mt-6 border-t border-[var(--sf-hairline)] divide-y divide-[var(--sf-hairline)]">
+                  <div className="py-3.5 sm:py-4">
+                    <div className="font-optima text-[15px] sm:text-[16px] font-medium text-[var(--sf-ink-muted)]">
                       Goes in
                     </div>
-                    <p className="mt-1 font-garamond text-[19.5px] leading-[1.45] text-[var(--sf-ink)]">
+                    <p className="mt-1 font-garamond text-[18.5px] sm:text-[19.5px] leading-[1.45] text-[var(--sf-ink)]">
                       {activeStage.inputLabel}
                     </p>
                   </div>
-                  <div className="py-4">
-                    <div className="font-optima text-[16px] font-medium text-[var(--sf-red)]">
+                  <div className="py-3.5 sm:py-4">
+                    <div className="font-optima text-[15px] sm:text-[16px] font-medium text-[var(--sf-red)]">
                       Comes out
                     </div>
-                    <p className="mt-1 font-garamond text-[19.5px] font-medium leading-[1.45] text-[var(--sf-ink)]">
+                    <p className="mt-1 font-garamond text-[18.5px] sm:text-[19.5px] font-medium leading-[1.45] text-[var(--sf-ink)]">
                       {activeStage.outputLabel}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-5 pt-5 border-t border-[var(--sf-hairline)] flex items-center justify-between gap-4">
+              <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-[var(--sf-hairline)] flex items-center justify-between gap-4">
                 <button
                   type="button"
                   onClick={() =>
@@ -314,7 +314,7 @@ export function TraceRefineryEngine() {
                       activeIndex === 0 ? REFINERY_STAGES.length - 1 : activeIndex - 1,
                     )
                   }
-                  className="sf-pressable inline-flex items-center gap-1.5 font-optima text-[17.5px] font-medium text-[var(--sf-ink-muted)] hover:text-[var(--sf-red)] cursor-pointer"
+                  className="sf-pressable inline-flex items-center gap-1.5 font-optima text-[16px] sm:text-[17.5px] font-medium text-[var(--sf-ink-muted)] hover:text-[var(--sf-red)] cursor-pointer"
                 >
                   <ChevronLeft className="h-4 w-4" aria-hidden="true" strokeWidth={2} />
                   <span>Previous</span>
@@ -325,7 +325,7 @@ export function TraceRefineryEngine() {
                   onClick={() =>
                     handleManualSelect((activeIndex + 1) % REFINERY_STAGES.length)
                   }
-                  className="sf-pressable inline-flex items-center gap-1.5 font-optima text-[17.5px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] cursor-pointer"
+                  className="sf-pressable inline-flex items-center gap-1.5 font-optima text-[16px] sm:text-[17.5px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] cursor-pointer"
                 >
                   <span>
                     {activeIndex === REFINERY_STAGES.length - 1
@@ -343,19 +343,19 @@ export function TraceRefineryEngine() {
               className="lg:col-span-7 bg-[var(--sf-terminal)] text-[var(--sf-terminal-ink)] flex flex-col justify-between"
             >
               <div>
-                <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 px-6 sm:px-8 py-4 border-b border-[var(--sf-terminal-hairline)] bg-[var(--sf-terminal-bar)]">
-                  <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex flex-wrap items-center justify-between gap-2.5 px-4 sm:px-8 py-3.5 sm:py-4 border-b border-[var(--sf-terminal-hairline)] bg-[var(--sf-terminal-bar)]">
+                  <div className="flex items-center gap-2 min-w-0">
                     <Terminal
                       className="h-4 w-4 text-[#FF8566] shrink-0"
                       aria-hidden="true"
                       strokeWidth={1.75}
                     />
-                    <span className="font-mono-trace text-[14.5px] text-[var(--sf-terminal-muted)] break-all sm:truncate">
+                    <span className="font-mono-trace text-[13.5px] sm:text-[14.5px] text-[var(--sf-terminal-muted)] break-all sm:truncate">
                       {activeStage.codeTitle}
                     </span>
                   </div>
                   <span
-                    className={`sf-squircle-xs inline-flex items-center gap-1.5 font-mono-trace text-[13.5px] px-3 py-1 border shrink-0 whitespace-nowrap ${
+                    className={`sf-squircle-xs inline-flex items-center gap-1.5 font-mono-trace text-[12.5px] sm:text-[13.5px] px-2.5 sm:px-3 py-1 border shrink-0 whitespace-nowrap ${
                       activeStage.statusTone === "signal"
                         ? "border-[rgba(255,133,102,0.5)] text-[#FFA68F] bg-[rgba(204,50,0,0.22)]"
                         : activeStage.statusTone === "verified"
@@ -368,14 +368,14 @@ export function TraceRefineryEngine() {
                   </span>
                 </div>
 
-                <div className="p-6 sm:p-8 space-y-4 font-mono-trace text-[14.5px] sm:text-[15.5px] leading-[1.7] overflow-x-auto">
+                <div className="p-4 sm:p-8 space-y-3 sm:space-y-4 font-mono-trace text-[14px] sm:text-[15.5px] leading-[1.65]">
                   {activeStage.lines.map((line, i) => (
                     <div
                       key={`${activeStage.id}-${i}`}
-                      className="refinery-trace-line flex items-start gap-4"
+                      className="refinery-trace-line flex items-start gap-3 sm:gap-4"
                     >
                       <span
-                        className={`text-[13.5px] uppercase tracking-wider select-none w-10 shrink-0 pt-[2px] ${
+                        className={`text-[12.5px] sm:text-[13.5px] uppercase tracking-wider select-none w-9 sm:w-10 shrink-0 pt-[2px] ${
                           line.tone === "red"
                             ? "text-[#FF8566]"
                             : line.tone === "verified"
@@ -386,7 +386,7 @@ export function TraceRefineryEngine() {
                         {line.prefix}
                       </span>
                       <span
-                        className={
+                        className={`min-w-0 break-words ${
                           line.tone === "red"
                             ? "text-[#FFA68F]"
                             : line.tone === "verified"
@@ -394,7 +394,7 @@ export function TraceRefineryEngine() {
                               : line.tone === "muted"
                                 ? "text-[var(--sf-terminal-muted)]"
                                 : "text-[var(--sf-terminal-ink)]"
-                        }
+                        }`}
                       >
                         {line.text}
                       </span>
@@ -405,12 +405,12 @@ export function TraceRefineryEngine() {
 
               <div
                 aria-live="polite"
-                className="px-6 sm:px-8 py-4 border-t border-[var(--sf-terminal-hairline)] bg-[rgba(255,255,255,0.03)] flex items-center justify-between gap-4"
+                className="px-4 sm:px-8 py-3.5 sm:py-4 border-t border-[var(--sf-terminal-hairline)] bg-[rgba(255,255,255,0.03)] flex items-center justify-between gap-3"
               >
-                <span className="font-garamond text-[19.5px] text-[var(--sf-terminal-muted)]">
+                <span className="font-garamond text-[17.5px] sm:text-[19.5px] text-[var(--sf-terminal-muted)]">
                   {activeStage.outcomeNote}
                 </span>
-                <span className="font-mono-trace text-[14.5px] text-[#FF8566] shrink-0 tabular-nums">
+                <span className="font-mono-trace text-[13.5px] sm:text-[14.5px] text-[#FF8566] shrink-0 tabular-nums">
                   {activeIndex + 1} / {REFINERY_STAGES.length}
                 </span>
               </div>
