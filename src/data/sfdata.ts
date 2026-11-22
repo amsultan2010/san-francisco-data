@@ -23,17 +23,17 @@ export const BACKER_LOGOS: LogoAsset[] = [
 ];
 
 export const PEDIGREE_COL_1: LogoAsset[] = [
-  { name: "Mercor", src: "/logos/mercor.png", heightPx: 44, widthPx: 128 },
-  { name: "Google", src: "/logos/google.png", heightPx: 48, widthPx: 112 },
-  { name: "NVIDIA", src: "/logos/nvidia.png", heightPx: 34, widthPx: 176 },
-  { name: "UC Berkeley RISELab", src: "/logos/berkeley-rise.png", heightPx: 50, widthPx: 110 },
+  { name: "Mercor", src: "/logos/mercor.png", heightPx: 54, widthPx: 158 },
+  { name: "Google", src: "/logos/google.png", heightPx: 58, widthPx: 136 },
+  { name: "NVIDIA", src: "/logos/nvidia.png", heightPx: 36, widthPx: 184 },
+  { name: "UC Berkeley RISELab", src: "/logos/berkeley-rise.png", heightPx: 62, widthPx: 138 },
 ];
 
 export const PEDIGREE_COL_2: LogoAsset[] = [
-  { name: "Etched", src: "/logos/etched.png", heightPx: 36, widthPx: 152 },
-  { name: "Google DeepMind", src: "/logos/deepmind.png", heightPx: 38, widthPx: 164 },
-  { name: "Stanford SAIL", src: "/logos/stanford-sail.png", heightPx: 52, widthPx: 114 },
-  { name: "Terminal-Bench", src: "/logos/terminal-bench.png", heightPx: 38, widthPx: 168 },
+  { name: "Etched", src: "/logos/etched.png", heightPx: 38, widthPx: 158 },
+  { name: "Google DeepMind", src: "/logos/deepmind.png", heightPx: 40, widthPx: 170 },
+  { name: "Stanford SAIL", src: "/logos/stanford-sail.png", heightPx: 64, widthPx: 142 },
+  { name: "Terminal-Bench", src: "/logos/terminal-bench.png", heightPx: 40, widthPx: 174 },
 ];
 
 export interface FounderProfile {
