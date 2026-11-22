@@ -1,39 +1,82 @@
-@import "@fontsource/source-serif-4/400.css";
-@import "@fontsource/source-serif-4/400-italic.css";
-@import "@fontsource/source-serif-4/500.css";
-@import "@fontsource/source-serif-4/600.css";
-@import "@fontsource/schibsted-grotesk/400.css";
-@import "@fontsource/schibsted-grotesk/500.css";
-@import "@fontsource/schibsted-grotesk/600.css";
 @import "@fontsource/azeret-mono/400.css";
 @import "@fontsource/azeret-mono/500.css";
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Optima";
+  src: url("/fonts/Optima-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Optima";
+  src: url("/fonts/Optima-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Optima";
+  src: url("/fonts/Optima-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Optima";
+  src: url("/fonts/Optima-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/fonts/EBGaramond-Variable.ttf") format("truetype");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/fonts/EBGaramond-Italic-Variable.ttf") format("truetype");
+  font-weight: 400 800;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  --sf-paper: #faf9f6;
-  --sf-paper-subtle: #f3f1ec;
-  --sf-ink: #111110;
-  --sf-ink-muted: #565550;
-  --sf-hairline: rgba(17, 17, 16, 0.11);
-  --sf-hairline-strong: rgba(17, 17, 16, 0.2);
-  --sf-red: #c0362c;
-  --sf-red-hover: #a22a21;
-  --sf-red-tint: rgba(192, 54, 44, 0.08);
-  --sf-obsidian: #09090b;
-  --sf-obsidian-surface: #111114;
-  --sf-obsidian-elevated: #17171b;
-  --sf-obsidian-ink: #f5f4f0;
-  --sf-obsidian-muted: #a19f97;
-  --sf-obsidian-hairline: rgba(245, 244, 240, 0.12);
-  --sf-verified: #2f855a;
+  --sf-red: #cc3200;
+  --sf-red-hover: #a82900;
+  --sf-red-deep: #9e2500;
+  --sf-red-surface: #b82c00;
+  --sf-white: #ffffff;
+  --sf-white-soft: #fff6f2;
+  --sf-white-muted: rgba(255, 245, 240, 0.88);
+  --sf-white-hairline: rgba(255, 255, 255, 0.24);
+  --sf-white-hairline-strong: rgba(255, 255, 255, 0.45);
+  --sf-ink: #11100e;
+  --sf-ink-muted: #4a4642;
+  --sf-hairline: rgba(17, 16, 14, 0.13);
+  --sf-hairline-strong: rgba(17, 16, 14, 0.26);
+  --sf-terminal: #121110;
+  --sf-terminal-bar: #1a1816;
+  --sf-terminal-ink: #f8f5f2;
+  --sf-terminal-muted: #c2bab2;
+  --sf-terminal-hairline: rgba(255, 255, 255, 0.13);
   --sf-verified-dark: #4ade80;
 }
 
 @layer base {
   html {
-    background-color: var(--sf-paper);
-    color: var(--sf-ink);
-    font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--sf-red);
+    color: var(--sf-white);
+    font-family: "EB Garamond", Georgia, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
@@ -42,18 +85,18 @@
 
   body {
     margin: 0;
-    background-color: var(--sf-paper);
-    color: var(--sf-ink);
+    background-color: var(--sf-red);
+    color: var(--sf-white);
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: var(--sf-red);
+    background-color: #11100e;
     color: #ffffff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--sf-red);
+    outline: 2px solid #ffffff;
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -69,26 +112,26 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--sf-paper);
+    background: var(--sf-red-deep);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(17, 17, 16, 0.2);
+    background: rgba(255, 255, 255, 0.35);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--sf-red);
+    background: rgba(255, 255, 255, 0.65);
   }
 }
 
-.font-serif-display {
-  font-family: "Source Serif 4", Georgia, serif;
-  font-feature-settings: "kern" 1, "liga" 1;
+.font-optima {
+  font-family: "Optima", "Optima Nova", Candara, sans-serif;
 }
 
-.font-sans-ui {
-  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+.font-garamond {
+  font-family: "EB Garamond", Georgia, serif;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 .font-mono-trace {
@@ -100,25 +143,8 @@
   font-variant-numeric: tabular-nums;
 }
 
-.sf-hairline-t {
-  border-top: 1px solid var(--sf-hairline);
-}
-
-.sf-hairline-b {
-  border-bottom: 1px solid var(--sf-hairline);
-}
-
-.sf-hairline-y {
-  border-top: 1px solid var(--sf-hairline);
-  border-bottom: 1px solid var(--sf-hairline);
-}
-
-.sf-obsidian-hairline-t {
-  border-top: 1px solid var(--sf-obsidian-hairline);
-}
-
-.sf-obsidian-hairline-b {
-  border-bottom: 1px solid var(--sf-obsidian-hairline);
+.sf-white-focus :focus-visible {
+  outline-color: var(--sf-red);
 }
 
 @media (prefers-reduced-motion: reduce) {
