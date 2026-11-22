@@ -1,0 +1,128 @@
+@import "@fontsource/source-serif-4/400.css";
+@import "@fontsource/source-serif-4/400-italic.css";
+@import "@fontsource/source-serif-4/500.css";
+@import "@fontsource/source-serif-4/600.css";
+@import "@fontsource/schibsted-grotesk/400.css";
+@import "@fontsource/schibsted-grotesk/500.css";
+@import "@fontsource/schibsted-grotesk/600.css";
+@import "@fontsource/azeret-mono/400.css";
+@import "@fontsource/azeret-mono/500.css";
+@import "tailwindcss";
+
+:root {
+  --sf-paper: #faf9f6;
+  --sf-paper-subtle: #f3f1ec;
+  --sf-ink: #111110;
+  --sf-ink-muted: #565550;
+  --sf-hairline: rgba(17, 17, 16, 0.11);
+  --sf-hairline-strong: rgba(17, 17, 16, 0.2);
+  --sf-red: #c0362c;
+  --sf-red-hover: #a22a21;
+  --sf-red-tint: rgba(192, 54, 44, 0.08);
+  --sf-obsidian: #09090b;
+  --sf-obsidian-surface: #111114;
+  --sf-obsidian-elevated: #17171b;
+  --sf-obsidian-ink: #f5f4f0;
+  --sf-obsidian-muted: #a19f97;
+  --sf-obsidian-hairline: rgba(245, 244, 240, 0.12);
+  --sf-verified: #2f855a;
+  --sf-verified-dark: #4ade80;
+}
+
+@layer base {
+  html {
+    background-color: var(--sf-paper);
+    color: var(--sf-ink);
+    font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    caret-color: var(--sf-red);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--sf-paper);
+    color: var(--sf-ink);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--sf-red);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--sf-red);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--sf-paper);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(17, 17, 16, 0.2);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--sf-red);
+  }
+}
+
+.font-serif-display {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.font-sans-ui {
+  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono-trace {
+  font-family: "Azeret Mono", ui-monospace, SFMono-Regular, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sf-hairline-t {
+  border-top: 1px solid var(--sf-hairline);
+}
+
+.sf-hairline-b {
+  border-bottom: 1px solid var(--sf-hairline);
+}
+
+.sf-hairline-y {
+  border-top: 1px solid var(--sf-hairline);
+  border-bottom: 1px solid var(--sf-hairline);
+}
+
+.sf-obsidian-hairline-t {
+  border-top: 1px solid var(--sf-obsidian-hairline);
+}
+
+.sf-obsidian-hairline-b {
+  border-bottom: 1px solid var(--sf-obsidian-hairline);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
