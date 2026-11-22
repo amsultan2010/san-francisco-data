@@ -1,69 +1,128 @@
 ---
 name: San Francisco Data
-description: Archival warm alabaster editorial authority paired with an obsidian interactive trace refinery and Golden Gate International Orange accent.
+description: Luminous white and warm archival paper editorial authority bookended by Golden Gate Vermilion, set in Optima and EB Garamond with a dark carbon trace inspector.
 colors:
-  sf-red: "#c0362c"
-  sf-red-hover: "#a22a21"
-  sf-red-tint: "rgba(192, 54, 44, 0.08)"
-  verified: "#2f855a"
-  verified-dark: "#4ade80"
-  signal-dark: "#f28b82"
-  paper: "#faf9f6"
-  paper-subtle: "#f3f1ec"
-  ink: "#111110"
-  ink-muted: "#565550"
-  hairline: "rgba(17, 17, 16, 0.11)"
-  hairline-strong: "rgba(17, 17, 16, 0.2)"
-  obsidian: "#09090b"
-  obsidian-surface: "#111114"
-  obsidian-elevated: "#17171b"
-  obsidian-ink: "#f5f4f0"
-  obsidian-muted: "#a19f97"
-  obsidian-hairline: "rgba(245, 244, 240, 0.12)"
+  sf-red: "#cc3200"
+  sf-red-hover: "#a82900"
+  sf-red-deep: "#9e2500"
+  sf-red-tint: "#fff4f0"
+  sf-red-border: "rgba(204, 50, 0, 0.24)"
+  sf-white: "#ffffff"
+  sf-paper: "#faf8f6"
+  sf-white-muted: "rgba(255, 245, 240, 0.9)"
+  sf-white-hairline: "rgba(255, 255, 255, 0.24)"
+  sf-white-hairline-strong: "rgba(255, 255, 255, 0.45)"
+  sf-ink: "#11100e"
+  sf-ink-muted: "#46423e"
+  sf-hairline: "rgba(17, 16, 14, 0.11)"
+  sf-hairline-strong: "rgba(17, 16, 14, 0.22)"
+  sf-terminal: "#141311"
+  sf-terminal-bar: "#1d1b18"
+  sf-terminal-ink: "#f8f5f2"
+  sf-terminal-muted: "#c8c0b8"
+  sf-terminal-hairline: "rgba(255, 255, 255, 0.13)"
+  sf-verified-dark: "#4ade80"
+  sf-signal-coral: "#ff8566"
+  sf-signal-peach: "#ffa68f"
 typography:
   display:
-    fontFamily: "Source Serif 4, Georgia, serif"
-    fontSize: "clamp(2.55rem, 5.4vw, 4.7rem)"
-    fontWeight: 400
-    lineHeight: 1.03
-    letterSpacing: "-0.03em"
-    fontFeature: "'kern' 1, 'liga' 1"
-  headline:
-    fontFamily: "Source Serif 4, Georgia, serif"
-    fontSize: "clamp(1.75rem, 3.4vw, 3.35rem)"
-    fontWeight: 400
-    lineHeight: 1.1
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "clamp(2.8rem, 5.9vw, 5rem)"
+    fontWeight: 500
+    lineHeight: 1.04
     letterSpacing: "-0.025em"
-    fontFeature: "'kern' 1, 'liga' 1"
-  title:
-    fontFamily: "Source Serif 4, Georgia, serif"
-    fontSize: "1.5rem"
-    fontWeight: 400
-    lineHeight: 1.2
+  headline:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "clamp(2rem, 3.8vw, 3.15rem)"
+    fontWeight: 500
+    lineHeight: 1.08
     letterSpacing: "-0.02em"
+  subhead:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "clamp(1.6rem, 2.4vw, 2.15rem)"
+    fontWeight: 500
+    lineHeight: 1.18
+    letterSpacing: "-0.015em"
+  title:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "1.45rem"
+    fontWeight: 500
+    lineHeight: 1.24
+    letterSpacing: "0em"
+  title-sm:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "1.35rem"
+    fontWeight: 500
+    lineHeight: 1.28
+    letterSpacing: "0em"
+  title-compact:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 500
+    lineHeight: 1.34
+    letterSpacing: "0em"
+  quote:
+    fontFamily: "EB Garamond, Georgia, serif"
+    fontSize: "1.42rem"
+    fontWeight: 400
+    lineHeight: 1.52
+    letterSpacing: "0em"
+    fontFeature: "'kern' 1, 'liga' 1"
+  lead:
+    fontFamily: "EB Garamond, Georgia, serif"
+    fontSize: "clamp(1.3rem, 2.1vw, 1.62rem)"
+    fontWeight: 400
+    lineHeight: 1.52
+    letterSpacing: "0em"
     fontFeature: "'kern' 1, 'liga' 1"
   body:
-    fontFamily: "Schibsted Grotesk, -apple-system, BlinkMacSystemFont, sans-serif"
-    fontSize: "0.96875rem"
+    fontFamily: "EB Garamond, Georgia, serif"
+    fontSize: "19.5px"
     fontWeight: 400
-    lineHeight: 1.68
+    lineHeight: 1.64
+    letterSpacing: "0em"
+    fontFeature: "'kern' 1, 'liga' 1"
+  body-md:
+    fontFamily: "EB Garamond, Georgia, serif"
+    fontSize: "18.5px"
+    fontWeight: 400
+    lineHeight: 1.52
+    letterSpacing: "0em"
+    fontFeature: "'kern' 1, 'liga' 1"
+  body-compact:
+    fontFamily: "EB Garamond, Georgia, serif"
+    fontSize: "17.5px"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "0em"
+    fontFeature: "'kern' 1, 'liga' 1"
+  ui:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "16px"
+    fontWeight: 500
+    lineHeight: 1.35
     letterSpacing: "0em"
   label:
-    fontFamily: "Schibsted Grotesk, -apple-system, BlinkMacSystemFont, sans-serif"
-    fontSize: "0.875rem"
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "14px"
     fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: "-0.01em"
+    lineHeight: 1.35
+    letterSpacing: "0.01em"
   mono:
     fontFamily: "Azeret Mono, ui-monospace, SFMono-Regular, monospace"
-    fontSize: "0.8125rem"
+    fontSize: "13.5px"
     fontWeight: 400
-    lineHeight: 1.65
+    lineHeight: 1.7
     letterSpacing: "0em"
+  mono-label:
+    fontFamily: "Azeret Mono, ui-monospace, SFMono-Regular, monospace"
+    fontSize: "12.5px"
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: "0.05em"
 rounded:
   none: "0px"
   focus: "2px"
-  brand: "3px"
   scrollbar: "4px"
   full: "9999px"
 spacing:
@@ -71,198 +130,232 @@ spacing:
   sm: "8px"
   md: "16px"
   lg: "24px"
-  xl: "40px"
+  xl: "48px"
   2xl: "64px"
   section: "96px"
+  section-lg: "128px"
 components:
   button-primary:
     backgroundColor: "{colors.sf-red}"
-    textColor: "#ffffff"
-    typography: "{typography.label}"
+    textColor: "{colors.sf-white}"
+    typography: "{typography.ui}"
     rounded: "{rounded.none}"
-    padding: "12px 20px"
+    padding: "14px 24px"
   button-primary-hover:
     backgroundColor: "{colors.sf-red-hover}"
-  button-ink:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "10px 16px"
-  button-ink-hover:
-    backgroundColor: "{colors.sf-red}"
   button-secondary:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    typography: "{typography.label}"
+    backgroundColor: "{colors.sf-white}"
+    textColor: "{colors.sf-ink}"
+    typography: "{typography.ui}"
     rounded: "{rounded.none}"
-    padding: "12px 20px"
-  stage-row-dark:
-    backgroundColor: "{colors.obsidian}"
-    textColor: "{colors.obsidian-muted}"
+    padding: "14px 24px"
+  button-nav-inverted:
+    backgroundColor: "{colors.sf-white}"
+    textColor: "{colors.sf-red}"
+    typography: "{typography.ui}"
     rounded: "{rounded.none}"
-    padding: "20px 16px"
-  stage-row-dark-active:
-    backgroundColor: "{colors.obsidian-surface}"
-    textColor: "{colors.obsidian-ink}"
-  specimen-terminal:
-    backgroundColor: "{colors.obsidian-surface}"
-    textColor: "{colors.obsidian-ink}"
-    typography: "{typography.mono}"
+    padding: "10px 20px"
+  button-nav-inverted-hover:
+    backgroundColor: "{colors.sf-red-tint}"
+  nav-bar:
+    backgroundColor: "{colors.sf-red}"
+    textColor: "{colors.sf-white}"
+    height: "74px"
+    padding: "0 64px"
+  stage-tab:
+    backgroundColor: "{colors.sf-paper}"
+    textColor: "{colors.sf-ink}"
     rounded: "{rounded.none}"
     padding: "24px"
-  status-chip-verified:
-    backgroundColor: "rgba(74, 222, 128, 0.08)"
-    textColor: "{colors.verified-dark}"
+  stage-tab-past:
+    backgroundColor: "{colors.sf-red-tint}"
+    textColor: "{colors.sf-ink}"
+  stage-tab-active:
+    backgroundColor: "{colors.sf-red}"
+    textColor: "{colors.sf-white}"
+  trace-inspector:
+    backgroundColor: "{colors.sf-terminal}"
+    textColor: "{colors.sf-terminal-ink}"
     typography: "{typography.mono}"
     rounded: "{rounded.none}"
-    padding: "2px 10px"
-  nav-bar:
-    backgroundColor: "rgba(250, 249, 246, 0.94)"
-    textColor: "{colors.ink}"
-    height: "64px"
-    padding: "0 40px"
+    padding: "32px"
+  status-chip-verified:
+    backgroundColor: "rgba(74, 222, 128, 0.12)"
+    textColor: "{colors.sf-verified-dark}"
+    typography: "{typography.mono}"
+    rounded: "{rounded.none}"
+    padding: "4px 12px"
+  status-chip-signal:
+    backgroundColor: "rgba(204, 50, 0, 0.22)"
+    textColor: "{colors.sf-signal-peach}"
+    typography: "{typography.mono}"
+    rounded: "{rounded.none}"
+    padding: "4px 12px"
+  monograph-panel:
+    backgroundColor: "{colors.sf-white}"
+    textColor: "{colors.sf-ink}"
+    rounded: "{rounded.none}"
+    padding: "48px"
 ---
 
 # Design System: San Francisco Data
 
 ## Overview
 
-**Creative North Star: "The Civic Refinery"**
+**Creative North Star: "The Golden Gate Monograph"**
 
-San Francisco Data pairs the quiet authority of a San Francisco research monograph with the precision of an industrial trace-refining instrument. Editorial surfaces rest on warm archival alabaster paper (`#faf9f6`) ruled by 1px architectural hairlines and set in unhurried serif display typography. When the narrative turns to mechanism—filtering raw coding-agent failures, reconstructing deterministic sandboxes, and grading user intent—the light-to-dark expression drops through a scroll-scrubbed curtain into a deep obsidian chamber (`#09090b`) where live trace telemetry and Golden Gate suspension geometry take center stage.
+San Francisco Data pairs the luminous clarity of a San Francisco research monograph with the structural precision of a suspension-bridge engineering schematic. Editorial bands alternate between pure white (`#ffffff`) and warm archival paper (`#faf8f6`), ruled by 1px architectural hairlines and framed top and bottom by full-bleed Golden Gate Vermilion (`#cc3200`) bookends for the sticky navigation bar and civic footer.
 
-The system refuses generic dark-neon AI templates, decorative gradients, and equal-height icon-card grids. Restraint is structural: crisp 0px corners, single-hue International Orange red (`#c0362c`) reserved strictly for primary actions, active telemetry, and the Golden Gate Bridge mark, and verified emerald reserved strictly for passing RL verifier states.
+Display headlines, navigation, controls, and metric numerals are set in humanist sans-serif `Optima` (medium weight 500), paired with `EB Garamond` for long-form editorial prose and pull quotes, and `Azeret Mono` strictly inside the dark carbon (`#141311`) trace inspector. The system rejects dark-neon AI templates, decorative gradients, uppercase eyebrow kickers, and rounded SaaS cards in favor of sharp 0px rectilinearity, generous whitespace, and purposeful, reduced-motion-safe GSAP and HTML5 Canvas motion.
 
 **Key Characteristics:**
-- Archival warm alabaster (`#faf9f6`) paired with deep obsidian (`#09090b`) for the technical refinery chamber.
-- Sharp 0px architectural geometry separated by 1px hairline rules rather than drop shadows.
-- High-contrast pairing of Source Serif 4 for editorial display, Schibsted Grotesk for UI and prose, and Azeret Mono strictly for real trace telemetry and verifier code.
-- Surgical San Francisco Data red (`#c0362c`) inspired by the Golden Gate Bridge, deployed sparingly so every red signal carries weight.
-- Purposeful, reduced-motion-safe GSAP and HTML5 Canvas choreography anchored to the suspension-bridge span.
+- Luminous pure white (`#ffffff`) primary surface alternating with warm archival paper (`#faf8f6`) secondary bands, bookended by Golden Gate Vermilion (`#cc3200`) header and footer bars.
+- High-contrast typographic triad: `Optima` for display, headings, metrics, and UI chrome; `EB Garamond` for editorial prose and italic blockquotes; `Azeret Mono` confined to trace payloads, filenames, and verifier badges.
+- Isolated dark carbon (`#141311`) trace inspector embedded inside the white Trace Refinery deep-dive panel for high-legibility code and telemetry inspection.
+- Sharp 0px architectural geometry divided by 1px hairline rules, with restrained ambient shadows only on the sticky vermilion navbar, active stage tab, and refinery panel.
+- Reduced-motion-safe GSAP reveals and an interactive HTML5 Canvas Golden Gate suspension bridge visualizing traces transforming into verified RL environments.
 
 ## Colors
 
-A disciplined two-surface architectural palette—warm alabaster paper and deep obsidian—punctuated by one brand accent (Golden Gate red) and semantic verification green.
+A luminous editorial palette—pure white and warm archival paper—bookended by Golden Gate Vermilion and anchored by a dark carbon inspector chamber with semantic emerald verification.
 
 ### Primary
-- **Golden Gate Red** (`sf-red`): Used for primary CTA fills, inline editorial action links, active stage indicator dots, active suspension cable segments, blockquote left rules, focus outlines, text selection, and the brand mark background.
-- **Golden Gate Red Hover** (`sf-red-hover`): Darker pressed/hover state for primary red buttons and underlined red links.
-- **Red Signal Wash** (`sf-red-tint`): Subtle translucent tint for active red telemetry zones and signal highlights.
+- **Golden Gate Vermilion** (`sf-red`): Bookend sticky navbar and footer background, active pipeline stage tab fill, primary CTA fills, hero accent phrase, metric numerals, column/audience headings, blockquote left rule, suspension bridge towers/cables, progress rail, focus ring, and text selection.
+- **Deep Vermilion** (`sf-red-hover`): Hover state for primary vermilion buttons and inline vermilion links.
+- **Shadow Vermilion** (`sf-red-deep`): Tinted shadow base for the sticky vermilion navbar (`rgba(158, 37, 0, 0.14)`).
+- **Vermilion Wash** (`sf-red-tint`): Completed ("past") pipeline stage tab fill and hover state for the inverted white navbar CTA button.
+- **Vermilion Rule** (`sf-red-border`): Subtle vermilion border for completed pipeline stage tabs, hover states on inactive tabs, and default underline decoration on inline red links.
 
 ### Secondary
-- **Verifier Emerald (Light)** (`verified`): Used exclusively for passing verifier output and verified trace pulses on warm alabaster surfaces.
-- **Verifier Emerald (Dark)** (`verified-dark`): High-contrast emerald used for passing verifier lines, verified status chips, and verified canvas pulses on obsidian surfaces.
-- **Signal Coral (Dark)** (`signal-dark`): Lightened red-coral text used for failure/signal trace lines on obsidian surfaces where `sf-red` would fall below WCAG AA contrast.
+- **Verifier Emerald** (`sf-verified-dark`): Used exclusively inside the dark carbon trace inspector for passing RL verifier status chips and verified trace lines.
+- **Signal Coral** (`sf-signal-coral`): High-contrast coral-red used on dark carbon (`#141311`) for the terminal icon, failure line prefixes, and the stage step counter (`1 / 4`).
+- **Signal Peach** (`sf-signal-peach`): Lightened vermilion-peach used on dark carbon for failure status chips and error trace text to preserve WCAG 2.1 AA contrast.
 
 ### Neutral
-- **Archival Paper** (`paper`): Default page canvas, sticky header fill (at 94% opacity), and text on carbon-ink buttons.
-- **Recessed Paper** (`paper-subtle`): Subtle tonal step for the sculptural canvas container and expandable trace drawer on light surfaces.
-- **Carbon Ink** (`ink`): Primary editorial text, display headlines, and secondary solid button fills.
-- **Warm Charcoal** (`ink-muted`): Secondary body prose, navigation links, metadata, and captions on light surfaces.
-- **Paper Hairline** (`hairline`): Default 1px structural divider across rows, ledgers, and section thresholds.
-- **Paper Hairline Strong** (`hairline-strong`): Secondary button strokes, default link underlines, and scrollbar thumb.
-- **Obsidian Chamber** (`obsidian`): Primary dark background for the interactive Trace Refinery and Three Hard Problems ledger.
-- **Obsidian Surface** (`obsidian-surface`): One-step lifted surface for active stage rows, the specimen terminal body, and the dark suspension canvas frame.
-- **Obsidian Elevated** (`obsidian-elevated`): Top header bar inside the specimen terminal.
-- **Obsidian Ink** (`obsidian-ink`): Primary warm off-white text on dark surfaces.
-- **Obsidian Muted** (`obsidian-muted`): Secondary prose, inactive stage labels, and muted telemetry lines on dark surfaces.
-- **Obsidian Hairline** (`obsidian-hairline`): Default 1px structural divider on obsidian surfaces.
+- **Pure White** (`sf-white`): Primary page canvas (Hero, Trace Refinery, Three-Audience Architecture), monograph and pedigree panel fills, inverted navbar CTA background, and text/marks on vermilion bookends.
+- **Warm Archival Paper** (`sf-paper`): Secondary alternating section canvas (Verified Traction Strip, Three Hard Research Problems, Essay & Pedigree band), inactive pipeline stage tab fill, progress rail track, and scrollbar track.
+- **Warm White Muted** (`sf-white-muted`): Default navigation links and secondary footer copy on vermilion bookends; transitions to pure white on hover.
+- **White Hairline** (`sf-white-hairline`): 1px structural divider on vermilion surfaces (navbar bottom border, mobile section strip top border).
+- **White Hairline Strong** (`sf-white-hairline-strong`): Reserved high-emphasis rule on vermilion surfaces.
+- **Carbon Ink** (`sf-ink`): Primary display headlines, hero lead, secondary button text, and primary body text on white and paper surfaces.
+- **Warm Charcoal** (`sf-ink-muted`): Secondary editorial prose, metric notes, metadata, and subdued labels on white and paper surfaces.
+- **Paper Hairline** (`sf-hairline`): Default 1px architectural divider across section thresholds, metric columns, research problem columns, audience rows, and monograph dividers.
+- **Paper Hairline Strong** (`sf-hairline-strong`): Secondary button strokes, refinery deep-dive outer border, desktop chevron badge border, link underlines, and scrollbar thumb.
+- **Dark Carbon** (`sf-terminal`): Primary background of the Trace Refinery illustrative artifact inspector.
+- **Carbon Bar** (`sf-terminal-bar`): Top header bar inside the Dark Carbon trace inspector.
+- **Terminal Ivory** (`sf-terminal-ink`): Primary monospace trace text inside the Dark Carbon inspector.
+- **Terminal Warm Gray** (`sf-terminal-muted`): Muted trace lines, terminal filename, and stage outcome note inside the Dark Carbon inspector.
+- **Terminal Hairline** (`sf-terminal-hairline`): 1px structural divider inside the Dark Carbon inspector.
 
 ### Named Rules
-**The One-Signal Red Rule.** Golden Gate Red (`#c0362c`) is reserved for primary actions, active pipeline states, focus rings, and the bridge mark; never flood full sections or decorative backgrounds with red.
+**The Vermilion Bookend Rule.** Golden Gate Vermilion (`#cc3200`) frames the document at the top (sticky navbar) and bottom (civic footer) and highlights active pipeline states, primary CTAs, and key numerals—leaving main reading sections on luminous white or warm archival paper.
 
-**The Semantic Verification Rule.** Emerald (`#2f855a` on paper, `#4ade80` on obsidian) appears only to denote a verified environment or passing RL verifier grade—never for marketing decoration.
+**The Semantic Verification Rule.** Verifier Emerald (`#4ade80`) appears solely for passing RL verifier states and verified consent/rollout lines inside the dark carbon inspector—never for marketing decoration.
+
+**The Dark-Chamber Contrast Rule.** On Dark Carbon (`#141311`), never place raw `#cc3200` small text; step up to Signal Coral (`#ff8566`) for icons/prefixes and Signal Peach (`#ffa68f`) for failure copy and status badges.
 
 ## Typography
 
-**Display Font:** Source Serif 4 (fallback: Georgia, serif)
-**Body Font:** Schibsted Grotesk (fallback: -apple-system, BlinkMacSystemFont, sans-serif)
-**Label/Mono Font:** Azeret Mono (fallback: ui-monospace, SFMono-Regular, monospace)
+**Display & UI Font:** Optima (fallback: Optima Nova, Candara, sans-serif; bundled locally in 400, 500, 700, 400 italic)
+**Body Font:** EB Garamond (fallback: Georgia, serif; variable 400–800 normal & italic)
+**Mono Font:** Azeret Mono (fallback: ui-monospace, SFMono-Regular, monospace; 400, 500)
 
-**Character:** Editorial authority meets technical instrument. Source Serif 4 carries thesis statements, section headings, pull quotes, and headline figures at regular weight (400) with tight negative tracking, while Schibsted Grotesk handles prose and navigation cleanly and Azeret Mono stays confined to real trace logs, step indices, status chips, and canvas axes.
+**Character:** Classical civic monument meets research journal. `Optima` brings flared, stone-carved clarity to headlines, navigation, buttons, and tabular metrics without heavy bolding, while `EB Garamond` gives body prose and italic blockquotes warm literary authority, and `Azeret Mono` isolates real trace telemetry inside the dark carbon inspector.
 
 ### Hierarchy
-- **Display** (400, `clamp(2.55rem, 5.4vw, 4.7rem)` wide / `clamp(2.45rem, 4.9vw, 4.15rem)` editorial, 1.03–1.06 line-height, -0.03em tracking): Page hero thesis statement only.
-- **Headline** (400, `clamp(1.6rem, 3.4vw, 3.35rem)`, 1.08–1.18 line-height, -0.025em tracking): Major section titles across both alabaster and obsidian surfaces.
-- **Title** (400 serif `1.5rem` / 500 sans `15.5px–17px`, 1.2 line-height, -0.02em tracking): Audience row headings, aside headings, verified metric values (`1.35rem–1.5rem` tabular-nums), and ledger item titles.
-- **Body** (400, `14.5px–15.5px` prose and `clamp(1.06rem, 1.5vw, 1.25rem)` hero lead, 1.6–1.75 line-height): Narrative paragraphs constrained to `52ch–65ch` max measure for effortless scanning.
-- **Label** (500, `13px–14.5px`, 1.4 line-height, -0.01em tracking): Navigation links, button labels, and inline CTAs.
-- **Mono** (400–500, `11.5px–13px`, 1.65 line-height, tabular-nums): Trace specimen code, `01`–`04` stage indices, status chips, and suspension-bridge axis labels.
+- **Display** (`Optima` 500, `clamp(2.8rem, 5.9vw, 5rem)`, 1.04 line-height, -0.025em tracking): Hero thesis H1 only.
+- **Headline** (`Optima` 500, `clamp(2rem, 3.8vw, 3.15rem)` refinery / `clamp(2rem, 3.5vw, 3rem)` sections / `clamp(2.2rem, 3.6vw, 3.15rem)` metric values, 1.05–1.1 line-height, -0.02em tracking): Major section H2s and large tabular traction numerals.
+- **Subhead** (`Optima` 500, `clamp(1.85rem, 3vw, 2.55rem)` essay / `clamp(1.65rem, 2.4vw, 2.15rem)` pedigree / `clamp(1.6rem, 2.4vw, 2.05rem)` refinery stage title, 1.12–1.18 line-height, -0.015em to -0.02em tracking): Panel headings and active stage titles.
+- **Title** (`Optima` 500, `1.35rem–1.45rem`, 1.24–1.25 line-height): Research problem titles, audience labels, and hiring subheadings.
+- **Title Compact** (`Optima` 500, `1.25rem` / `18px–18.5px`, 1.2–1.34 line-height): Audience row headings, pipeline stage tab titles (`18px`), and desktop navbar wordmark (`18.5px`).
+- **Quote** (`EB Garamond` italic 400, `1.42rem`, 1.52 line-height, max `48ch`): Pull quote in the October 1 essay monograph.
+- **Lead** (`EB Garamond` 400, `clamp(1.3rem, 2.1vw, 1.62rem)` primary / `clamp(1.15rem, 1.5vw, 1.32rem)` secondary, 1.52–1.58 line-height, max `54ch–56ch`): Hero thesis paragraphs.
+- **Body** (`EB Garamond` 400, `19px–20px`, 1.58–1.64 line-height, max `56ch`): Section introductions, research problem descriptions, audience narratives, essay summary, and refinery stage details.
+- **Body Compact** (`EB Garamond` 400–500, `17px–18.5px`, 1.35–1.58 line-height): Metric notes, essay date, footer colophon, pipeline tab tags, input/output rows, and inspector outcome notes.
+- **UI** (`Optima` 500, `15.5px–16.5px`, 1.35 line-height): Desktop navigation links (`16px`), primary/secondary buttons (`16px`), navbar/footer CTAs (`15.5px`), metric labels (`16px`), and institution names (`16.5px`).
+- **Label** (`Optima` 500–700, `14px–14.5px`, 1.35 line-height): Mobile nav strip (`14.5px`), pedigree sub-label (`14.5px`), refinery `Goes in`/`Comes out` labels (`14px`), and bold `01`–`04` step indices (`14px`, 700, `0.08em` tracking).
+- **Mono** (`Azeret Mono` 400, `12.5px–14.5px`, 1.7 line-height, tabular-nums): Trace payload lines (`13.5px` mobile / `14.5px` desktop), filenames (`13.5px`), stage counters (`13px`), status chips (`12.5px`), and 3-letter line prefixes (`12.5px` uppercase).
 
 ### Named Rules
-**The Real-Telemetry Mono Rule.** Azeret Mono is reserved for genuine technical artifacts—trace payloads, verifier code, step indices, and canvas telemetry—never for marketing slogans or decorative eyebrow labels.
+**The Humanist-Literary Split Rule.** Use `Optima` (weight 500) for structural typography—headings, navigation, buttons, metrics, and UI labels—and `EB Garamond` (weight 400) for all narrative prose and quotes. Never swap their roles.
 
-**The Regular-Weight Serif Rule.** Source Serif 4 stays at weight 400 for display and section headings; hierarchy comes from scale, tight tracking (`-0.02em` to `-0.03em`), and generous surrounding space rather than heavy bolding.
+**The Telemetry-Only Mono Rule.** `Azeret Mono` is restricted to the dark carbon trace inspector (filenames, trace payloads, prefixes, status chips, and step counters)—never for page headings or marketing copy.
 
 ## Layout
 
-Two complementary architectural containers share one vertical rhythm:
-- **Wide Architectural Grid (Path C):** `1200px` max container (`px-5 sm:px-10` / `px-6 sm:px-10`), using a 12-column CSS Grid (`lg:grid-cols-12`) for asymmetric splits: 7/5 for the refinery header and essay/pedigree split, 5/7 for the interactive stage list and specimen terminal, and 4/5/3 for three-audience editorial rows.
-- **Single-Column Editorial Frame (Path D):** `760px` max reading column for hero prose, thesis narrative, metrics, careers, essays, and footer, expanding to `1040px` only for the top header and the sculptural suspension canvas.
-- **Vertical Rhythm:** Generous section padding (`96px` mobile, `112px–128px` desktop) separated by 1px horizontal hairlines or the scroll-scrubbed alabaster-to-obsidian curtain (`64px–96px` height). Lists use full-width hairline-divided rows (`py-5` to `py-10`) instead of multi-column card grids.
-- **Responsive Behavior:** Multi-column grids collapse cleanly to single-column stacks below `1024px` (`lg`). Metric grids use 2 columns on mobile and 2 or 4 columns on desktop. The Path C navigation links collapse below `768px` (`md`), keeping the brand mark and primary partner button visible without wrapping.
+All sections align to a single architectural container (`max-w-[1140px]`, centered with `mx-auto`) and responsive horizontal gutters (`px-6 sm:px-12 lg:px-16`, or `24px` mobile / `48px` tablet / `64px` desktop; the navbar uses `px-4 sm:px-12 lg:px-16` for tighter mobile fit).
+
+- **Hero Frame:** Centered `860px` max reading column (`pt-18 pb-14 lg:pt-26 lg:pb-20`), followed by the full-container `SuspensionCanvas` (`240px` height) framed by top and bottom 1px hairlines.
+- **Vertical Section Rhythm:** Generous `96px` mobile / `128px` desktop vertical padding (`py-24 lg:py-32`) on Refinery, Research, Partners, and Essay/Pedigree bands, alternating `#ffffff` and `#faf8f6` surfaces separated by 1px horizontal hairlines.
+- **Architectural Grids:**
+  - Traction Strip: 2 columns mobile → 4 columns `lg` (`1024px+`) with 1px vertical dividers.
+  - Pipeline Stage Selector: 1 column → 2 columns `sm` (`640px+`) → 4 columns `lg` with `16px` gap and overlaid desktop flow chevrons.
+  - Refinery Deep-Dive: 12-column grid (`5/7` split on `lg`) separating plain-English transformation from the dark carbon inspector.
+  - Three Hard Problems: 1 column → 3 columns `lg` with 1px vertical dividers (`lg:divide-x`).
+  - Audience Paths: Full-width horizontal rows divided by 1px hairlines, using a `3/6/3` 12-column split on `lg`.
+  - Essay & Pedigree: `7/5` 12-column split on `lg` (`lg:items-stretch`) with equal-height white panels resting on `#faf8f6`.
+- **Responsive Breakpoints:** `sm` (`640px`), `md` (`768px`, desktop nav threshold), `lg` (`1024px`, multi-column architectural grid threshold).
 
 ## Elevation & Depth
 
-Surfaces are flat by default. Depth is communicated through 1px architectural hairline borders and disciplined tonal stepping (`#faf9f6` → `#f3f1ec` on paper; `#09090b` → `#111114` → `#17171b` on obsidian), never through drop shadows on content cards, buttons, or terminals. Sticky navigation relies on translucent frosted paper (`rgba(250, 249, 246, 0.94)` with `12px` backdrop blur) and a 1px bottom hairline.
+Surfaces are primarily flat and separated by 1px architectural hairlines (`rgba(17, 16, 14, 0.11)` / `0.22`) and `#ffffff` / `#faf8f6` tonal alternation. Three restrained ambient shadows provide targeted spatial separation without hard offsets or card-grid clutter:
 
 ### Shadow Vocabulary
-- **Floating Utility Overlay** (`box-shadow: 0 8px 28px rgba(17, 17, 16, 0.14)`): Used solely on the fixed-position preview switcher utility (`PreviewSwitcher`) so it remains legible over both alabaster and obsidian scroll regions.
+- **Sticky Vermilion Navbar** (`box-shadow: 0 4px 20px rgba(158, 37, 0, 0.14)`): Grounds the sticky `#cc3200` header as luminous white and paper sections scroll beneath it.
+- **Active Stage Tab** (`box-shadow: 0 12px 30px rgba(204, 50, 0, 0.2)`): Lifts the selected `#cc3200` pipeline stage tab above inactive paper tabs.
+- **Refinery Deep-Dive Panel** (`box-shadow: 0 20px 50px rgba(17, 16, 14, 0.06)`): Soft ambient elevation for the interactive stage panel + dark carbon inspector container.
 
 ### Named Rules
-**The Flat-By-Default Rule.** Content surfaces, terminals, and buttons carry zero drop shadow at rest or on hover; hierarchy is established with 1px hairlines and tonal contrast.
+**The Hairline-First Depth Rule.** Establish hierarchy with 1px hairline rules and `#ffffff` / `#faf8f6` surface alternation first; reserve soft ambient shadows strictly for sticky navigation, the active pipeline stage, and the primary interactive refinery container.
 
 ## Shapes
 
-Sharp architectural rectilinearity defines the form language. Every primary container—buttons, stage rows, specimen terminals, status chips, sculpture frames, and the preview switcher—uses crisp right angles (`0px` radius). Small exceptions exist strictly for functional clarity:
-- **Brand Mark:** Slightly softened `3px` corners on the 28px square Golden Gate Bridge icon.
-- **Focus Indicator:** `2px` radius on the `2px solid #c0362c` keyboard focus ring (`3px` offset).
-- **Status Indicator Dot:** Full circle (`9999px`) on the 6px active-stage dot.
-- **Scrollbar Thumb:** `4px` radius on the 8px custom scrollbar.
+Crisp `0px` architectural rectilinearity defines the form language across buttons, pipeline stage tabs, the refinery deep-dive container, dark carbon trace inspector, monograph and pedigree panels, and status chips. Functional radius exceptions are minimal:
+- **Focus Indicator (`2px`):** Keyboard `:focus-visible` outline (`2px solid #cc3200`, `3px` offset; switches to `#ffffff` inside `.sf-red-focus` vermilion bands).
+- **Scrollbar Thumb (`4px`):** Custom 8px scrollbar thumb.
+- **Pipeline Flow Chevron (`9999px`):** Circular `24px` white directional arrow badge centered between desktop pipeline stage tabs.
 
 ## Components
 
-Every component feels like a precision printed or machined instrument—sharp corners, 1px rules, crisp typographic contrast, and immediate color transitions (`150ms–200ms`) with no bouncy scale effects.
+Components feel like precision-printed civic instruments—sharp 0px corners, 1px hairline rules, `Optima` 500 control labels, and immediate `150ms–200ms` color/border transitions.
 
 ### Buttons
-- **Shape:** Crisp rectangular (`0px` radius).
-- **Primary (`button-primary`):** Golden Gate Red fill (`#c0362c`), pure white text (`#ffffff`), `12px 20px` padding, `14px` Schibsted Grotesk 500, paired with a 16px directional Lucide arrow (`strokeWidth={1.75}`). Hover transitions to `#a22a21`.
-- **Ink (`button-ink`):** Carbon Ink fill (`#111110`), Archival Paper text (`#faf9f6`), `8px 16px` (header) or `10px 16px` (aside CTA). Hover transitions to Golden Gate Red (`#c0362c`).
-- **Secondary (`button-secondary`):** Transparent background, `1px solid rgba(17, 17, 16, 0.2)` border, Carbon Ink text (`#111110`), `12px 20px` padding. Hover sharpens border to `#111110`.
-- **Editorial Link:** Underlined inline action (`text-underline-offset: 0.22em`, `1px` thickness) in `#c0362c` (hover `#a22a21`) or `#111110` / `#565550` with trailing `ArrowUpRight`.
+- **Shape:** Sharp rectangular (`0px` radius).
+- **Primary (`button-primary`):** Golden Gate Vermilion fill (`#cc3200`), pure white text (`#ffffff`), `14px 24px` padding (`px-6 py-3.5`), `16px` Optima 500, paired with a 16px Lucide directional arrow (`strokeWidth={2}`). Hover darkens to `#a82900`.
+- **Secondary (`button-secondary`):** Pure white fill (`#ffffff`), `1px solid rgba(17, 16, 14, 0.22)` border, Carbon Ink text (`#11100e`), `14px 24px` padding, `16px` Optima 500. Hover shifts border and text to `#cc3200`.
+- **Inverted Navbar CTA (`button-nav-inverted`):** Pure white fill (`#ffffff`), `#cc3200` text, `8px 12px` mobile / `10px 20px` desktop (`px-3 py-2 sm:px-5 sm:py-2.5`), `14px` / `15.5px` Optima 500. Hover warms to `#fff4f0`.
+- **Inline Editorial Link:** Underlined (`text-underline-offset: 0.22em`, `1px` thickness) in `#cc3200` (decoration `rgba(204, 50, 0, 0.24)`) or `#11100e` (hover `#cc3200`) with trailing `ArrowUpRight`.
 
 ### Chips
-- **Style:** Sharp rectangular (`0px` radius), `11.5px` Azeret Mono, `2px 10px` padding, `1px` semantic border with low-opacity tinted fill and leading 12px Lucide status icon.
-- **State:** `signal` variant uses coral-red text on `rgba(192, 54, 44, 0.12)` with `rgba(192, 54, 44, 0.45)` border; `verified` variant uses `#4ade80` on `rgba(74, 222, 128, 0.08)` with `rgba(74, 222, 128, 0.35)` border; `neutral` uses muted obsidian ink on `rgba(245, 244, 240, 0.04)`.
+- **Style:** Sharp rectangular (`0px` radius), `12.5px` Azeret Mono, `4px 12px` padding (`px-3 py-1`), `1px` semantic border with low-opacity fill and leading `14px` `CheckCircle2` icon.
+- **State:** `signal` uses `#ffa68f` on `rgba(204, 50, 0, 0.22)` with `rgba(255, 133, 102, 0.5)` border; `verified` uses `#4ade80` on `rgba(74, 222, 128, 0.12)` with `rgba(74, 222, 128, 0.42)` border; `neutral` uses `#f8f5f2` on `rgba(255, 255, 255, 0.06)` with `rgba(255, 255, 255, 0.13)` border.
 
 ### Cards / Containers
 - **Corner Style:** Sharp rectangular (`0px` radius).
-- **Background:** Obsidian Surface (`#111114`) with Obsidian Elevated (`#17171b`) header bar for the Specimen Terminal; translucent Recessed Paper (`#f3f1ec` at 50% opacity) for Path D's sculptural stage container.
-- **Shadow Strategy:** None (Flat-By-Default Rule).
-- **Border:** `1px solid` hairline (`--sf-obsidian-hairline` on dark, `--sf-hairline` on light).
-- **Internal Padding:** `20px–24px` (`p-5 sm:p-6`) for terminal code body; `14px 20px` for terminal header bar.
+- **Background:** Pure white (`#ffffff`) for the Essay Monograph, Team Pedigree aside, and Refinery left column; Dark Carbon (`#141311`) with `#1d1b18` header bar for the trace inspector.
+- **Shadow Strategy:** Hairline-only (`1px solid rgba(17, 16, 14, 0.11)`) for monograph/pedigree panels; `0 20px 50px rgba(17, 16, 14, 0.06)` ambient shadow on the interactive refinery container.
+- **Internal Padding:** `32px–48px` (`p-8 sm:p-11 lg:p-12`) for monograph/pedigree panels; `24px–36px` (`p-6 sm:p-8 lg:p-9`) for the trace inspector body.
 
 ### Navigation
-- **Path C Sticky Header:** `64px` height, translucent alabaster (`rgba(250, 249, 246, 0.94)`) with `12px` backdrop blur and 1px bottom hairline. Left: 28px red-square Golden Gate Bridge mark (`3px` radius) + `15px` medium wordmark. Center (`md+`): 4 muted `14px` links (`gap-8`) transitioning to Carbon Ink on hover. Right: Carbon Ink CTA button.
-- **Path D Static Editorial Header:** `1040px` max width, unsticky, zero bottom border, pairing the same bridge mark + wordmark with three quiet inline links (`Essay`, `Careers`, underlined `Partner`).
+- **Sticky Vermilion Bookend Header:** Full-bleed `#cc3200` with `1px` white hairline bottom border and soft vermilion shadow. `68px` mobile / `74px` desktop height (`h-[68px] sm:h-[74px]`), `max-w-[1140px]` inner container. Left: inline SVG `BridgeMark` + `Optima` 500 wordmark. Center (`md+`): 5 links (`gap-9`) in `rgba(255, 245, 240, 0.9)` transitioning to `#ffffff`. Right: inverted white CTA button. Below `768px`, a compact horizontal scrollable section strip sits beneath a `1px` white hairline.
+- **Vermilion Bookend Footer:** Full-bleed `#cc3200`, `48px` vertical padding (`py-12`), pairing `BridgeMark`, `StreetcarIcon`, Financial District address, and copyright in `EB Garamond` (`17.5px`) with 4 external links in `Optima` (`15.5px`).
 
 ### Trace Refinery Engine & Suspension Canvas
-- **Interactive Stage Selector:** Vertical stack of 4 full-width hairline-divided buttons (`01`–`04`) in the obsidian chamber (or 4-column horizontal scrubber strip in Path D). Active stage switches background to `#111114` (dark) or `#faf9f6` (light), illuminates the 6px Golden Gate Red dot, expands technical detail copy, and animates terminal trace lines (`y: 8 → 0`, `0.42s`, `0.05s` stagger, `expo.out`). On desktop (`≥1024px`) with motion enabled, GSAP ScrollTrigger advances stages on scroll until the visitor manually selects one.
-- **Suspension Canvas:** Custom 2D HTML5 Canvas rendering a 12×5 architectural coordinate grid, twin cross-braced Golden Gate suspension towers, vertical suspender cables, primary and parallax catenary curves, an active-stage red highlight band, and 14 travelling trace pulses that shift from `#c0362c` to verified emerald (`#2f855a` / `#4ade80`) past the second tower. Responds subtly to vertical pointer elevation and freezes cleanly under `prefers-reduced-motion: reduce`.
+- **Interactive 4-Stage Pipeline (`TraceRefineryEngine`):** Four `role="tab"` stage buttons (`01`–`04`) in a 4-column desktop grid connected by `24px` circular flow chevrons. States step cleanly from `#faf8f6` (upcoming) → `#fff4f0` with vermilion border (past) → `#cc3200` with white text and ambient vermilion shadow (active). Below sits a `3px` vermilion progress rail and a `5/7` deep-dive panel pairing plain-English `Goes in` / `Comes out` transformation rows with the `#141311` dark carbon trace inspector. Stage changes animate `.refinery-animate-item` (`y: 10 → 0`, `0.42s`, `0.04s` stagger, `expo.out`) when motion is enabled.
+- **Suspension Canvas (`SuspensionCanvas`):** Custom 2D HTML5 Canvas (`240px` height) on white displaying a 12×4 architectural coordinate grid, twin cross-braced `#cc3200` Golden Gate towers, vertical suspender cables, primary and ghost catenary curves, and 14 travelling trace pulses shifting from `#cc3200` to `#11100e` past the second tower, with `Optima` stage legend annotations below the deck. Responds subtly to vertical pointer elevation and freezes cleanly under `prefers-reduced-motion: reduce`.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** separate content bands, editorial rows, and technical ledgers with 1px hairline rules (`rgba(17, 17, 16, 0.11)` on alabaster, `rgba(245, 244, 240, 0.12)` on obsidian) instead of floating shadowed cards.
-- **Do** reserve Source Serif 4 (weight 400, tight negative tracking) for thesis headlines, section headings, pull quotes, and key metric values, and Schibsted Grotesk for body prose and UI controls.
-- **Do** restrict Azeret Mono to real technical artifacts (trace logs, verifier code, `01`–`04` stage indices, status chips, and canvas axis annotations).
-- **Do** gate all GSAP entrance reveals, scroll-scrubbed curtains, and stage ScrollTriggers inside `gsap.matchMedia()` for `(prefers-reduced-motion: no-preference)`.
-- **Do** use `signal-dark` (`#f28b82`) or `verified-dark` (`#4ade80`) for small semantic text on obsidian surfaces to maintain WCAG 2.1 AA contrast.
+- **Do** alternate main reading bands between `#ffffff` and `#faf8f6` separated by 1px hairlines (`rgba(17, 16, 14, 0.11)`), framed by `#cc3200` vermilion bookends for header and footer.
+- **Do** pair `Optima` (500) for headings, navigation, buttons, metrics, and UI labels with `EB Garamond` (400) for prose and quotes, keeping `Azeret Mono` confined to the dark carbon trace inspector.
+- **Do** align all sections to the `1140px` architectural container with `px-6 sm:px-12 lg:px-16` horizontal gutters.
+- **Do** apply `.sf-red-focus` on vermilion surfaces so keyboard `:focus-visible` outlines switch to `#ffffff` for accessible contrast.
+- **Do** gate all GSAP entrance reveals, scroll parallax, and stage animations inside `gsap.matchMedia()` for `(prefers-reduced-motion: no-preference)`.
 
 ### Don't:
-- **Don't** round primary buttons, terminals, or stage containers beyond `0px`; keep rounded corners limited to the `3px` brand mark, `2px` focus ring, and `9999px` status dot.
-- **Don't** add drop shadows to marketing cards, buttons, or terminals; reserve elevation shadow strictly for fixed utility overlays.
-- **Don't** place uppercase eyebrow/kicker labels above section headings or build equal-height icon-card grids.
-- **Don't** use Golden Gate Red (`#c0362c`) as a full-section background or pair it with unverified decorative gradients.
-- **Don't** use emerald green for non-verification states or decorative badges.
+- **Don't** round primary buttons, stage tabs, panels, or status chips beyond `0px`; restrict radius to `2px` focus rings, `4px` scrollbar thumbs, and `9999px` pipeline flow chevrons.
+- **Don't** place raw `#cc3200` small text on the `#141311` dark carbon inspector; use `#ff8566` or `#ffa68f` for AA contrast.
+- **Don't** add uppercase eyebrow/kicker labels above section headings or decorative gradients behind editorial bands.
+- **Don't** use Verifier Emerald (`#4ade80`) outside genuine passing RL verifier or consent-verified telemetry states.
+- **Don't** replace `Optima` or `EB Garamond` with system sans-serif stacks or mix `Azeret Mono` into marketing headlines.

@@ -1,72 +1,87 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-22T07:47:00Z",
+  "generatedAt": "2026-11-22T08:40:00Z",
   "title": "Design System: San Francisco Data",
   "extensions": {
     "colorMeta": {
       "sf-red": {
         "role": "primary",
-        "displayName": "Golden Gate Red",
-        "canonical": "#c0362c",
+        "displayName": "Golden Gate Vermilion",
+        "canonical": "#cc3200",
         "tonalRamp": [
-          "oklch(22% 0.08 27)",
-          "oklch(32% 0.12 27)",
-          "oklch(42% 0.15 27)",
-          "oklch(51% 0.17 27)",
-          "oklch(62% 0.15 27)",
-          "oklch(74% 0.11 27)",
-          "oklch(86% 0.06 27)",
-          "oklch(95% 0.02 27)"
+          "oklch(22% 0.09 34)",
+          "oklch(32% 0.13 34)",
+          "oklch(43% 0.17 34)",
+          "oklch(54% 0.20 34)",
+          "oklch(64% 0.17 34)",
+          "oklch(75% 0.12 34)",
+          "oklch(87% 0.06 34)",
+          "oklch(96% 0.02 34)"
         ]
       },
       "sf-red-hover": {
         "role": "primary",
-        "displayName": "Golden Gate Red Hover",
-        "canonical": "#a22a21",
+        "displayName": "Deep Vermilion",
+        "canonical": "#a82900",
         "tonalRamp": [
-          "oklch(20% 0.07 27)",
-          "oklch(29% 0.11 27)",
-          "oklch(39% 0.14 27)",
-          "oklch(45% 0.15 27)",
-          "oklch(57% 0.13 27)",
-          "oklch(70% 0.09 27)",
-          "oklch(84% 0.05 27)",
-          "oklch(94% 0.02 27)"
+          "oklch(20% 0.08 34)",
+          "oklch(30% 0.12 34)",
+          "oklch(40% 0.15 34)",
+          "oklch(48% 0.17 34)",
+          "oklch(59% 0.14 34)",
+          "oklch(72% 0.10 34)",
+          "oklch(85% 0.05 34)",
+          "oklch(95% 0.02 34)"
+        ]
+      },
+      "sf-red-deep": {
+        "role": "primary",
+        "displayName": "Shadow Vermilion",
+        "canonical": "#9e2500",
+        "tonalRamp": [
+          "oklch(19% 0.08 34)",
+          "oklch(28% 0.11 34)",
+          "oklch(38% 0.14 34)",
+          "oklch(46% 0.16 34)",
+          "oklch(57% 0.13 34)",
+          "oklch(70% 0.09 34)",
+          "oklch(84% 0.05 34)",
+          "oklch(94% 0.02 34)"
         ]
       },
       "sf-red-tint": {
         "role": "primary",
-        "displayName": "Red Signal Wash",
-        "canonical": "rgba(192, 54, 44, 0.08)",
+        "displayName": "Vermilion Wash",
+        "canonical": "#fff4f0",
         "tonalRamp": [
-          "oklch(22% 0.06 27)",
-          "oklch(34% 0.09 27)",
-          "oklch(46% 0.12 27)",
-          "oklch(58% 0.12 27)",
-          "oklch(70% 0.09 27)",
-          "oklch(82% 0.05 27)",
-          "oklch(91% 0.03 27)",
-          "oklch(97% 0.01 27)"
+          "oklch(24% 0.05 36)",
+          "oklch(36% 0.07 36)",
+          "oklch(49% 0.08 36)",
+          "oklch(62% 0.07 36)",
+          "oklch(74% 0.06 36)",
+          "oklch(84% 0.04 36)",
+          "oklch(92% 0.025 36)",
+          "oklch(97% 0.015 36)"
         ]
       },
-      "verified": {
-        "role": "secondary",
-        "displayName": "Verifier Emerald (Light)",
-        "canonical": "#2f855a",
+      "sf-red-border": {
+        "role": "primary",
+        "displayName": "Vermilion Rule",
+        "canonical": "rgba(204, 50, 0, 0.24)",
         "tonalRamp": [
-          "oklch(22% 0.05 155)",
-          "oklch(33% 0.08 155)",
-          "oklch(44% 0.10 155)",
-          "oklch(54% 0.11 155)",
-          "oklch(66% 0.10 155)",
-          "oklch(78% 0.07 155)",
-          "oklch(88% 0.04 155)",
-          "oklch(96% 0.015 155)"
+          "oklch(22% 0.07 34)",
+          "oklch(33% 0.10 34)",
+          "oklch(45% 0.12 34)",
+          "oklch(57% 0.12 34)",
+          "oklch(69% 0.09 34)",
+          "oklch(80% 0.06 34)",
+          "oklch(90% 0.03 34)",
+          "oklch(96% 0.01 34)"
         ]
       },
-      "verified-dark": {
+      "sf-verified-dark": {
         "role": "secondary",
-        "displayName": "Verifier Emerald (Dark)",
+        "displayName": "Verifier Emerald",
         "canonical": "#4ade80",
         "tonalRamp": [
           "oklch(22% 0.07 150)",
@@ -79,250 +94,346 @@
           "oklch(97% 0.02 150)"
         ]
       },
-      "signal-dark": {
+      "sf-signal-coral": {
         "role": "secondary",
-        "displayName": "Signal Coral (Dark)",
-        "canonical": "#f28b82",
+        "displayName": "Signal Coral",
+        "canonical": "#ff8566",
         "tonalRamp": [
-          "oklch(22% 0.06 25)",
-          "oklch(34% 0.09 25)",
-          "oklch(48% 0.12 25)",
-          "oklch(62% 0.13 25)",
-          "oklch(74% 0.12 25)",
-          "oklch(83% 0.08 25)",
-          "oklch(91% 0.04 25)",
-          "oklch(97% 0.015 25)"
+          "oklch(22% 0.07 34)",
+          "oklch(34% 0.11 34)",
+          "oklch(48% 0.14 34)",
+          "oklch(62% 0.16 34)",
+          "oklch(72% 0.15 34)",
+          "oklch(82% 0.10 34)",
+          "oklch(90% 0.05 34)",
+          "oklch(97% 0.015 34)"
         ]
       },
-      "paper": {
+      "sf-signal-peach": {
+        "role": "secondary",
+        "displayName": "Signal Peach",
+        "canonical": "#ffa68f",
+        "tonalRamp": [
+          "oklch(22% 0.06 34)",
+          "oklch(34% 0.09 34)",
+          "oklch(48% 0.11 34)",
+          "oklch(62% 0.12 34)",
+          "oklch(75% 0.11 34)",
+          "oklch(82% 0.09 34)",
+          "oklch(91% 0.04 34)",
+          "oklch(97% 0.015 34)"
+        ]
+      },
+      "sf-white": {
         "role": "neutral",
-        "displayName": "Archival Paper",
-        "canonical": "#faf9f6",
+        "displayName": "Pure White",
+        "canonical": "#ffffff",
         "tonalRamp": [
-          "oklch(18% 0.005 90)",
-          "oklch(30% 0.006 90)",
-          "oklch(44% 0.007 90)",
-          "oklch(58% 0.008 90)",
-          "oklch(72% 0.008 90)",
-          "oklch(84% 0.007 90)",
-          "oklch(93% 0.006 90)",
-          "oklch(98% 0.005 90)"
+          "oklch(16% 0 0)",
+          "oklch(28% 0 0)",
+          "oklch(42% 0 0)",
+          "oklch(56% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(93% 0 0)",
+          "oklch(100% 0 0)"
         ]
       },
-      "paper-subtle": {
+      "sf-paper": {
         "role": "neutral",
-        "displayName": "Recessed Paper",
-        "canonical": "#f3f1ec",
+        "displayName": "Warm Archival Paper",
+        "canonical": "#faf8f6",
         "tonalRamp": [
-          "oklch(18% 0.006 85)",
-          "oklch(30% 0.008 85)",
-          "oklch(44% 0.009 85)",
-          "oklch(58% 0.010 85)",
-          "oklch(72% 0.010 85)",
-          "oklch(84% 0.009 85)",
-          "oklch(92% 0.008 85)",
-          "oklch(96% 0.006 85)"
+          "oklch(18% 0.005 60)",
+          "oklch(30% 0.006 60)",
+          "oklch(44% 0.007 60)",
+          "oklch(58% 0.008 60)",
+          "oklch(72% 0.008 60)",
+          "oklch(84% 0.007 60)",
+          "oklch(93% 0.006 60)",
+          "oklch(98% 0.005 60)"
         ]
       },
-      "ink": {
+      "sf-white-muted": {
+        "role": "neutral",
+        "displayName": "Warm White Muted",
+        "canonical": "rgba(255, 245, 240, 0.9)",
+        "tonalRamp": [
+          "oklch(18% 0.006 38)",
+          "oklch(30% 0.007 38)",
+          "oklch(44% 0.008 38)",
+          "oklch(58% 0.009 38)",
+          "oklch(72% 0.009 38)",
+          "oklch(84% 0.008 38)",
+          "oklch(93% 0.007 38)",
+          "oklch(98% 0.006 38)"
+        ]
+      },
+      "sf-white-hairline": {
+        "role": "neutral",
+        "displayName": "White Hairline",
+        "canonical": "rgba(255, 255, 255, 0.24)",
+        "tonalRamp": [
+          "oklch(18% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(44% 0 0)",
+          "oklch(58% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(92% 0 0)",
+          "oklch(98% 0 0)"
+        ]
+      },
+      "sf-white-hairline-strong": {
+        "role": "neutral",
+        "displayName": "White Hairline Strong",
+        "canonical": "rgba(255, 255, 255, 0.45)",
+        "tonalRamp": [
+          "oklch(18% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(44% 0 0)",
+          "oklch(58% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(92% 0 0)",
+          "oklch(98% 0 0)"
+        ]
+      },
+      "sf-ink": {
         "role": "neutral",
         "displayName": "Carbon Ink",
-        "canonical": "#111110",
+        "canonical": "#11100e",
         "tonalRamp": [
-          "oklch(16% 0.003 95)",
-          "oklch(26% 0.004 95)",
-          "oklch(38% 0.005 95)",
-          "oklch(50% 0.005 95)",
-          "oklch(64% 0.005 95)",
-          "oklch(78% 0.004 95)",
-          "oklch(89% 0.003 95)",
-          "oklch(96% 0.002 95)"
+          "oklch(16% 0.004 75)",
+          "oklch(26% 0.005 75)",
+          "oklch(38% 0.006 75)",
+          "oklch(50% 0.006 75)",
+          "oklch(64% 0.005 75)",
+          "oklch(78% 0.004 75)",
+          "oklch(89% 0.003 75)",
+          "oklch(96% 0.002 75)"
         ]
       },
-      "ink-muted": {
+      "sf-ink-muted": {
         "role": "neutral",
         "displayName": "Warm Charcoal",
-        "canonical": "#565550",
+        "canonical": "#46423e",
         "tonalRamp": [
-          "oklch(18% 0.006 95)",
-          "oklch(28% 0.008 95)",
-          "oklch(38% 0.009 95)",
-          "oklch(45% 0.009 95)",
-          "oklch(60% 0.008 95)",
-          "oklch(74% 0.006 95)",
-          "oklch(87% 0.004 95)",
-          "oklch(95% 0.003 95)"
+          "oklch(18% 0.006 60)",
+          "oklch(28% 0.008 60)",
+          "oklch(38% 0.009 60)",
+          "oklch(48% 0.009 60)",
+          "oklch(62% 0.008 60)",
+          "oklch(75% 0.006 60)",
+          "oklch(87% 0.004 60)",
+          "oklch(95% 0.003 60)"
         ]
       },
-      "hairline": {
+      "sf-hairline": {
         "role": "neutral",
         "displayName": "Paper Hairline",
-        "canonical": "rgba(17, 17, 16, 0.11)",
+        "canonical": "rgba(17, 16, 14, 0.11)",
         "tonalRamp": [
-          "oklch(18% 0.003 95)",
-          "oklch(30% 0.003 95)",
-          "oklch(44% 0.003 95)",
-          "oklch(58% 0.003 95)",
-          "oklch(72% 0.003 95)",
-          "oklch(84% 0.003 95)",
-          "oklch(91% 0.002 95)",
-          "oklch(96% 0.002 95)"
+          "oklch(18% 0.003 75)",
+          "oklch(30% 0.003 75)",
+          "oklch(44% 0.003 75)",
+          "oklch(58% 0.003 75)",
+          "oklch(72% 0.003 75)",
+          "oklch(84% 0.003 75)",
+          "oklch(91% 0.002 75)",
+          "oklch(96% 0.002 75)"
         ]
       },
-      "hairline-strong": {
+      "sf-hairline-strong": {
         "role": "neutral",
         "displayName": "Paper Hairline Strong",
-        "canonical": "rgba(17, 17, 16, 0.2)",
+        "canonical": "rgba(17, 16, 14, 0.22)",
         "tonalRamp": [
-          "oklch(18% 0.003 95)",
-          "oklch(30% 0.003 95)",
-          "oklch(44% 0.003 95)",
-          "oklch(58% 0.003 95)",
-          "oklch(72% 0.003 95)",
-          "oklch(82% 0.003 95)",
-          "oklch(90% 0.002 95)",
-          "oklch(95% 0.002 95)"
+          "oklch(18% 0.003 75)",
+          "oklch(30% 0.003 75)",
+          "oklch(44% 0.003 75)",
+          "oklch(58% 0.003 75)",
+          "oklch(72% 0.003 75)",
+          "oklch(82% 0.003 75)",
+          "oklch(90% 0.002 75)",
+          "oklch(95% 0.002 75)"
         ]
       },
-      "obsidian": {
+      "sf-terminal": {
         "role": "neutral",
-        "displayName": "Obsidian Chamber",
-        "canonical": "#09090b",
+        "displayName": "Dark Carbon",
+        "canonical": "#141311",
         "tonalRamp": [
-          "oklch(14% 0.005 285)",
-          "oklch(22% 0.006 285)",
-          "oklch(34% 0.007 285)",
-          "oklch(48% 0.007 285)",
-          "oklch(62% 0.006 285)",
-          "oklch(76% 0.005 285)",
-          "oklch(88% 0.004 285)",
-          "oklch(95% 0.002 285)"
+          "oklch(17% 0.005 70)",
+          "oklch(25% 0.006 70)",
+          "oklch(36% 0.007 70)",
+          "oklch(50% 0.007 70)",
+          "oklch(64% 0.006 70)",
+          "oklch(77% 0.005 70)",
+          "oklch(88% 0.004 70)",
+          "oklch(95% 0.002 70)"
         ]
       },
-      "obsidian-surface": {
+      "sf-terminal-bar": {
         "role": "neutral",
-        "displayName": "Obsidian Surface",
-        "canonical": "#111114",
+        "displayName": "Carbon Bar",
+        "canonical": "#1d1b18",
         "tonalRamp": [
-          "oklch(16% 0.006 285)",
-          "oklch(24% 0.007 285)",
-          "oklch(36% 0.008 285)",
-          "oklch(50% 0.008 285)",
-          "oklch(64% 0.007 285)",
-          "oklch(78% 0.005 285)",
-          "oklch(89% 0.004 285)",
-          "oklch(96% 0.002 285)"
+          "oklch(20% 0.006 68)",
+          "oklch(28% 0.007 68)",
+          "oklch(40% 0.008 68)",
+          "oklch(53% 0.008 68)",
+          "oklch(66% 0.007 68)",
+          "oklch(79% 0.005 68)",
+          "oklch(89% 0.004 68)",
+          "oklch(96% 0.002 68)"
         ]
       },
-      "obsidian-elevated": {
+      "sf-terminal-ink": {
         "role": "neutral",
-        "displayName": "Obsidian Elevated",
-        "canonical": "#17171b",
+        "displayName": "Terminal Ivory",
+        "canonical": "#f8f5f2",
         "tonalRamp": [
-          "oklch(19% 0.007 285)",
-          "oklch(27% 0.008 285)",
-          "oklch(39% 0.009 285)",
-          "oklch(52% 0.008 285)",
-          "oklch(66% 0.007 285)",
-          "oklch(79% 0.005 285)",
-          "oklch(90% 0.004 285)",
-          "oklch(96% 0.002 285)"
+          "oklch(18% 0.005 60)",
+          "oklch(30% 0.006 60)",
+          "oklch(44% 0.007 60)",
+          "oklch(58% 0.008 60)",
+          "oklch(72% 0.008 60)",
+          "oklch(84% 0.007 60)",
+          "oklch(92% 0.006 60)",
+          "oklch(97% 0.005 60)"
         ]
       },
-      "obsidian-ink": {
+      "sf-terminal-muted": {
         "role": "neutral",
-        "displayName": "Obsidian Ink",
-        "canonical": "#f5f4f0",
+        "displayName": "Terminal Warm Gray",
+        "canonical": "#c8c0b8",
         "tonalRamp": [
-          "oklch(18% 0.005 90)",
-          "oklch(30% 0.006 90)",
-          "oklch(44% 0.007 90)",
-          "oklch(58% 0.008 90)",
-          "oklch(72% 0.008 90)",
-          "oklch(84% 0.007 90)",
-          "oklch(92% 0.006 90)",
-          "oklch(97% 0.005 90)"
+          "oklch(18% 0.007 65)",
+          "oklch(30% 0.009 65)",
+          "oklch(44% 0.010 65)",
+          "oklch(58% 0.011 65)",
+          "oklch(70% 0.011 65)",
+          "oklch(80% 0.010 65)",
+          "oklch(89% 0.007 65)",
+          "oklch(96% 0.004 65)"
         ]
       },
-      "obsidian-muted": {
+      "sf-terminal-hairline": {
         "role": "neutral",
-        "displayName": "Obsidian Muted",
-        "canonical": "#a19f97",
+        "displayName": "Terminal Hairline",
+        "canonical": "rgba(255, 255, 255, 0.13)",
         "tonalRamp": [
-          "oklch(18% 0.006 95)",
-          "oklch(30% 0.008 95)",
-          "oklch(44% 0.010 95)",
-          "oklch(58% 0.011 95)",
-          "oklch(70% 0.011 95)",
-          "oklch(81% 0.009 95)",
-          "oklch(90% 0.006 95)",
-          "oklch(96% 0.003 95)"
-        ]
-      },
-      "obsidian-hairline": {
-        "role": "neutral",
-        "displayName": "Obsidian Hairline",
-        "canonical": "rgba(245, 244, 240, 0.12)",
-        "tonalRamp": [
-          "oklch(16% 0.004 90)",
-          "oklch(28% 0.005 90)",
-          "oklch(42% 0.005 90)",
-          "oklch(56% 0.005 90)",
-          "oklch(70% 0.005 90)",
-          "oklch(82% 0.004 90)",
-          "oklch(90% 0.003 90)",
-          "oklch(96% 0.002 90)"
+          "oklch(16% 0 0)",
+          "oklch(28% 0 0)",
+          "oklch(42% 0 0)",
+          "oklch(56% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(82% 0 0)",
+          "oklch(90% 0 0)",
+          "oklch(96% 0 0)"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Page hero thesis statement only."
+        "purpose": "Hero thesis H1 statement only."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Major section titles across alabaster and obsidian surfaces."
+        "purpose": "Major section titles and tabular traction metric values."
+      },
+      "subhead": {
+        "displayName": "Subhead",
+        "purpose": "Essay monograph, team pedigree, and active refinery stage headings."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Audience row headings, aside headings, and verified metric values."
+        "purpose": "Research problem titles and audience labels."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "Aside subheadings such as the Financial District hiring callout."
+      },
+      "title-compact": {
+        "displayName": "Title Compact",
+        "purpose": "Audience row headings, pipeline stage tab titles, and navbar wordmark."
+      },
+      "quote": {
+        "displayName": "Pull Quote",
+        "purpose": "Italic EB Garamond thesis pull quote inside the essay monograph."
+      },
+      "lead": {
+        "displayName": "Hero Lead",
+        "purpose": "Primary and secondary hero thesis paragraphs."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Primary editorial prose constrained to 52ch-65ch."
+        "purpose": "Editorial narrative prose constrained to 56ch."
+      },
+      "body-md": {
+        "displayName": "Body Medium",
+        "purpose": "Hiring callout prose, refinery input/output rows, and desktop navbar wordmark scale."
+      },
+      "body-compact": {
+        "displayName": "Body Compact",
+        "purpose": "Metric notes, monograph date, footer colophon, stage tags, and input/output summaries."
+      },
+      "ui": {
+        "displayName": "UI Control",
+        "purpose": "Navigation links, buttons, inline CTAs, metric labels, and institution names."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Navigation links, buttons, and inline editorial CTAs."
+        "purpose": "Mobile nav links, input/output labels, pedigree sub-label, and bold step indices."
       },
       "mono": {
         "displayName": "Mono Telemetry",
-        "purpose": "Trace payloads, verifier code, 01-04 stage indices, and status chips."
+        "purpose": "Dark carbon trace inspector filenames, payload lines, and step counters."
+      },
+      "mono-label": {
+        "displayName": "Mono Label",
+        "purpose": "Status chips and 3-letter uppercase trace line prefixes inside the dark carbon inspector."
       }
     },
     "shadows": [
       {
-        "name": "floating-utility",
-        "value": "0 8px 28px rgba(17, 17, 16, 0.14)",
-        "purpose": "Used solely on the fixed-position preview switcher utility overlay."
+        "name": "navbar-vermilion",
+        "value": "0 4px 20px rgba(158, 37, 0, 0.14)",
+        "purpose": "Grounds the sticky Golden Gate Vermilion navbar over scrolling white and paper content."
+      },
+      {
+        "name": "active-stage",
+        "value": "0 12px 30px rgba(204, 50, 0, 0.2)",
+        "purpose": "Lifts the active vermilion pipeline stage tab above inactive paper tabs."
+      },
+      {
+        "name": "panel-ambient",
+        "value": "0 20px 50px rgba(17, 16, 14, 0.06)",
+        "purpose": "Soft ambient lift for the Trace Refinery deep-dive panel and dark carbon inspector."
       }
     ],
     "motion": [
       {
-        "name": "ease-hero-reveal",
-        "value": "expo.out",
-        "purpose": "Hero line entrance (y: 10 -> 0, 0.7s, 0.06s stagger) and trace line updates (y: 8 -> 0, 0.42s, 0.05s stagger)."
+        "name": "ease-hero-stagger",
+        "value": "expo.out (y: 14 -> 0, 0.72s, 0.065s stagger)",
+        "purpose": "Hero headline, lead prose, CTAs, and suspension bridge entrance reveal."
       },
       {
-        "name": "scrub-curtain",
-        "value": "scrub: 0.4, ease: none",
-        "purpose": "Scroll-linked scaleY (0.12 -> 1) architectural threshold curtain from alabaster into obsidian."
+        "name": "scrub-bridge-parallax",
+        "value": "scrub: 0.6, ease: none (y: 0 -> 22)",
+        "purpose": "Subtle vertical scroll parallax on the hero Golden Gate suspension bridge canvas."
       },
       {
-        "name": "transition-color",
-        "value": "150ms–200ms cubic-bezier(0.4, 0, 0.2, 1)",
-        "purpose": "Immediate color and border transitions on links, buttons, and stage rows."
+        "name": "ease-stage-reveal",
+        "value": "expo.out (y: 10 -> 0, 0.42s, 0.04s stagger)",
+        "purpose": "Refinery stage deep-dive and dark carbon trace line updates on stage selection."
+      },
+      {
+        "name": "transition-standard",
+        "value": "150ms–300ms ease",
+        "purpose": "Immediate color/border transitions on links and buttons, plus 300ms scaleX progress rail."
       }
     ],
     "breakpoints": [
@@ -333,112 +444,117 @@
   },
   "components": [
     {
-      "name": "Primary Button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Primary hero CTA in Golden Gate Red with sharp 0px corners and directional arrow.",
-      "html": "<a href=\"#pipeline\" class=\"ds-btn-primary\"><span>Inspect the trace pipeline</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m7 7 10 10\"/><path d=\"M17 7v10H7\"/></svg></a>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--sf-red, #c0362c); color: #ffffff; padding: 12px 20px; font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; border-radius: 0; transition: background-color 150ms ease; } .ds-btn-primary:hover { background: var(--sf-red-hover, #a22a21); } .ds-btn-primary:focus-visible { outline: 2px solid var(--sf-red, #c0362c); outline-offset: 3px; border-radius: 2px; }"
+      "name": "Sticky Vermilion Navbar",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Full-bleed Golden Gate Vermilion bookend header with white BridgeMark, Optima navigation, and inverted white CTA.",
+      "html": "<header class=\"ds-nav\"><a href=\"#top\" class=\"ds-nav-brand\"><svg width=\"32\" height=\"24\" viewBox=\"0 0 64 40\" fill=\"none\" aria-hidden=\"true\"><path d=\"M18 4V37M46 4V37\" stroke=\"currentColor\" stroke-width=\"3.2\" stroke-linecap=\"square\"/><path d=\"M3 19C10.5 19 16 12.5 18 6.5C21.5 16.5 26.5 21 32 21C37.5 21 42.5 16.5 46 6.5C48 12.5 53.5 19 61 19\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"butt\"/><path d=\"M11 17.5V29M25 18.5V29M32 21V29M39 18.5V29M53 17.5V29\" stroke=\"currentColor\" stroke-width=\"2.4\"/><path d=\"M3 29H61\" stroke=\"currentColor\" stroke-width=\"3.2\" stroke-linecap=\"square\"/></svg><span>San Francisco Data</span></a><nav class=\"ds-nav-links\" aria-label=\"Primary\"><a href=\"#refinery\">How it works</a><a href=\"#research\">Research</a><a href=\"#partners\">Partners</a><a href=\"#essay\">Essay</a><a href=\"#careers\">Careers</a></nav><a href=\"#partner\" class=\"ds-nav-cta\"><span>Partner with us</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 74px; padding: 0 32px; background: var(--sf-red, #cc3200); border-bottom: 1px solid var(--sf-white-hairline, rgba(255, 255, 255, 0.24)); box-shadow: 0 4px 20px rgba(158, 37, 0, 0.14); font-family: 'Optima', 'Optima Nova', Candara, sans-serif; } .ds-nav-brand { display: inline-flex; align-items: center; gap: 12px; color: var(--sf-white, #ffffff); font-size: 18.5px; font-weight: 500; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; } .ds-nav-links { display: flex; align-items: center; gap: 36px; font-size: 16px; font-weight: 500; } .ds-nav-links a { color: var(--sf-white-muted, rgba(255, 245, 240, 0.9)); text-decoration: none; transition: color 150ms ease; } .ds-nav-links a:hover { color: var(--sf-white, #ffffff); } .ds-nav-links a:focus-visible, .ds-nav-brand:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; border-radius: 2px; } .ds-nav-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--sf-white, #ffffff); color: var(--sf-red, #cc3200); padding: 10px 20px; font-size: 15.5px; font-weight: 500; text-decoration: none; border-radius: 0; white-space: nowrap; transition: background-color 150ms ease; } .ds-nav-cta:hover { background: var(--sf-red-tint, #fff4f0); }"
     },
     {
-      "name": "Ink Button",
+      "name": "Primary Vermilion Button",
       "kind": "button",
-      "refersTo": "button-ink",
-      "description": "High-contrast Carbon Ink action button used in the sticky header and aside CTA; shifts to Golden Gate Red on hover.",
-      "html": "<a href=\"#\" class=\"ds-btn-ink\"><span>Partner with us</span><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a>",
-      "css": ".ds-btn-ink { display: inline-flex; align-items: center; gap: 6px; background: var(--sf-ink, #111110); color: var(--sf-paper, #faf9f6); padding: 10px 16px; font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13.5px; font-weight: 500; letter-spacing: -0.01em; text-decoration: none; border-radius: 0; transition: background-color 150ms ease; } .ds-btn-ink:hover { background: var(--sf-red, #c0362c); } .ds-btn-ink:focus-visible { outline: 2px solid var(--sf-red, #c0362c); outline-offset: 3px; border-radius: 2px; }"
+      "refersTo": "button-primary",
+      "description": "Primary hero and hiring CTA in Golden Gate Vermilion with sharp 0px corners and directional arrow.",
+      "html": "<a href=\"#refinery\" class=\"ds-btn-primary\"><span>See how traces become RL</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m7 7 10 10\"/><path d=\"M17 7v10H7\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--sf-red, #cc3200); color: var(--sf-white, #ffffff); padding: 14px 24px; font-family: 'Optima', 'Optima Nova', Candara, sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; border-radius: 0; transition: background-color 150ms ease; } .ds-btn-primary:hover { background: var(--sf-red-hover, #a82900); } .ds-btn-primary:focus-visible { outline: 2px solid var(--sf-red, #cc3200); outline-offset: 3px; border-radius: 2px; }"
     },
     {
       "name": "Secondary Hairline Button",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Unfilled architectural button with 1px hairline border for secondary hero actions.",
-      "html": "<a href=\"#\" class=\"ds-btn-secondary\"><span>View open roles</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a>",
-      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--sf-ink, #111110); border: 1px solid var(--sf-hairline-strong, rgba(17, 17, 16, 0.2)); padding: 12px 20px; font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; border-radius: 0; transition: border-color 150ms ease; } .ds-btn-secondary:hover { border-color: var(--sf-ink, #111110); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--sf-red, #c0362c); outline-offset: 3px; border-radius: 2px; }"
+      "description": "Pure white architectural button with 1px hairline border; border and label shift to vermilion on hover.",
+      "html": "<a href=\"#careers\" class=\"ds-btn-secondary\"><span>Explore open roles</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: var(--sf-white, #ffffff); color: var(--sf-ink, #11100e); border: 1px solid var(--sf-hairline-strong, rgba(17, 16, 14, 0.22)); padding: 14px 24px; font-family: 'Optima', 'Optima Nova', Candara, sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; border-radius: 0; transition: border-color 150ms ease, color 150ms ease; } .ds-btn-secondary:hover { border-color: var(--sf-red, #cc3200); color: var(--sf-red, #cc3200); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--sf-red, #cc3200); outline-offset: 3px; border-radius: 2px; }"
     },
     {
-      "name": "Sticky Navigation Bar",
-      "kind": "nav",
-      "refersTo": "nav-bar",
-      "description": "64px frosted alabaster header with 1px hairline rule, bridge mark, muted links, and right-aligned ink CTA.",
-      "html": "<header class=\"ds-nav\"><a href=\"#top\" class=\"ds-nav-brand\"><span class=\"ds-nav-mark\" aria-hidden=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"1.75\"><path d=\"M5 20V5M19 20V5M2 15h20M5 6c3.5 5 10.5 5 14 0\"/></svg></span><span>San Francisco Data</span></a><nav class=\"ds-nav-links\" aria-label=\"Primary\"><a href=\"#pipeline\">Pipeline</a><a href=\"#partners\">Partners</a><a href=\"#thesis\">Essay</a><a href=\"#careers\">Careers</a></nav><a href=\"#partner\" class=\"ds-nav-cta\">Partner with us</a></header>",
-      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; padding: 0 24px; background: rgba(250, 249, 246, 0.94); border-bottom: 1px solid var(--sf-hairline, rgba(17, 17, 16, 0.11)); font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; } .ds-nav-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; letter-spacing: -0.015em; color: var(--sf-ink, #111110); text-decoration: none; } .ds-nav-mark { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--sf-red, #c0362c); border-radius: 3px; } .ds-nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; } .ds-nav-links a { color: var(--sf-ink-muted, #565550); text-decoration: none; transition: color 150ms ease; } .ds-nav-links a:hover { color: var(--sf-ink, #111110); } .ds-nav-cta { background: var(--sf-ink, #111110); color: var(--sf-paper, #faf9f6); padding: 8px 14px; font-size: 13.5px; font-weight: 500; text-decoration: none; transition: background-color 150ms ease; } .ds-nav-cta:hover { background: var(--sf-red, #c0362c); }"
+      "name": "Pipeline Stage Tab (Active)",
+      "kind": "custom",
+      "refersTo": "stage-tab-active",
+      "description": "Active Golden Gate Vermilion pipeline stage selector tab with bold Optima step index, icon, and EB Garamond tag.",
+      "html": "<button type=\"button\" role=\"tab\" aria-selected=\"true\" class=\"ds-stage-tab-active\"><div class=\"ds-stage-head\"><span class=\"ds-stage-step\">01</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2\"/></svg></div><div class=\"ds-stage-copy\"><div class=\"ds-stage-title\">Raw Trace</div><div class=\"ds-stage-tag\">Agent fails live</div></div></button>",
+      "css": ".ds-stage-tab-active { display: flex; flex-direction: column; justify-content: space-between; width: 240px; text-align: left; padding: 24px; background: var(--sf-red, #cc3200); color: var(--sf-white, #ffffff); border: 1px solid var(--sf-red, #cc3200); border-radius: 0; box-shadow: 0 12px 30px rgba(204, 50, 0, 0.2); cursor: pointer; transition: all 200ms ease; } .ds-stage-tab-active:focus-visible { outline: 2px solid var(--sf-red, #cc3200); outline-offset: 3px; border-radius: 2px; } .ds-stage-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; } .ds-stage-step { font-family: 'Optima', 'Optima Nova', Candara, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; } .ds-stage-copy { margin-top: 16px; } .ds-stage-title { font-family: 'Optima', 'Optima Nova', Candara, sans-serif; font-size: 18px; font-weight: 500; line-height: 1.2; } .ds-stage-tag { margin-top: 6px; font-family: 'EB Garamond', Georgia, serif; font-size: 17px; line-height: 1.35; color: var(--sf-white-muted, rgba(255, 245, 240, 0.9)); }"
     },
     {
       "name": "Verified Status Chip",
       "kind": "chip",
       "refersTo": "status-chip-verified",
-      "description": "Sharp-cornered monospace status badge used in the Trace Refinery terminal header.",
-      "html": "<span class=\"ds-chip-verified\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg><span>RL VERIFIER PASS</span></span>",
-      "css": ".ds-chip-verified { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; font-family: 'Azeret Mono', ui-monospace, SFMono-Regular, monospace; font-size: 11.5px; color: var(--sf-verified-dark, #4ade80); background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.35); border-radius: 0; font-variant-numeric: tabular-nums; }"
+      "description": "Sharp-cornered monospace verifier badge inside the Dark Carbon trace inspector header.",
+      "html": "<span class=\"ds-chip-verified\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg><span>RL reward verified</span></span>",
+      "css": ".ds-chip-verified { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; font-family: 'Azeret Mono', ui-monospace, SFMono-Regular, monospace; font-size: 12.5px; color: var(--sf-verified-dark, #4ade80); background: rgba(74, 222, 128, 0.12); border: 1px solid rgba(74, 222, 128, 0.42); border-radius: 0; font-variant-numeric: tabular-nums; }"
     },
     {
-      "name": "Refinery Stage Selector Row",
-      "kind": "custom",
-      "refersTo": "stage-row-dark-active",
-      "description": "Obsidian hairline-divided pipeline stage button with Azeret Mono step index and active Golden Gate Red dot.",
-      "html": "<button type=\"button\" class=\"ds-stage-row ds-stage-row-active\" aria-pressed=\"true\"><span class=\"ds-stage-index\">04</span><span class=\"ds-stage-body\"><span class=\"ds-stage-head\"><span class=\"ds-stage-title\">Ungameable Verifier</span><span class=\"ds-stage-dot\" aria-hidden=\"true\"></span></span><span class=\"ds-stage-summary\">Grade real user intent rather than brittle test loopholes.</span></span></button>",
-      "css": ".ds-stage-row { display: flex; align-items: baseline; gap: 16px; width: 100%; text-align: left; padding: 20px 16px; background: var(--sf-obsidian, #09090b); border: none; border-top: 1px solid var(--sf-obsidian-hairline, rgba(245, 244, 240, 0.12)); border-bottom: 1px solid var(--sf-obsidian-hairline, rgba(245, 244, 240, 0.12)); cursor: pointer; font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; transition: background-color 200ms ease; } .ds-stage-row-active { background: var(--sf-obsidian-surface, #111114); } .ds-stage-row:hover { background: rgba(245, 244, 240, 0.03); } .ds-stage-row-active:hover { background: var(--sf-obsidian-surface, #111114); } .ds-stage-row:focus-visible { outline: 2px solid var(--sf-red, #c0362c); outline-offset: -2px; } .ds-stage-index { font-family: 'Azeret Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.05em; color: var(--sf-red, #c0362c); font-variant-numeric: tabular-nums; } .ds-stage-body { flex: 1; min-width: 0; } .ds-stage-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; } .ds-stage-title { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; color: var(--sf-obsidian-ink, #f5f4f0); } .ds-stage-dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--sf-red, #c0362c); flex-shrink: 0; } .ds-stage-summary { display: block; margin-top: 6px; font-size: 14px; line-height: 1.55; color: var(--sf-obsidian-muted, #a19f97); }"
-    },
-    {
-      "name": "Specimen Terminal",
+      "name": "Dark Carbon Trace Inspector",
       "kind": "card",
-      "refersTo": "specimen-terminal",
-      "description": "Sharp-cornered obsidian telemetry container displaying real trace and verifier output in Azeret Mono.",
-      "html": "<div class=\"ds-terminal\"><div class=\"ds-terminal-bar\"><span class=\"ds-terminal-title\">verifier_reward.py · intent check</span><span class=\"ds-terminal-badge\">VERIFIED</span></div><div class=\"ds-terminal-body\"><div class=\"ds-trace-line\"><span class=\"ds-trace-prefix\">ENV</span><span>sandbox://repo-snapshot@9f4c2a</span></div><div class=\"ds-trace-line\"><span class=\"ds-trace-prefix\">FAIL</span><span class=\"ds-trace-signal\">AssertionError: migration rollback drops index</span></div><div class=\"ds-trace-line\"><span class=\"ds-trace-prefix\">PASS</span><span class=\"ds-trace-ok\">reward=1.0 · user intent verified across 3 invariants</span></div></div></div>",
-      "css": ".ds-terminal { background: var(--sf-obsidian-surface, #111114); border: 1px solid var(--sf-obsidian-hairline, rgba(245, 244, 240, 0.12)); border-radius: 0; font-family: 'Azeret Mono', ui-monospace, SFMono-Regular, monospace; } .ds-terminal-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; background: var(--sf-obsidian-elevated, #17171b); border-bottom: 1px solid var(--sf-obsidian-hairline, rgba(245, 244, 240, 0.12)); } .ds-terminal-title { font-size: 12px; color: var(--sf-obsidian-muted, #a19f97); } .ds-terminal-badge { font-size: 11.5px; padding: 2px 10px; color: var(--sf-verified-dark, #4ade80); background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.35); } .ds-terminal-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 12px; font-size: 13px; line-height: 1.65; color: var(--sf-obsidian-ink, #f5f4f0); font-variant-numeric: tabular-nums; } .ds-trace-line { display: flex; align-items: flex-start; gap: 16px; } .ds-trace-prefix { width: 32px; flex-shrink: 0; font-size: 11px; letter-spacing: 0.05em; color: rgba(245, 244, 240, 0.68); } .ds-trace-signal { color: #f28b82; } .ds-trace-ok { color: var(--sf-verified-dark, #4ade80); }"
+      "refersTo": "trace-inspector",
+      "description": "Sharp-cornered #141311 dark carbon telemetry inspector displaying Azeret Mono trace payloads and EB Garamond outcome bar.",
+      "html": "<div class=\"ds-inspector\"><div class=\"ds-inspector-bar\"><span class=\"ds-inspector-file\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#ff8566\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polyline points=\"4 17 10 11 4 5\"/><line x1=\"12\" x2=\"20\" y1=\"19\" y2=\"19\"/></svg><span>verifier_suite.py · illustrative grader</span></span><span class=\"ds-inspector-badge\">RL reward verified</span></div><div class=\"ds-inspector-body\"><div class=\"ds-trace-line\"><span class=\"ds-trace-prefix\">CHK</span><span>assert leaked_handles_after_timeout(n=64) == 0</span></div><div class=\"ds-trace-line\"><span class=\"ds-trace-prefix ds-trace-ok\">GRD</span><span class=\"ds-trace-ok\">reward_hacking_audit: passed · false_positive_rate: 0.00</span></div></div><div class=\"ds-inspector-foot\"><span class=\"ds-inspector-note\">Reward-hacking audit passed · 0.00 false-positive rate</span><span class=\"ds-inspector-count\">4 / 4</span></div></div>",
+      "css": ".ds-inspector { background: var(--sf-terminal, #141311); color: var(--sf-terminal-ink, #f8f5f2); border: 1px solid var(--sf-hairline-strong, rgba(17, 16, 14, 0.22)); border-radius: 0; } .ds-inspector-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 28px; background: var(--sf-terminal-bar, #1d1b18); border-bottom: 1px solid var(--sf-terminal-hairline, rgba(255, 255, 255, 0.13)); } .ds-inspector-file { display: inline-flex; align-items: center; gap: 10px; font-family: 'Azeret Mono', ui-monospace, SFMono-Regular, monospace; font-size: 13.5px; color: var(--sf-terminal-muted, #c8c0b8); } .ds-inspector-badge { padding: 4px 12px; font-family: 'Azeret Mono', ui-monospace, SFMono-Regular, monospace; font-size: 12.5px; color: var(--sf-verified-dark, #4ade80); background: rgba(74, 222, 128, 0.12); border: 1px solid rgba(74, 222, 128, 0.42); } .ds-inspector-body { padding: 32px; display: flex; flex-direction: column; gap: 16px; font-family: 'Azeret Mono', ui-monospace, SFMono-Regular, monospace; font-size: 14.5px; line-height: 1.7; font-variant-numeric: tabular-nums; } .ds-trace-line { display: flex; align-items: flex-start; gap: 16px; } .ds-trace-prefix { width: 36px; flex-shrink: 0; font-size: 12.5px; letter-spacing: 0.05em; color: rgba(248, 245, 242, 0.65); } .ds-trace-ok { color: var(--sf-verified-dark, #4ade80); } .ds-inspector-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 28px; border-top: 1px solid var(--sf-terminal-hairline, rgba(255, 255, 255, 0.13)); background: rgba(255, 255, 255, 0.03); } .ds-inspector-note { font-family: 'EB Garamond', Georgia, serif; font-size: 17.5px; color: var(--sf-terminal-muted, #c8c0b8); } .ds-inspector-count { font-family: 'Azeret Mono', ui-monospace, SFMono-Regular, monospace; font-size: 13px; color: #ff8566; }"
+    },
+    {
+      "name": "Essay Monograph Panel",
+      "kind": "card",
+      "refersTo": "monograph-panel",
+      "description": "Sharp-cornered pure white editorial monograph resting on warm archival paper with vermilion-ruled italic EB Garamond pull quote.",
+      "html": "<article class=\"ds-monograph\"><div class=\"ds-monograph-meta\">October 1, 2026 · Brandon Guo &amp; Faiz Siddiqi</div><h2 class=\"ds-monograph-title\">Production traces and the future of data</h2><blockquote class=\"ds-monograph-quote\">“The economy itself can become the largest source of training data for advanced AI.”</blockquote></article>",
+      "css": ".ds-monograph { background: var(--sf-white, #ffffff); border: 1px solid var(--sf-hairline, rgba(17, 16, 14, 0.11)); border-radius: 0; padding: 40px; color: var(--sf-ink, #11100e); } .ds-monograph-meta { padding-bottom: 20px; border-bottom: 1px solid var(--sf-hairline, rgba(17, 16, 14, 0.11)); font-family: 'EB Garamond', Georgia, serif; font-size: 17.5px; color: var(--sf-ink-muted, #46423e); font-variant-numeric: tabular-nums; } .ds-monograph-title { margin: 28px 0 0; font-family: 'Optima', 'Optima Nova', Candara, sans-serif; font-size: 2rem; font-weight: 500; line-height: 1.12; letter-spacing: -0.02em; } .ds-monograph-quote { margin: 24px 0 0; padding-left: 20px; border-left: 1px solid var(--sf-red, #cc3200); font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 1.42rem; line-height: 1.52; color: var(--sf-ink, #11100e); }"
     }
   ],
   "narrative": {
-    "northStar": "The Civic Refinery",
-    "overview": "San Francisco Data pairs the quiet authority of a San Francisco research monograph with the precision of an industrial trace-refining instrument. Editorial surfaces rest on warm archival alabaster paper (`#faf9f6`) ruled by 1px architectural hairlines and set in unhurried serif display typography. When the narrative turns to mechanism—filtering raw coding-agent failures, reconstructing deterministic sandboxes, and grading user intent—the light-to-dark expression drops through a scroll-scrubbed curtain into a deep obsidian chamber (`#09090b`) where live trace telemetry and Golden Gate suspension geometry take center stage.\n\nThe system refuses generic dark-neon AI templates, decorative gradients, and equal-height icon-card grids. Restraint is structural: crisp 0px corners, single-hue International Orange red (`#c0362c`) reserved strictly for primary actions, active telemetry, and the Golden Gate Bridge mark, and verified emerald reserved strictly for passing RL verifier states.",
+    "northStar": "The Golden Gate Monograph",
+    "overview": "San Francisco Data pairs the luminous clarity of a San Francisco research monograph with the structural precision of a suspension-bridge engineering schematic. Editorial bands alternate between pure white (`#ffffff`) and warm archival paper (`#faf8f6`), ruled by 1px architectural hairlines and framed top and bottom by full-bleed Golden Gate Vermilion (`#cc3200`) bookends for the sticky navigation bar and civic footer.\n\nDisplay headlines, navigation, controls, and metric numerals are set in humanist sans-serif `Optima` (medium weight 500), paired with `EB Garamond` for long-form editorial prose and pull quotes, and `Azeret Mono` strictly inside the dark carbon (`#141311`) trace inspector. The system rejects dark-neon AI templates, decorative gradients, uppercase eyebrow kickers, and rounded SaaS cards in favor of sharp 0px rectilinearity, generous whitespace, and purposeful, reduced-motion-safe GSAP and HTML5 Canvas motion.",
     "keyCharacteristics": [
-      "Archival warm alabaster (`#faf9f6`) paired with deep obsidian (`#09090b`) for the technical refinery chamber.",
-      "Sharp 0px architectural geometry separated by 1px hairline rules rather than drop shadows.",
-      "High-contrast pairing of Source Serif 4 for editorial display, Schibsted Grotesk for UI and prose, and Azeret Mono strictly for real trace telemetry and verifier code.",
-      "Surgical San Francisco Data red (`#c0362c`) inspired by the Golden Gate Bridge, deployed sparingly so every red signal carries weight.",
-      "Purposeful, reduced-motion-safe GSAP and HTML5 Canvas choreography anchored to the suspension-bridge span."
+      "Luminous pure white (`#ffffff`) primary surface alternating with warm archival paper (`#faf8f6`) secondary bands, bookended by Golden Gate Vermilion (`#cc3200`) header and footer bars.",
+      "High-contrast typographic triad: `Optima` for display, headings, metrics, and UI chrome; `EB Garamond` for editorial prose and italic blockquotes; `Azeret Mono` confined to trace payloads, filenames, and verifier badges.",
+      "Isolated dark carbon (`#141311`) trace inspector embedded inside the white Trace Refinery deep-dive panel for high-legibility code and telemetry inspection.",
+      "Sharp 0px architectural geometry divided by 1px hairline rules, with restrained ambient shadows only on the sticky vermilion navbar, active stage tab, and refinery panel.",
+      "Reduced-motion-safe GSAP reveals and an interactive HTML5 Canvas Golden Gate suspension bridge visualizing traces transforming into verified RL environments."
     ],
     "rules": [
       {
-        "name": "The One-Signal Red Rule",
-        "body": "Golden Gate Red (`#c0362c`) is reserved for primary actions, active pipeline states, focus rings, and the bridge mark; never flood full sections or decorative backgrounds with red.",
+        "name": "The Vermilion Bookend Rule",
+        "body": "Golden Gate Vermilion (`#cc3200`) frames the document at the top (sticky navbar) and bottom (civic footer) and highlights active pipeline states, primary CTAs, and key numerals—leaving main reading sections on luminous white or warm archival paper.",
         "section": "colors"
       },
       {
         "name": "The Semantic Verification Rule",
-        "body": "Emerald (`#2f855a` on paper, `#4ade80` on obsidian) appears only to denote a verified environment or passing RL verifier grade—never for marketing decoration.",
+        "body": "Verifier Emerald (`#4ade80`) appears solely for passing RL verifier states and verified consent/rollout lines inside the dark carbon inspector—never for marketing decoration.",
         "section": "colors"
       },
       {
-        "name": "The Real-Telemetry Mono Rule",
-        "body": "Azeret Mono is reserved for genuine technical artifacts—trace payloads, verifier code, step indices, and canvas telemetry—never for marketing slogans or decorative eyebrow labels.",
+        "name": "The Dark-Chamber Contrast Rule",
+        "body": "On Dark Carbon (`#141311`), never place raw `#cc3200` small text; step up to Signal Coral (`#ff8566`) for icons/prefixes and Signal Peach (`#ffa68f`) for failure copy and status badges.",
+        "section": "colors"
+      },
+      {
+        "name": "The Humanist-Literary Split Rule",
+        "body": "Use `Optima` (weight 500) for structural typography—headings, navigation, buttons, metrics, and UI labels—and `EB Garamond` (weight 400) for all narrative prose and quotes. Never swap their roles.",
         "section": "typography"
       },
       {
-        "name": "The Regular-Weight Serif Rule",
-        "body": "Source Serif 4 stays at weight 400 for display and section headings; hierarchy comes from scale, tight tracking (`-0.02em` to `-0.03em`), and generous surrounding space rather than heavy bolding.",
+        "name": "The Telemetry-Only Mono Rule",
+        "body": "`Azeret Mono` is restricted to the dark carbon trace inspector (filenames, trace payloads, prefixes, status chips, and step counters)—never for page headings or marketing copy.",
         "section": "typography"
       },
       {
-        "name": "The Flat-By-Default Rule",
-        "body": "Content surfaces, terminals, and buttons carry zero drop shadow at rest or on hover; hierarchy is established with 1px hairlines and tonal contrast.",
+        "name": "The Hairline-First Depth Rule",
+        "body": "Establish hierarchy with 1px hairline rules and `#ffffff` / `#faf8f6` surface alternation first; reserve soft ambient shadows strictly for sticky navigation, the active pipeline stage, and the primary interactive refinery container.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do separate content bands, editorial rows, and technical ledgers with 1px hairline rules (`rgba(17, 17, 16, 0.11)` on alabaster, `rgba(245, 244, 240, 0.12)` on obsidian) instead of floating shadowed cards.",
-      "Do reserve Source Serif 4 (weight 400, tight negative tracking) for thesis headlines, section headings, pull quotes, and key metric values, and Schibsted Grotesk for body prose and UI controls.",
-      "Do restrict Azeret Mono to real technical artifacts (trace logs, verifier code, `01`–`04` stage indices, status chips, and canvas axis annotations).",
-      "Do gate all GSAP entrance reveals, scroll-scrubbed curtains, and stage ScrollTriggers inside `gsap.matchMedia()` for `(prefers-reduced-motion: no-preference)`.",
-      "Do use `signal-dark` (`#f28b82`) or `verified-dark` (`#4ade80`) for small semantic text on obsidian surfaces to maintain WCAG 2.1 AA contrast."
+      "Do alternate main reading bands between `#ffffff` and `#faf8f6` separated by 1px hairlines (`rgba(17, 16, 14, 0.11)`), framed by `#cc3200` vermilion bookends for header and footer.",
+      "Do pair `Optima` (500) for headings, navigation, buttons, metrics, and UI labels with `EB Garamond` (400) for prose and quotes, keeping `Azeret Mono` confined to the dark carbon trace inspector.",
+      "Do align all sections to the `1140px` architectural container with `px-6 sm:px-12 lg:px-16` horizontal gutters.",
+      "Do apply `.sf-red-focus` on vermilion surfaces so keyboard `:focus-visible` outlines switch to `#ffffff` for accessible contrast.",
+      "Do gate all GSAP entrance reveals, scroll parallax, and stage animations inside `gsap.matchMedia()` for `(prefers-reduced-motion: no-preference)`."
     ],
     "donts": [
-      "Don't round primary buttons, terminals, or stage containers beyond `0px`; keep rounded corners limited to the `3px` brand mark, `2px` focus ring, and `9999px` status dot.",
-      "Don't add drop shadows to marketing cards, buttons, or terminals; reserve elevation shadow strictly for fixed utility overlays.",
-      "Don't place uppercase eyebrow/kicker labels above section headings or build equal-height icon-card grids.",
-      "Don't use Golden Gate Red (`#c0362c`) as a full-section background or pair it with unverified decorative gradients.",
-      "Don't use emerald green for non-verification states or decorative badges."
+      "Don't round primary buttons, stage tabs, panels, or status chips beyond `0px`; restrict radius to `2px` focus rings, `4px` scrollbar thumbs, and `9999px` pipeline flow chevrons.",
+      "Don't place raw `#cc3200` small text on the `#141311` dark carbon inspector; use `#ff8566` or `#ffa68f` for AA contrast.",
+      "Don't add uppercase eyebrow/kicker labels above section headings or decorative gradients behind editorial bands.",
+      "Don't use Verifier Emerald (`#4ade80`) outside genuine passing RL verifier or consent-verified telemetry states.",
+      "Don't replace `Optima` or `EB Garamond` with system sans-serif stacks or mix `Azeret Mono` into marketing headlines."
     ]
   }
 }
