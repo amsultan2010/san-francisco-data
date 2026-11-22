@@ -1,7 +1,9 @@
-import { useRef, type MouseEvent } from "react";
+import { useEffect, useRef, type MouseEvent } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useGSAP } from "@gsap/react";
+import Lenis from "lenis";
 import { ArrowUpRight } from "lucide-react";
 import {
   AUDIENCE_PATHS,
@@ -17,15 +19,47 @@ import { TraceRefineryEngine } from "./components/TraceRefineryEngine";
 import { StreetcarIcon } from "./components/StreetcarIcon";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollToPlugin);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
+
+const COL_1_HALF = [...PEDIGREE_COL_1, ...PEDIGREE_COL_1];
+const COL_2_HALF = [...PEDIGREE_COL_2, ...PEDIGREE_COL_2];
 
 export default function App() {
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
   const scrollProgressRef = useRef<HTMLDivElement | null>(null);
   const researchRef = useRef<HTMLElement | null>(null);
-  const partnersRef = useRef<HTMLElement | null>(null);
   const editorialSpreadRef = useRef<HTMLElement | null>(null);
+  const partnersRef = useRef<HTMLElement | null>(null);
+
+  // Slow, high-inertia Lenis smooth scrolling synced directly with GSAP ScrollTrigger
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const lenis = new Lenis({
+      lerp: 0.055,
+      wheelMultiplier: 0.65,
+      touchMultiplier: 0.85,
+      smoothWheel: true,
+    });
+    lenisRef.current = lenis;
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const tick = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(tick);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
 
   const handleSmoothAnchor = (e: MouseEvent<HTMLAnchorElement>, targetId: string) => {
     const reduced =
@@ -33,8 +67,12 @@ export default function App() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
     e.preventDefault();
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(targetId, { offset: -84, duration: 1.65 });
+      return;
+    }
     gsap.to(window, {
-      duration: 1.15,
+      duration: 1.35,
       scrollTo: { y: targetId, offsetY: 84 },
       ease: "power3.inOut",
     });
@@ -44,7 +82,7 @@ export default function App() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // 1. Slow, smooth scrubbed reading progress bar
+        // 1. Slow, smooth scrubbed reading progress bar synced with Lenis
         if (scrollProgressRef.current) {
           gsap.fromTo(
             scrollProgressRef.current,
@@ -56,20 +94,20 @@ export default function App() {
                 trigger: rootRef.current,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 0.9,
+                scrub: 0.6,
               },
             },
           );
         }
 
-        // 2. Hero staggered clip + upward reveal
+        // 2. Hero staggered entrance
         const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
         heroTl
           .from(".sf-hero-stagger", {
-            y: 30,
+            y: 28,
             opacity: 0,
-            duration: 1.0,
-            stagger: 0.11,
+            duration: 1.05,
+            stagger: 0.12,
             clearProps: "transform,opacity",
           })
           .from(
@@ -77,19 +115,19 @@ export default function App() {
             {
               y: 22,
               opacity: 0,
-              duration: 1.05,
+              duration: 1.1,
               clearProps: "transform,opacity",
             },
-            "-=0.7",
+            "-=0.72",
           );
 
-        // 3. Research section: masked headline reveal + staggered architectural cards
+        // 3. Research section: masked headline reveal + staggered cards
         if (researchRef.current) {
           gsap.from(researchRef.current.querySelector(".sf-research-heading"), {
             clipPath: "inset(0 0 100% 0)",
             y: 24,
             opacity: 0,
-            duration: 1.0,
+            duration: 1.05,
             ease: "power3.out",
             clearProps: "transform,opacity,clipPath",
             scrollTrigger: {
@@ -100,9 +138,9 @@ export default function App() {
           });
 
           gsap.from(researchRef.current.querySelectorAll(".sf-research-card"), {
-            y: 32,
+            y: 30,
             opacity: 0,
-            duration: 0.9,
+            duration: 0.95,
             stagger: 0.12,
             ease: "power3.out",
             clearProps: "transform,opacity",
@@ -114,43 +152,12 @@ export default function App() {
           });
         }
 
-        // 4. Audience triptych: masked heading + staggered columns
-        if (partnersRef.current) {
-          gsap.from(partnersRef.current.querySelector(".sf-partners-heading"), {
-            clipPath: "inset(0 0 100% 0)",
-            y: 22,
-            opacity: 0,
-            duration: 0.95,
-            ease: "power3.out",
-            clearProps: "transform,opacity,clipPath",
-            scrollTrigger: {
-              trigger: partnersRef.current,
-              start: "top 84%",
-              once: true,
-            },
-          });
-
-          gsap.from(partnersRef.current.querySelectorAll(".sf-triptych-col"), {
-            y: 30,
-            opacity: 0,
-            duration: 0.88,
-            stagger: 0.12,
-            ease: "power3.out",
-            clearProps: "transform,opacity",
-            scrollTrigger: {
-              trigger: partnersRef.current,
-              start: "top 80%",
-              once: true,
-            },
-          });
-        }
-
-        // 5. Combined Essay + Founders spread: opposing horizontal/vertical reveals
+        // 4. Combined Essay + Founders spread: opposing horizontal reveals
         if (editorialSpreadRef.current) {
           gsap.from(editorialSpreadRef.current.querySelector(".sf-essay-card"), {
             x: -24,
             opacity: 0,
-            duration: 0.95,
+            duration: 1.0,
             ease: "power3.out",
             clearProps: "transform,opacity",
             scrollTrigger: {
@@ -163,13 +170,44 @@ export default function App() {
           gsap.from(editorialSpreadRef.current.querySelectorAll(".sf-founder-row"), {
             x: 24,
             opacity: 0,
-            duration: 0.95,
+            duration: 1.0,
             stagger: 0.16,
             ease: "power3.out",
             clearProps: "transform,opacity",
             scrollTrigger: {
               trigger: editorialSpreadRef.current,
               start: "top 82%",
+              once: true,
+            },
+          });
+        }
+
+        // 5. Audience triptych: masked heading + staggered columns
+        if (partnersRef.current) {
+          gsap.from(partnersRef.current.querySelector(".sf-partners-heading"), {
+            clipPath: "inset(0 0 100% 0)",
+            y: 22,
+            opacity: 0,
+            duration: 1.0,
+            ease: "power3.out",
+            clearProps: "transform,opacity,clipPath",
+            scrollTrigger: {
+              trigger: partnersRef.current,
+              start: "top 84%",
+              once: true,
+            },
+          });
+
+          gsap.from(partnersRef.current.querySelectorAll(".sf-triptych-col"), {
+            y: 28,
+            opacity: 0,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power3.out",
+            clearProps: "transform,opacity",
+            scrollTrigger: {
+              trigger: partnersRef.current,
+              start: "top 80%",
               once: true,
             },
           });
@@ -184,14 +222,14 @@ export default function App() {
     <div ref={rootRef} className="min-h-screen bg-[var(--sf-white)] text-[var(--sf-ink)]">
       <a
         href="#top"
-        className="sf-squircle-sm sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[var(--sf-white)] focus:text-[var(--sf-red)] focus:px-4 focus:py-2 focus:font-optima focus:text-[15.5px] focus:font-medium focus:shadow-lg"
+        className="sf-squircle-sm sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[var(--sf-white)] focus:text-[var(--sf-red)] focus:px-4 focus:py-2 focus:font-optima focus:text-[16px] focus:font-medium focus:shadow-lg"
       >
         Skip to main content
       </a>
 
       {/* Sticky Golden Gate Vermilion Navbar (#CC3200) */}
       <header className="sf-red-focus sticky top-0 z-40 bg-[var(--sf-red)] border-b border-[var(--sf-white-hairline)] shadow-[0_4px_20px_rgba(158,37,0,0.14)]">
-        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14 h-[72px] sm:h-[78px] flex items-center justify-between gap-4 sm:gap-6">
+        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 h-[72px] sm:h-[78px] flex items-center justify-between gap-4 sm:gap-6">
           <a
             href="#top"
             translate="no"
@@ -206,7 +244,7 @@ export default function App() {
 
           <nav
             aria-label="Primary"
-            className="hidden md:flex items-center gap-5 lg:gap-7 font-optima text-[17.5px] font-medium text-[var(--sf-white-muted)]"
+            className="hidden md:flex items-center gap-5 lg:gap-8 font-optima text-[18px] font-medium text-[var(--sf-white-muted)]"
           >
             <a
               href="#refinery"
@@ -223,13 +261,6 @@ export default function App() {
               Research
             </a>
             <a
-              href="#partners"
-              onClick={(e) => handleSmoothAnchor(e, "#partners")}
-              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
-            >
-              Partners
-            </a>
-            <a
               href="#essay"
               onClick={(e) => handleSmoothAnchor(e, "#essay")}
               className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
@@ -243,13 +274,20 @@ export default function App() {
             >
               Founders
             </a>
+            <a
+              href="#partners"
+              onClick={(e) => handleSmoothAnchor(e, "#partners")}
+              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
+            >
+              Partners
+            </a>
           </nav>
 
           <a
             href={SFDATA_LINKS.xBrandon}
             target="_blank"
             rel="noreferrer"
-            className="sf-pressable sf-squircle-sm inline-flex items-center gap-1.5 bg-[var(--sf-white)] text-[var(--sf-red)] px-3.5 py-2 sm:px-5 sm:py-2.5 font-optima text-[15.5px] sm:text-[17px] font-medium leading-none hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
+            className="sf-pressable sf-squircle-sm inline-flex items-center gap-1.5 bg-[var(--sf-white)] text-[var(--sf-red)] px-3.5 py-2 sm:px-5 sm:py-2.5 font-optima text-[16px] sm:text-[17.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
           >
             <span>Partner with us</span>
             <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" strokeWidth={2} />
@@ -259,7 +297,7 @@ export default function App() {
         {/* Compact Mobile Section Nav Strip */}
         <nav
           aria-label="Mobile sections"
-          className="md:hidden border-t border-[var(--sf-white-hairline)] px-6 py-2.5 flex items-center justify-between gap-4 overflow-x-auto font-optima text-[15.5px] font-medium text-[var(--sf-white-muted)]"
+          className="md:hidden border-t border-[var(--sf-white-hairline)] px-4 py-2.5 flex items-center justify-between gap-4 overflow-x-auto font-optima text-[16px] font-medium text-[var(--sf-white-muted)]"
         >
           <a
             href="#refinery"
@@ -276,13 +314,6 @@ export default function App() {
             Research
           </a>
           <a
-            href="#partners"
-            onClick={(e) => handleSmoothAnchor(e, "#partners")}
-            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
-          >
-            Partners
-          </a>
-          <a
             href="#essay"
             onClick={(e) => handleSmoothAnchor(e, "#essay")}
             className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
@@ -296,6 +327,13 @@ export default function App() {
           >
             Founders
           </a>
+          <a
+            href="#partners"
+            onClick={(e) => handleSmoothAnchor(e, "#partners")}
+            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
+          >
+            Partners
+          </a>
         </nav>
 
         {/* Scroll-scrubbed reading progress hairline */}
@@ -307,50 +345,56 @@ export default function App() {
       </header>
 
       <main id="top">
-        {/* Asymmetric Wide Hero: Left Manifesto + Right Counter-Scrolling Vertical Logo Columns */}
+        {/* Asymmetric Wide Hero: Left Manifesto + Right Seamless Infinite Vertical Logo Columns */}
         <section className="relative overflow-hidden bg-[var(--sf-white)]">
-          <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14 pt-16 pb-16 lg:pt-24 lg:pb-20">
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-12 items-center">
-              {/* Left Column: Backed by (centered between VC logos) + Hero Title with Glowing Accent + Lead */}
+          <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 pt-14 pb-16 lg:pt-20 lg:pb-20">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-10 items-center">
+              {/* Left Column: Backed by (centered directly over divider line) + Glowing Headline + Lead */}
               <div className="lg:col-span-7 pt-4 lg:pt-8">
-                <div className="sf-hero-stagger inline-flex flex-col items-center">
-                  <div className="font-optima text-[17.5px] font-medium text-[var(--sf-ink-muted)] text-center">
+                <div
+                  aria-label="Backed by a16z speedrun and Khosla Ventures"
+                  className="sf-hero-stagger inline-grid grid-cols-[auto_1px_auto] gap-x-7 sm:gap-x-9 gap-y-3 items-center"
+                >
+                  <div className="col-start-2 justify-self-center whitespace-nowrap font-optima text-[18px] font-medium text-[var(--sf-ink-muted)]">
                     Backed by:
                   </div>
-                  <div
-                    aria-label="Backed by a16z speedrun and Khosla Ventures"
-                    className="mt-3 flex flex-wrap items-center justify-center gap-7 sm:gap-9"
-                  >
-                    {BACKER_LOGOS.map((logo, idx) => (
-                      <div key={logo.name} className="inline-flex items-center gap-7 sm:gap-9">
-                        <span
-                          role="img"
-                          aria-label={logo.name}
-                          className="sf-logo-tint inline-block"
-                          style={{
-                            width: `${logo.widthPx}px`,
-                            height: `${logo.heightPx}px`,
-                            maskImage: `url(${logo.src})`,
-                            WebkitMaskImage: `url(${logo.src})`,
-                          }}
-                        />
-                        {idx === 0 && (
-                          <span
-                            aria-hidden="true"
-                            className="h-7 w-[1px] bg-[var(--sf-hairline-strong)]"
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
+
+                  <span
+                    role="img"
+                    aria-label={BACKER_LOGOS[0].name}
+                    className="sf-logo-tint row-start-2 col-start-1 justify-self-end inline-block"
+                    style={{
+                      width: `${BACKER_LOGOS[0].widthPx}px`,
+                      height: `${BACKER_LOGOS[0].heightPx}px`,
+                      maskImage: `url(${BACKER_LOGOS[0].src})`,
+                      WebkitMaskImage: `url(${BACKER_LOGOS[0].src})`,
+                    }}
+                  />
+
+                  <span
+                    aria-hidden="true"
+                    className="row-start-2 col-start-2 h-8 w-[1px] bg-[var(--sf-hairline-strong)]"
+                  />
+
+                  <span
+                    role="img"
+                    aria-label={BACKER_LOGOS[1].name}
+                    className="sf-logo-tint row-start-2 col-start-3 justify-self-start inline-block"
+                    style={{
+                      width: `${BACKER_LOGOS[1].widthPx}px`,
+                      height: `${BACKER_LOGOS[1].heightPx}px`,
+                      maskImage: `url(${BACKER_LOGOS[1].src})`,
+                      WebkitMaskImage: `url(${BACKER_LOGOS[1].src})`,
+                    }}
+                  />
                 </div>
 
-                <h1 className="sf-hero-stagger mt-10 font-optima text-[clamp(2.9rem,5.7vw,5.35rem)] font-medium leading-[1.03] tracking-[-0.025em] text-[var(--sf-ink)] text-balance">
+                <h1 className="sf-hero-stagger mt-10 font-optima text-[clamp(3rem,5.8vw,5.5rem)] font-medium leading-[1.03] tracking-[-0.025em] text-[var(--sf-ink)] text-balance">
                   The marketplace for{" "}
                   <span className="sf-glow-text">proprietary AI data</span>
                 </h1>
 
-                <p className="sf-hero-stagger mt-7 font-garamond text-[clamp(1.38rem,2vw,1.72rem)] leading-[1.52] text-[var(--sf-ink-muted)] max-w-[54ch]">
+                <p className="sf-hero-stagger mt-7 font-garamond text-[clamp(1.42rem,2vw,1.76rem)] leading-[1.52] text-[var(--sf-ink-muted)] max-w-[56ch]">
                   San Francisco Data turns real production traces from deployed AI agents into
                   reinforcement learning environments. As models surpass human intelligence, the
                   strongest training signal comes from where agents fail on real economic work, not
@@ -358,30 +402,34 @@ export default function App() {
                 </p>
               </div>
 
-              {/* Right Column: Dual Counter-Scrolling Vertical Logo Columns (tighter vertical rhythm) */}
+              {/* Right Column: Truly Seamless Infinite Counter-Scrolling Vertical Logo Columns */}
               <div
                 aria-label="Research and engineering institutions represented by our team"
                 className="sf-hero-rail lg:col-span-5"
               >
-                <div className="sf-squircle border border-[var(--sf-hairline)] bg-[var(--sf-paper)] px-6 sm:px-8 py-4">
-                  <div className="sf-vmarquee-viewport h-[360px] sm:h-[420px] lg:h-[470px] overflow-hidden grid grid-cols-2 gap-6 sm:gap-8">
-                    {/* Column 1: scrolls upward */}
+                <div className="sf-squircle border border-[var(--sf-hairline)] bg-[var(--sf-paper)] px-5 sm:px-7 py-3">
+                  <div className="sf-vmarquee-viewport h-[360px] sm:h-[420px] lg:h-[470px] overflow-hidden grid grid-cols-2 gap-5 sm:gap-7">
+                    {/* Column 1: seamlessly infinite upward scroll */}
                     <div className="overflow-hidden">
-                      <div className="sf-vmarquee-up gap-4 py-2">
-                        {[0, 1].map((dup) => (
+                      <div className="sf-vmarquee-up">
+                        {[0, 1].map((half) => (
                           <div
-                            key={`col1-${dup}`}
-                            aria-hidden={dup === 1}
-                            className="flex flex-col items-center gap-4 pb-4 shrink-0"
+                            key={`col1-${half}`}
+                            aria-hidden={half === 1}
+                            className="flex flex-col items-center shrink-0"
                           >
-                            {PEDIGREE_COL_1.map((logo) => (
+                            {COL_1_HALF.map((logo, idx) => (
                               <div
-                                key={`c1-${dup}-${logo.name}`}
-                                className="flex items-center justify-center h-14 w-full"
+                                key={`c1-${half}-${idx}-${logo.name}`}
+                                className="flex items-center justify-center h-[72px] pb-4 w-full shrink-0"
                               >
                                 <span
-                                  role={dup === 0 ? "img" : undefined}
-                                  aria-label={dup === 0 ? logo.name : undefined}
+                                  role={half === 0 && idx < PEDIGREE_COL_1.length ? "img" : undefined}
+                                  aria-label={
+                                    half === 0 && idx < PEDIGREE_COL_1.length
+                                      ? logo.name
+                                      : undefined
+                                  }
                                   className="sf-logo-tint block max-w-full opacity-90"
                                   style={{
                                     width: `${logo.widthPx}px`,
@@ -397,23 +445,27 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* Column 2: scrolls downward */}
-                    <div className="overflow-hidden border-l border-[var(--sf-hairline)] pl-6 sm:pl-8">
-                      <div className="sf-vmarquee-down gap-4 py-2">
-                        {[0, 1].map((dup) => (
+                    {/* Column 2: seamlessly infinite downward scroll */}
+                    <div className="overflow-hidden border-l border-[var(--sf-hairline)] pl-5 sm:pl-7">
+                      <div className="sf-vmarquee-down">
+                        {[0, 1].map((half) => (
                           <div
-                            key={`col2-${dup}`}
-                            aria-hidden={dup === 1}
-                            className="flex flex-col items-center gap-4 pb-4 shrink-0"
+                            key={`col2-${half}`}
+                            aria-hidden={half === 1}
+                            className="flex flex-col items-center shrink-0"
                           >
-                            {PEDIGREE_COL_2.map((logo) => (
+                            {COL_2_HALF.map((logo, idx) => (
                               <div
-                                key={`c2-${dup}-${logo.name}`}
-                                className="flex items-center justify-center h-14 w-full"
+                                key={`c2-${half}-${idx}-${logo.name}`}
+                                className="flex items-center justify-center h-[72px] pb-4 w-full shrink-0"
                               >
                                 <span
-                                  role={dup === 0 ? "img" : undefined}
-                                  aria-label={dup === 0 ? logo.name : undefined}
+                                  role={half === 0 && idx < PEDIGREE_COL_2.length ? "img" : undefined}
+                                  aria-label={
+                                    half === 0 && idx < PEDIGREE_COL_2.length
+                                      ? logo.name
+                                      : undefined
+                                  }
                                   className="sf-logo-tint block max-w-full opacity-90"
                                   style={{
                                     width: `${logo.widthPx}px`,
@@ -444,13 +496,13 @@ export default function App() {
           ref={researchRef}
           className="bg-[var(--sf-paper)] border-t border-b border-[var(--sf-hairline)] py-20 lg:py-24"
         >
-          <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 items-start">
+          <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-10 items-start">
               <div className="sf-research-heading lg:col-span-4">
-                <h2 className="font-optima text-[clamp(2.1rem,3.4vw,3rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
+                <h2 className="font-optima text-[clamp(2.1rem,3.4vw,3.05rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
                   Three hard research problems define this work
                 </h2>
-                <p className="mt-4 font-garamond text-[20.5px] leading-[1.56] text-[var(--sf-ink-muted)]">
+                <p className="mt-4 font-garamond text-[21px] leading-[1.56] text-[var(--sf-ink-muted)]">
                   Raw agent logs only become frontier RL signal once filtering, faithful world
                   reconstruction, and verifier rigor are solved together.
                 </p>
@@ -463,10 +515,10 @@ export default function App() {
                     key={problem.title}
                     className="sf-research-card sf-squircle bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-7 flex flex-col justify-between"
                   >
-                    <h3 className="font-optima text-[1.45rem] font-medium leading-[1.22] text-[var(--sf-red)]">
+                    <h3 className="font-optima text-[1.48rem] font-medium leading-[1.22] text-[var(--sf-red)]">
                       {problem.title}
                     </h3>
-                    <p className="mt-4 font-garamond text-[20px] leading-[1.58] text-[var(--sf-ink-muted)]">
+                    <p className="mt-4 font-garamond text-[20.5px] leading-[1.58] text-[var(--sf-ink-muted)]">
                       {problem.body}
                     </p>
                   </div>
@@ -476,57 +528,28 @@ export default function App() {
           </div>
         </section>
 
-        {/* Wide 3-Column Audience Triptych (Centered Title, Header + Subheader Only) */}
-        <section
-          id="partners"
-          ref={partnersRef}
-          className="bg-[var(--sf-white)] text-[var(--sf-ink)] py-20 lg:py-24"
-        >
-          <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
-            <h2 className="sf-partners-heading mx-auto text-center font-optima text-[clamp(2.1rem,3.5vw,3.1rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] max-w-[28ch] text-balance">
-              Built for trace partners, frontier labs, and research engineers
-            </h2>
-
-            <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
-              {AUDIENCE_PATHS.map((item) => (
-                <div
-                  key={item.audience}
-                  className="sf-triptych-col border-t-2 border-[var(--sf-red)] pt-7 flex flex-col"
-                >
-                  <h3 className="font-optima text-[1.55rem] font-medium leading-[1.2] text-[var(--sf-red)]">
-                    {item.audience}
-                  </h3>
-                  <p className="mt-3 font-optima text-[1.35rem] font-medium leading-[1.35] text-[var(--sf-ink)]">
-                    {item.heading}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Combined Side-by-Side Spread: Compact Essay (Left) + Alternating Founders (Right) — Flush Top & Bottom */}
+        {/* Combined Side-by-Side Spread: Essay (Left) + Alternating Founders (Right) — Above Partners */}
         <section
           id="essay"
           ref={editorialSpreadRef}
-          className="bg-[var(--sf-paper)] border-t border-[var(--sf-hairline)] py-20 lg:py-24"
+          className="bg-[var(--sf-white)] py-20 lg:py-24"
         >
-          <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 items-stretch">
-              {/* Left: Compact Essay Card (Flush with top of Brandon & bottom of Faiz) */}
-              <article className="sf-essay-card sf-squircle lg:col-span-5 h-full bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-8 sm:p-10 flex flex-col justify-between">
+          <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-8 items-stretch">
+              {/* Left: Compact Essay Card (Flush with top of Brandon & bottom of Faiz, upright quote) */}
+              <article className="sf-essay-card sf-squircle lg:col-span-5 h-full bg-[var(--sf-paper)] border border-[var(--sf-hairline)] p-8 sm:p-10 flex flex-col justify-between">
                 <div>
-                  <h2 className="font-optima text-[clamp(1.85rem,2.7vw,2.45rem)] font-medium leading-[1.12] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
+                  <h2 className="font-optima text-[clamp(1.9rem,2.7vw,2.5rem)] font-medium leading-[1.12] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
                     Production traces and the future of data
                   </h2>
 
-                  <blockquote className="mt-7 pl-5 border-l-2 border-[var(--sf-red)] font-garamond italic text-[1.45rem] leading-[1.52] text-[var(--sf-ink)]">
+                  <blockquote className="mt-7 pl-5 border-l-2 border-[var(--sf-red)] font-garamond text-[1.48rem] leading-[1.52] text-[var(--sf-ink)]">
                     “The economy itself can become the largest source of training data for advanced
                     AI, building a continuous connection between AI deployed across the economy and
                     the training processes that determine what AI can do next.”
                   </blockquote>
 
-                  <p className="mt-6 font-garamond text-[20.5px] leading-[1.6] text-[var(--sf-ink-muted)]">
+                  <p className="mt-6 font-garamond text-[21px] leading-[1.58] text-[var(--sf-ink-muted)]">
                     Our thesis explains why contractor-generated training tasks hit a ceiling as
                     models surpass human experts, and why coding agents are the starting wedge for
                     turning live production failures into RL environments.
@@ -538,7 +561,7 @@ export default function App() {
                     href={SFDATA_LINKS.essay}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-center gap-2 font-optima text-[18px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] underline transition-colors"
+                    className="group inline-flex items-center gap-2 font-optima text-[18.5px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] underline transition-colors"
                   >
                     <span>Read the full essay on sfdata.com</span>
                     <ArrowUpRight
@@ -557,7 +580,7 @@ export default function App() {
                   return (
                     <article
                       key={founder.name}
-                      className="sf-founder-row sf-squircle h-full bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-5 sm:p-6 flex items-center"
+                      className="sf-founder-row sf-squircle h-full bg-[var(--sf-paper)] border border-[var(--sf-hairline)] p-5 sm:p-6 flex items-center"
                     >
                       <div
                         className={`w-full flex flex-col sm:flex-row gap-6 sm:gap-7 items-center ${
@@ -567,15 +590,15 @@ export default function App() {
                         <img
                           src={founder.image}
                           alt={founder.name}
-                          width={208}
-                          height={208}
+                          width={212}
+                          height={212}
                           loading="lazy"
-                          className="sf-squircle-sm h-[176px] w-[176px] sm:h-[208px] sm:w-[208px] object-cover shrink-0 border border-[var(--sf-hairline)]"
+                          className="sf-squircle-sm h-[180px] w-[180px] sm:h-[212px] sm:w-[212px] object-cover shrink-0 border border-[var(--sf-hairline)]"
                         />
 
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-3">
-                            <h3 className="font-optima text-[1.55rem] font-medium leading-[1.15] text-[var(--sf-ink)]">
+                            <h3 className="font-optima text-[1.58rem] font-medium leading-[1.15] text-[var(--sf-ink)]">
                               {founder.name}
                             </h3>
 
@@ -585,7 +608,7 @@ export default function App() {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label={`${founder.name} on X`}
-                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-paper)] inline-flex items-center justify-center"
+                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-white)] inline-flex items-center justify-center"
                               >
                                 <span
                                   aria-hidden="true"
@@ -601,7 +624,7 @@ export default function App() {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label={`${founder.name} on LinkedIn`}
-                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-paper)] inline-flex items-center justify-center"
+                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-white)] inline-flex items-center justify-center"
                               >
                                 <span
                                   aria-hidden="true"
@@ -615,11 +638,11 @@ export default function App() {
                             </div>
                           </div>
 
-                          <p className="mt-1 font-optima text-[17.5px] font-medium text-[var(--sf-red)]">
+                          <p className="mt-1 font-optima text-[18px] font-medium text-[var(--sf-red)]">
                             {founder.role}
                           </p>
 
-                          <ul className="mt-3.5 space-y-2 list-disc pl-5 font-garamond text-[19.5px] leading-[1.48] text-[var(--sf-ink-muted)] marker:text-[var(--sf-red)]">
+                          <ul className="mt-3.5 space-y-2 list-disc pl-5 font-garamond text-[20px] leading-[1.48] text-[var(--sf-ink-muted)] marker:text-[var(--sf-red)]">
                             {founder.bullets.map((bullet) => (
                               <li key={bullet}>{bullet}</li>
                             ))}
@@ -633,14 +656,43 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* Wide 3-Column Audience Triptych (Centered Title, Header + Subheader Only) */}
+        <section
+          id="partners"
+          ref={partnersRef}
+          className="bg-[var(--sf-paper)] border-t border-[var(--sf-hairline)] text-[var(--sf-ink)] py-20 lg:py-24"
+        >
+          <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8">
+            <h2 className="sf-partners-heading mx-auto text-center font-optima text-[clamp(2.15rem,3.5vw,3.15rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] max-w-[28ch] text-balance">
+              Built for trace partners, frontier labs, and research engineers
+            </h2>
+
+            <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
+              {AUDIENCE_PATHS.map((item) => (
+                <div
+                  key={item.audience}
+                  className="sf-triptych-col border-t-2 border-[var(--sf-red)] pt-7 flex flex-col"
+                >
+                  <h3 className="font-optima text-[1.6rem] font-medium leading-[1.2] text-[var(--sf-red)]">
+                    {item.audience}
+                  </h3>
+                  <p className="mt-3 font-optima text-[1.4rem] font-medium leading-[1.35] text-[var(--sf-ink)]">
+                    {item.heading}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Bookend Golden Gate Vermilion Footer */}
       <footer className="sf-red-focus bg-[var(--sf-red)] text-[var(--sf-white)]">
-        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14 pt-16 pb-12">
+        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 pt-16 pb-12">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 pb-12 border-b border-[var(--sf-white-hairline)] items-center">
             <div className="md:col-span-7">
-              <p className="font-garamond text-[21.5px] sm:text-[23px] leading-[1.56] text-[var(--sf-white-muted)]">
+              <p className="font-garamond text-[22px] sm:text-[23.5px] leading-[1.56] text-[var(--sf-white-muted)]">
                 We are a small, in-person research engineering team in San Francisco’s Financial
                 District, backed by a $30M seed round led by Khosla Ventures and a16z speedrun,
                 building RL environments and evaluations for 20+ frontier labs.
@@ -648,17 +700,17 @@ export default function App() {
             </div>
 
             <div className="md:col-span-5 md:pl-10">
-              <h2 className="font-optima text-[1.95rem] font-medium leading-[1.15] text-[var(--sf-white)]">
+              <h2 className="font-optima text-[2rem] font-medium leading-[1.15] text-[var(--sf-white)]">
                 Join us!
               </h2>
-              <p className="mt-2.5 font-garamond text-[21.5px] sm:text-[22.5px] leading-[1.5] text-[var(--sf-white-muted)]">
+              <p className="mt-2.5 font-garamond text-[22px] sm:text-[23px] leading-[1.5] text-[var(--sf-white-muted)]">
                 We’re hiring exceptional research engineers.
               </p>
               <a
                 href={SFDATA_LINKS.careers}
                 target="_blank"
                 rel="noreferrer"
-                className="sf-pressable sf-squircle-sm mt-5 inline-flex items-center gap-2 bg-[var(--sf-white)] text-[var(--sf-red)] px-6 py-3.5 font-optima text-[17.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)]"
+                className="sf-pressable sf-squircle-sm mt-5 inline-flex items-center gap-2 bg-[var(--sf-white)] text-[var(--sf-red)] px-6 py-3.5 font-optima text-[18px] font-medium leading-none hover:bg-[var(--sf-red-tint)]"
               >
                 <span>View open roles on Ashby</span>
                 <ArrowUpRight className="h-4.5 w-4.5" aria-hidden="true" strokeWidth={2} />
@@ -667,7 +719,7 @@ export default function App() {
           </div>
 
           <div className="pt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between text-[var(--sf-white-muted)]">
-            <div className="flex flex-wrap items-center gap-3.5 font-garamond text-[20px] sm:text-[21px]">
+            <div className="flex flex-wrap items-center gap-3.5 font-garamond text-[20px] sm:text-[21.5px]">
               <BridgeMark className="h-6 w-8 text-[var(--sf-white)] shrink-0" />
               <StreetcarIcon className="h-5 w-7 text-[var(--sf-white)] shrink-0" />
               <span className="text-[var(--sf-white)]">
@@ -677,7 +729,7 @@ export default function App() {
               <span translate="no">© 2026 San Francisco Data</span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-7 font-optima text-[18.5px] sm:text-[19.5px]">
+            <div className="flex flex-wrap items-center gap-7 font-optima text-[19px] sm:text-[20px]">
               <a
                 href={SFDATA_LINKS.essay}
                 target="_blank"

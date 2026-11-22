@@ -167,7 +167,7 @@ export function TraceRefineryEngine() {
       ref={sectionRef}
       className="bg-[var(--sf-white)] text-[var(--sf-ink)] py-20 lg:py-24 border-t border-[var(--sf-hairline)]"
     >
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
+      <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8">
         {/* Asymmetric Wide Editorial Header */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-6">
@@ -193,7 +193,7 @@ export function TraceRefineryEngine() {
             onProgressStage={handleProgressStage}
             onSelectStage={handleManualSelect}
             onReplay={handleReplay}
-            height={248}
+            height={284}
           />
         </div>
 

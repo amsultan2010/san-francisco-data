@@ -1,5 +1,3 @@
-@import "@fontsource/azeret-mono/400.css";
-@import "@fontsource/azeret-mono/500.css";
 @import "tailwindcss";
 
 @font-face {
@@ -80,7 +78,7 @@
     font-family: "EB Garamond", Georgia, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     caret-color: var(--sf-red);
     -webkit-tap-highlight-color: rgba(204, 50, 0, 0.16);
   }
@@ -153,7 +151,7 @@
 }
 
 .font-mono-trace {
-  font-family: "Azeret Mono", ui-monospace, SFMono-Regular, monospace;
+  font-family: "Optima", "Optima Nova", Candara, sans-serif;
   font-variant-numeric: tabular-nums;
 }
 
@@ -181,33 +179,50 @@
   corner-shape: squircle;
 }
 
-/* Constant left-to-right vermilion glow sweep on hero accent phrase */
+/* Multi-harmonic left-to-right vermilion luminous glow on hero accent phrase */
 @keyframes sf-glow-sweep {
   0% {
-    background-position: 150% 50%;
+    background-position: 200% 50%;
   }
   100% {
-    background-position: -150% 50%;
+    background-position: -200% 50%;
+  }
+}
+
+@keyframes sf-glow-aura {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 14px rgba(204, 50, 0, 0.28))
+      drop-shadow(0 0 34px rgba(255, 118, 64, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 22px rgba(255, 92, 40, 0.5))
+      drop-shadow(0 0 48px rgba(255, 180, 120, 0.34));
   }
 }
 
 .sf-glow-text {
   background-image: linear-gradient(
-    100deg,
-    #cc3200 0%,
-    #cc3200 32%,
-    #ff6b3d 44%,
-    #ffd7c7 50%,
-    #ff6b3d 56%,
-    #cc3200 68%,
-    #cc3200 100%
+    104deg,
+    #b82b00 0%,
+    #cc3200 18%,
+    #ff6a33 31%,
+    #ffd5b8 38%,
+    #fff4eb 42%,
+    #ff8c42 47%,
+    #cc3200 58%,
+    #e6400a 72%,
+    #ffb07c 80%,
+    #cc3200 90%,
+    #b82b00 100%
   );
-  background-size: 260% 100%;
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: sf-glow-sweep 3.2s linear infinite;
-  filter: drop-shadow(0 0 22px rgba(255, 107, 61, 0.34));
+  animation:
+    sf-glow-sweep 4.2s linear infinite,
+    sf-glow-aura 2.8s ease-in-out infinite;
 }
 
 /* Vertical counter-scrolling logo columns */
