@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Pause, Play } from "lucide-react";
 
 interface SuspensionCanvasProps {
   theme?: "light" | "vermilion" | "dark";
@@ -23,6 +24,7 @@ export function SuspensionCanvas({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const stageRef = useRef(activeStage);
   const pointerRef = useRef({ x: 0.5, y: 0.5, active: false });
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     stageRef.current = activeStage;
@@ -35,10 +37,11 @@ export function SuspensionCanvas({
     if (!ctx) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const staticRender = reducedMotion || isPaused;
 
     const pulses: Pulse[] = Array.from({ length: 14 }, (_, i) => ({
       t: (i / 14) % 1,
-      speed: 0.00048 + (i % 4) * 0.00016,
+      speed: 0.00052 + (i % 4) * 0.00018,
       lane: i % 3,
       size: i % 3 === 0 ? 3.2 : 2.1,
     }));
@@ -145,10 +148,10 @@ export function SuspensionCanvas({
       const baseBottomY = canvasHeight * 0.88;
 
       const pointerInfluence =
-        !reducedMotion && pointerRef.current.active
-          ? (pointerRef.current.y - 0.5) * 12
+        !staticRender && pointerRef.current.active
+          ? (pointerRef.current.y - 0.5) * 14
           : 0;
-      const breath = reducedMotion ? 0 : Math.sin(time * 0.00095) * 3;
+      const breath = staticRender ? 0 : Math.sin(time * 0.001) * 3.5;
       const sagOffset = breath + pointerInfluence;
 
       // Subtle architectural coordinate grid
@@ -250,7 +253,7 @@ export function SuspensionCanvas({
 
       // Travelling trace pulses along cable & deck
       pulses.forEach((p) => {
-        if (!reducedMotion) {
+        if (!staticRender) {
           p.t = (p.t + p.speed) % 1;
         }
         const xNorm = 0.03 + p.t * 0.94;
@@ -331,7 +334,7 @@ export function SuspensionCanvas({
       });
       ctx.textAlign = "left";
 
-      if (!reducedMotion) {
+      if (!staticRender) {
         rafId = requestAnimationFrame(draw);
       }
     };
@@ -344,14 +347,35 @@ export function SuspensionCanvas({
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, [theme, height]);
+  }, [theme, height, isPaused]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{ height: `${height}px` }}
-      className={`block w-full select-none ${className}`}
-      aria-label="Interactive Golden Gate suspension bridge visualizing production traces transforming into verified RL environments"
-    />
+    <div className="relative">
+      <canvas
+        ref={canvasRef}
+        style={{ height: `${height}px` }}
+        className={`block w-full select-none ${className}`}
+        aria-label="Interactive Golden Gate suspension bridge visualizing production traces transforming into verified RL environments"
+      />
+      <button
+        type="button"
+        onClick={() => setIsPaused((prev) => !prev)}
+        aria-pressed={isPaused}
+        aria-label={isPaused ? "Play bridge animation" : "Pause bridge animation"}
+        className="sf-pressable absolute top-2 right-2 inline-flex items-center gap-1.5 border border-[var(--sf-hairline)] bg-[var(--sf-white)]/90 px-2.5 py-1 font-optima text-[12.5px] font-medium text-[var(--sf-ink-muted)] hover:border-[var(--sf-red-border)] hover:text-[var(--sf-red)] cursor-pointer"
+      >
+        {isPaused ? (
+          <>
+            <Play className="h-3 w-3" aria-hidden="true" strokeWidth={2} />
+            <span>Play</span>
+          </>
+        ) : (
+          <>
+            <Pause className="h-3 w-3" aria-hidden="true" strokeWidth={2} />
+            <span>Pause</span>
+          </>
+        )}
+      </button>
+    </div>
   );
 }
