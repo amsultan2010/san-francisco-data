@@ -82,6 +82,13 @@
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
     caret-color: var(--sf-red);
+    -webkit-tap-highlight-color: rgba(204, 50, 0, 0.16);
+  }
+
+  @media (pointer: fine) {
+    html {
+      overscroll-behavior: none;
+    }
   }
 
   body {
@@ -89,6 +96,15 @@
     background-color: var(--sf-white);
     color: var(--sf-ink);
     overflow-x: hidden;
+  }
+
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  a,
+  button {
+    touch-action: manipulation;
   }
 
   ::selection {
@@ -133,6 +149,7 @@
 .font-garamond {
   font-family: "EB Garamond", Georgia, serif;
   font-feature-settings: "kern" 1, "liga" 1;
+  text-wrap: pretty;
 }
 
 .font-mono-trace {
@@ -146,6 +163,18 @@
 
 .sf-red-focus :focus-visible {
   outline-color: #ffffff;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sf-pressable {
+    transition-property: background-color, border-color, color, box-shadow, transform;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .sf-pressable:active {
+    transform: scale(0.97);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

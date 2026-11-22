@@ -3,21 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>San Francisco Data — The marketplace for proprietary AI data</title>
+    <title>San Francisco Data | Marketplace for Proprietary AI Data</title>
     <meta
       name="description"
-      content="San Francisco Data turns production traces into RL environments. We partner with companies whose agents are pushed past their limits and turn those failures into training environments to continuously push the frontier."
+      content="San Francisco Data turns real AI agent production traces into reproducible RL environments and ungameable verifiers for frontier labs."
     />
-    <link rel="icon" type="image/jpeg" href="/logo-sfdata.jpg" />
-    <meta property="og:title" content="San Francisco Data" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#CC3200" />
+    <link rel="canonical" href="https://www.sfdata.com/" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link
+      rel="preload"
+      href="/fonts/Optima-Medium.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/EBGaramond-Variable.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <meta property="og:site_name" content="San Francisco Data" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.sfdata.com/" />
+    <meta
+      property="og:title"
+      content="San Francisco Data | Marketplace for Proprietary AI Data"
+    />
     <meta
       property="og:description"
-      content="The marketplace for proprietary AI data. San Francisco Data turns production traces into RL environments."
+      content="San Francisco Data turns real AI agent production traces into reproducible RL environments and ungameable verifiers for frontier labs."
     />
-    <meta property="og:image" content="/opengraph-image.png" />
+    <meta property="og:image" content="https://www.sfdata.com/opengraph-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="San Francisco Data | Marketplace for Proprietary AI Data"
+    />
+    <meta
+      name="twitter:description"
+      content="San Francisco Data turns real AI agent production traces into reproducible RL environments and ungameable verifiers for frontier labs."
+    />
+    <meta name="twitter:image" content="https://www.sfdata.com/opengraph-image.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.sfdata.com/#website",
+            "url": "https://www.sfdata.com/",
+            "name": "San Francisco Data",
+            "alternateName": "SF Data",
+            "description": "The marketplace for proprietary AI data. San Francisco Data turns production traces into RL environments."
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://www.sfdata.com/#organization",
+            "name": "San Francisco Data",
+            "alternateName": "SF Data",
+            "url": "https://www.sfdata.com/",
+            "logo": "https://www.sfdata.com/logo-sfdata.jpg",
+            "sameAs": [
+              "https://x.com/sfdata",
+              "https://www.linkedin.com/company/sanfranciscodata"
+            ],
+            "founders": [
+              { "@type": "Person", "name": "Brandon Guo" },
+              { "@type": "Person", "name": "Faiz Siddiqi" }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Kearny Street, Financial District",
+              "addressLocality": "San Francisco",
+              "addressRegion": "CA",
+              "addressCountry": "US"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
