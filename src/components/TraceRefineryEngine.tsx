@@ -13,6 +13,7 @@ import {
   Terminal,
 } from "lucide-react";
 import { REFINERY_STAGES } from "../data/sfdata";
+import { TracePipelineCanvas } from "./TracePipelineCanvas";
 
 const STAGE_ICONS = [Activity, Filter, Box, ShieldCheck] as const;
 
@@ -27,6 +28,7 @@ function getInitialStageIndex(): number {
 export function TraceRefineryEngine() {
   const [activeIndex, setActiveIndex] = useState<number>(getInitialStageIndex);
   const sectionRef = useRef<HTMLElement | null>(null);
+  const diagramRef = useRef<HTMLDivElement | null>(null);
   const stagePanelRef = useRef<HTMLDivElement | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const hasInteractedRef = useRef(false);
@@ -60,7 +62,6 @@ export function TraceRefineryEngine() {
     }
   };
 
-  // Scroll-triggered entrance choreography for header, 4 pipeline nodes, connectors, and deep-dive panel
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
@@ -78,6 +79,22 @@ export function TraceRefineryEngine() {
             once: true,
           },
         });
+
+        if (diagramRef.current) {
+          gsap.from(diagramRef.current, {
+            y: 28,
+            opacity: 0,
+            scale: 0.985,
+            duration: 0.78,
+            ease: "expo.out",
+            clearProps: "transform,opacity",
+            scrollTrigger: {
+              trigger: diagramRef.current,
+              start: "top 86%",
+              once: true,
+            },
+          });
+        }
 
         gsap.from(".refinery-node-reveal", {
           y: 24,
@@ -127,7 +144,6 @@ export function TraceRefineryEngine() {
     { scope: sectionRef },
   );
 
-  // Stage-switch stagger transition for text & terminal trace lines
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
@@ -170,24 +186,37 @@ export function TraceRefineryEngine() {
       ref={sectionRef}
       className="bg-[var(--sf-white)] text-[var(--sf-ink)] py-24 lg:py-32"
     >
-      <div className="mx-auto max-w-[1140px] px-6 sm:px-12 lg:px-16">
+      <div className="mx-auto max-w-[1060px] px-6 sm:px-14 lg:px-20">
         {/* Centered Editorial Section Header */}
-        <div className="mx-auto max-w-[760px] text-center">
+        <div className="mx-auto max-w-[740px] text-center">
           <h2 className="refinery-header-reveal font-optima text-[clamp(2rem,3.8vw,3.15rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
             Raw traces are not training assets any more than crude oil is jet fuel.
           </h2>
-          <p className="refinery-header-reveal mt-5 font-garamond text-[20px] leading-[1.58] text-[var(--sf-ink-muted)] text-balance">
-            We operate as a Glencore for production traces, pairing partner-permissioned access to
+          <p className="refinery-header-reveal mt-5 font-garamond text-[20px] leading-[1.58] text-[var(--sf-ink)] text-balance">
+            We partner with companies whose agents are pushed past their limits and turn those
+            failures into training environments to continuously push the frontier.
+          </p>
+          <p className="refinery-header-reveal mt-3.5 font-garamond text-[19px] leading-[1.6] text-[var(--sf-ink-muted)] text-balance">
+            Operating as a Glencore for production traces, we pair partner-permissioned access to
             fragmented agent supply with the four-step research engineering pipeline required to
-            turn real failures into verifiable RL training environments.
+            turn real failures into verifiable RL environments.
           </p>
         </div>
 
-        {/* Interactive 4-Step Visual Pipeline Diagram */}
+        {/* Interactive 4-Chamber Particle Flow Diagram (replaces Golden Gate bridge) */}
+        <div ref={diagramRef} className="mt-12">
+          <TracePipelineCanvas
+            activeStage={activeIndex}
+            onSelectStage={selectStage}
+            height={250}
+          />
+        </div>
+
+        {/* Interactive 4-Step Visual Pipeline Tabs */}
         <div
           role="tablist"
           aria-label="Trace to RL refinery stages"
-          className="refinery-pipeline-grid mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4"
+          className="refinery-pipeline-grid mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4"
         >
           {REFINERY_STAGES.map((stage, idx) => {
             const isActive = idx === activeIndex;
@@ -208,7 +237,7 @@ export function TraceRefineryEngine() {
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => selectStage(idx)}
                   onKeyDown={(e) => handleTabKeyDown(e, idx)}
-                  className={`refinery-node-reveal sf-pressable group w-full text-left p-5 sm:p-6 border cursor-pointer flex flex-col justify-between ${
+                  className={`refinery-node-reveal sf-pressable sf-squircle group w-full text-left p-5 sm:p-6 border cursor-pointer flex flex-col justify-between ${
                     isActive
                       ? "bg-[var(--sf-red)] text-[var(--sf-white)] border-[var(--sf-red)] shadow-[0_12px_30px_rgba(204,50,0,0.2)]"
                       : isPast
@@ -271,7 +300,7 @@ export function TraceRefineryEngine() {
           ref={stagePanelRef}
           role="tabpanel"
           aria-labelledby={`tab-${activeStage.id}`}
-          className="mt-6 border border-[var(--sf-hairline-strong)] bg-[var(--sf-white)] shadow-[0_20px_50px_rgba(17,16,14,0.06)]"
+          className="sf-squircle mt-6 border border-[var(--sf-hairline-strong)] bg-[var(--sf-white)] shadow-[0_20px_50px_rgba(17,16,14,0.06)] overflow-hidden"
         >
           {/* Progress rail */}
           <div className="h-[3px] w-full bg-[var(--sf-paper)] overflow-hidden" aria-hidden="true">
@@ -362,7 +391,7 @@ export function TraceRefineryEngine() {
                     </span>
                   </div>
                   <span
-                    className={`inline-flex items-center gap-1.5 font-mono-trace text-[12.5px] px-3 py-1 border shrink-0 whitespace-nowrap ${
+                    className={`sf-squircle-xs inline-flex items-center gap-1.5 font-mono-trace text-[12.5px] px-3 py-1 border shrink-0 whitespace-nowrap ${
                       activeStage.statusTone === "signal"
                         ? "border-[rgba(255,133,102,0.5)] text-[#FFA68F] bg-[rgba(204,50,0,0.22)]"
                         : activeStage.statusTone === "verified"

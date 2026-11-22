@@ -58,7 +58,7 @@
   --sf-red-border: rgba(204, 50, 0, 0.24);
   --sf-white: #ffffff;
   --sf-paper: #faf8f6;
-  --sf-white-muted: rgba(255, 245, 240, 0.9);
+  --sf-white-muted: rgba(255, 245, 240, 0.92);
   --sf-white-hairline: rgba(255, 255, 255, 0.24);
   --sf-white-hairline-strong: rgba(255, 255, 255, 0.45);
   --sf-ink: #11100e;
@@ -115,7 +115,7 @@
   :focus-visible {
     outline: 2px solid var(--sf-red);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 
   a {
@@ -163,6 +163,22 @@
 
 .sf-red-focus :focus-visible {
   outline-color: #ffffff;
+}
+
+/* Apple-style low-radius squircle rounding (~60% corner smoothing) */
+.sf-squircle {
+  border-radius: 12px;
+  corner-shape: squircle;
+}
+
+.sf-squircle-sm {
+  border-radius: 8px;
+  corner-shape: squircle;
+}
+
+.sf-squircle-xs {
+  border-radius: 6px;
+  corner-shape: squircle;
 }
 
 @media (prefers-reduced-motion: no-preference) {
