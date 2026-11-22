@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 interface SuspensionCanvasProps {
-  theme?: "light" | "dark";
+  theme?: "vermilion" | "dark";
   activeStage?: number;
   className?: string;
   height?: number;
@@ -15,10 +15,10 @@ interface Pulse {
 }
 
 export function SuspensionCanvas({
-  theme = "light",
+  theme = "vermilion",
   activeStage = 0,
   className = "",
-  height = 360,
+  height = 280,
 }: SuspensionCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const stageRef = useRef(activeStage);
@@ -36,11 +36,11 @@ export function SuspensionCanvas({
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const pulses: Pulse[] = Array.from({ length: 14 }, (_, i) => ({
-      t: (i / 14) % 1,
-      speed: 0.00055 + (i % 4) * 0.00018,
+    const pulses: Pulse[] = Array.from({ length: 16 }, (_, i) => ({
+      t: (i / 16) % 1,
+      speed: 0.0005 + (i % 4) * 0.00018,
       lane: i % 3,
-      size: i % 3 === 0 ? 3.2 : 2.1,
+      size: i % 3 === 0 ? 3.2 : 2.0,
     }));
 
     let rafId = 0;
@@ -85,7 +85,7 @@ export function SuspensionCanvas({
       deckY: number,
       sagOffset: number,
     ) => {
-      const spanSag = (deckY - towerTopY) * 0.72 + sagOffset;
+      const spanSag = (deckY - towerTopY) * 0.7 + sagOffset;
       if (xNorm < t1) {
         const u = (t1 - xNorm) / t1;
         return towerTopY + spanSag * 0.92 * u * u;
@@ -103,19 +103,19 @@ export function SuspensionCanvas({
     const draw = (time: number) => {
       ctx.clearRect(0, 0, width, canvasHeight);
 
-      const isDark = theme === "dark";
-      const gridColor = isDark ? "rgba(245, 244, 240, 0.05)" : "rgba(17, 17, 16, 0.045)";
-      const cableFine = isDark ? "rgba(245, 244, 240, 0.16)" : "rgba(17, 17, 16, 0.14)";
-      const cableMain = isDark ? "rgba(245, 244, 240, 0.42)" : "rgba(17, 17, 16, 0.42)";
-      const towerStroke = isDark ? "rgba(245, 244, 240, 0.55)" : "rgba(17, 17, 16, 0.52)";
-      const deckColor = isDark ? "rgba(245, 244, 240, 0.34)" : "rgba(17, 17, 16, 0.34)";
-      const red = "#C0362C";
-      const redSoft = isDark ? "rgba(192, 54, 44, 0.28)" : "rgba(192, 54, 44, 0.18)";
-      const labelColor = isDark ? "rgba(245, 244, 240, 0.72)" : "rgba(17, 17, 16, 0.68)";
+      const isVermilion = theme === "vermilion";
+      const gridColor = isVermilion ? "rgba(255, 255, 255, 0.08)" : "rgba(255, 255, 255, 0.05)";
+      const cableFine = isVermilion ? "rgba(255, 255, 255, 0.24)" : "rgba(255, 255, 255, 0.16)";
+      const cableMain = isVermilion ? "rgba(255, 255, 255, 0.72)" : "rgba(255, 255, 255, 0.44)";
+      const towerStroke = isVermilion ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.62)";
+      const deckColor = isVermilion ? "rgba(255, 255, 255, 0.62)" : "rgba(255, 255, 255, 0.36)";
+      const accent = isVermilion ? "#FFFFFF" : "#CC3200";
+      const accentSoft = isVermilion ? "rgba(255, 255, 255, 0.45)" : "rgba(204, 50, 0, 0.42)";
+      const labelColor = isVermilion ? "rgba(255, 255, 255, 0.86)" : "rgba(248, 245, 242, 0.76)";
 
       const t1 = 0.27;
       const t2 = 0.73;
-      const towerTopY = canvasHeight * 0.16;
+      const towerTopY = canvasHeight * 0.14;
       const deckY = canvasHeight * 0.76;
       const baseBottomY = canvasHeight * 0.9;
 
@@ -123,7 +123,7 @@ export function SuspensionCanvas({
         !reducedMotion && pointerRef.current.active
           ? (pointerRef.current.y - 0.5) * 14
           : 0;
-      const breath = reducedMotion ? 0 : Math.sin(time * 0.0009) * 3.5;
+      const breath = reducedMotion ? 0 : Math.sin(time * 0.00095) * 3.5;
       const sagOffset = breath + pointerInfluence;
 
       // Subtle architectural coordinate grid
@@ -154,15 +154,13 @@ export function SuspensionCanvas({
         [t2, 0.97],
       ];
       const [zoneStart, zoneEnd] = stageZones[stageRef.current % 4];
-      const grad = ctx.createLinearGradient(
-        width * zoneStart,
-        0,
-        width * zoneEnd,
-        0,
+      const grad = ctx.createLinearGradient(width * zoneStart, 0, width * zoneEnd, 0);
+      grad.addColorStop(0, "rgba(255, 255, 255, 0)");
+      grad.addColorStop(
+        0.5,
+        isVermilion ? "rgba(255, 255, 255, 0.14)" : "rgba(204, 50, 0, 0.18)",
       );
-      grad.addColorStop(0, "rgba(192, 54, 44, 0)");
-      grad.addColorStop(0.5, isDark ? "rgba(192, 54, 44, 0.11)" : "rgba(192, 54, 44, 0.065)");
-      grad.addColorStop(1, "rgba(192, 54, 44, 0)");
+      grad.addColorStop(1, "rgba(255, 255, 255, 0)");
       ctx.fillStyle = grad;
       ctx.fillRect(
         width * zoneStart,
@@ -179,22 +177,22 @@ export function SuspensionCanvas({
         const x = xNorm * width;
         const yTop = catenaryY(xNorm, t1, t2, towerTopY, deckY, sagOffset);
         const inZone = xNorm >= zoneStart && xNorm <= zoneEnd;
-        ctx.strokeStyle = inZone ? redSoft : cableFine;
-        ctx.lineWidth = inZone ? 1.15 : 0.85;
+        ctx.strokeStyle = inZone ? accentSoft : cableFine;
+        ctx.lineWidth = inZone ? 1.2 : 0.85;
         ctx.beginPath();
         ctx.moveTo(x, yTop);
         ctx.lineTo(x, deckY);
         ctx.stroke();
       }
 
-      // Secondary ghost catenary (depth parallax)
+      // Secondary ghost catenary
       ctx.strokeStyle = cableFine;
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (let s = 0; s <= 120; s++) {
         const xNorm = s / 120;
         const x = xNorm * width;
-        const y = catenaryY(xNorm, t1, t2, towerTopY + 8, deckY, sagOffset * 0.65 + 10);
+        const y = catenaryY(xNorm, t1, t2, towerTopY + 9, deckY, sagOffset * 0.65 + 10);
         if (s === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
@@ -202,7 +200,7 @@ export function SuspensionCanvas({
 
       // Primary suspension cable
       ctx.strokeStyle = cableMain;
-      ctx.lineWidth = 1.65;
+      ctx.lineWidth = 1.75;
       ctx.beginPath();
       for (let s = 0; s <= 140; s++) {
         const xNorm = s / 140;
@@ -213,9 +211,9 @@ export function SuspensionCanvas({
       }
       ctx.stroke();
 
-      // Active segment in brand red along the primary cable
-      ctx.strokeStyle = red;
-      ctx.lineWidth = 2.1;
+      // Active segment highlight along the primary cable
+      ctx.strokeStyle = accent;
+      ctx.lineWidth = 2.4;
       ctx.beginPath();
       const segSteps = 48;
       for (let s = 0; s <= segSteps; s++) {
@@ -229,19 +227,19 @@ export function SuspensionCanvas({
 
       // Horizontal roadway deck
       ctx.strokeStyle = deckColor;
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = 1.65;
       ctx.beginPath();
       ctx.moveTo(width * 0.02, deckY);
       ctx.lineTo(width * 0.98, deckY);
       ctx.stroke();
 
-      // Twin suspension towers with architectural cross-bracing
+      // Twin suspension towers
       [t1, t2].forEach((txNorm) => {
         const tx = txNorm * width;
         const halfW = Math.max(5, Math.min(8, width * 0.008));
 
         ctx.strokeStyle = towerStroke;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1.65;
         ctx.beginPath();
         ctx.moveTo(tx - halfW, towerTopY);
         ctx.lineTo(tx - halfW, baseBottomY);
@@ -249,7 +247,6 @@ export function SuspensionCanvas({
         ctx.lineTo(tx + halfW, baseBottomY);
         ctx.stroke();
 
-        // Cross-beams
         [0.24, 0.44, 0.64, 0.82].forEach((frac) => {
           const by = towerTopY + (baseBottomY - towerTopY) * frac;
           ctx.beginPath();
@@ -258,14 +255,13 @@ export function SuspensionCanvas({
           ctx.stroke();
         });
 
-        // Crimson cap beacon
-        ctx.fillStyle = red;
+        ctx.fillStyle = accent;
         ctx.beginPath();
-        ctx.arc(tx, towerTopY - 3, 2.6, 0, Math.PI * 2);
+        ctx.arc(tx, towerTopY - 3, 2.8, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Travelling trace pulses along the cable & deck
+      // Travelling trace pulses along cable & deck
       pulses.forEach((p) => {
         if (!reducedMotion) {
           p.t = (p.t + p.speed) % 1;
@@ -279,28 +275,27 @@ export function SuspensionCanvas({
                 xNorm,
                 t1,
                 t2,
-                towerTopY + (p.lane === 1 ? 8 : 0),
+                towerTopY + (p.lane === 1 ? 9 : 0),
                 deckY,
                 sagOffset * (p.lane === 1 ? 0.65 : 1) + (p.lane === 1 ? 10 : 0),
               );
 
         const isVerified = xNorm > t2;
-        ctx.fillStyle = isVerified
-          ? isDark
+        ctx.fillStyle = isVermilion
+          ? "#FFFFFF"
+          : isVerified
             ? "#4ADE80"
-            : "#2F855A"
-          : red;
+            : "#FF6B4A";
         ctx.beginPath();
         ctx.arc(x, y, p.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Subtle crisp outer ring for primary pulses
         if (p.lane === 0) {
-          ctx.strokeStyle = isVerified
-            ? isDark
-              ? "rgba(74, 222, 128, 0.35)"
-              : "rgba(47, 133, 90, 0.3)"
-            : "rgba(192, 54, 44, 0.32)";
+          ctx.strokeStyle = isVermilion
+            ? "rgba(255, 255, 255, 0.45)"
+            : isVerified
+              ? "rgba(74, 222, 128, 0.4)"
+              : "rgba(255, 107, 74, 0.4)";
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.arc(x, y, p.size + 4.5, 0, Math.PI * 2);
@@ -308,7 +303,7 @@ export function SuspensionCanvas({
         }
       });
 
-      // Quiet architectural axis annotations at bottom
+      // Architectural axis annotations at bottom
       const isNarrow = width < 560;
       ctx.font = isNarrow
         ? '500 9.5px "Azeret Mono", monospace'
@@ -329,7 +324,12 @@ export function SuspensionCanvas({
             { x: t2 + 0.02, text: "RL VERIFIER" },
           ];
       annotations.forEach((a, idx) => {
-        ctx.fillStyle = idx === stageRef.current % 4 ? red : labelColor;
+        ctx.fillStyle =
+          idx === stageRef.current % 4
+            ? isVermilion
+              ? "#FFFFFF"
+              : "#FF7857"
+            : labelColor;
         ctx.fillText(a.text, a.x * width, deckY + 14);
       });
       ctx.textAlign = "left";
