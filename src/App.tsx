@@ -2,7 +2,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import {
   AUDIENCE_PATHS,
   HARD_PROBLEMS,
@@ -10,7 +10,6 @@ import {
   TEAM_INSTITUTIONS,
 } from "./data/sfdata";
 import { BridgeMark } from "./components/BridgeMark";
-import { SuspensionCanvas } from "./components/SuspensionCanvas";
 import { TraceRefineryEngine } from "./components/TraceRefineryEngine";
 import { StreetcarIcon } from "./components/StreetcarIcon";
 
@@ -24,7 +23,6 @@ const KINETIC_METRICS = [
 export default function App() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const scrollProgressRef = useRef<HTMLDivElement | null>(null);
-  const heroSpanRef = useRef<HTMLDivElement | null>(null);
   const statsRef = useRef<HTMLDivElement | null>(null);
   const researchRef = useRef<HTMLElement | null>(null);
   const partnersRef = useRef<HTMLElement | null>(null);
@@ -58,30 +56,11 @@ export default function App() {
           y: 26,
           opacity: 0,
           duration: 0.82,
-          stagger: 0.085,
+          stagger: 0.1,
           clearProps: "transform,opacity",
         });
 
-        // 3. Scroll-scrubbed Golden Gate suspension bridge parallax + subtle scale depth
-        if (heroSpanRef.current) {
-          gsap.fromTo(
-            heroSpanRef.current,
-            { y: -10, scale: 0.99 },
-            {
-              y: 28,
-              scale: 1.015,
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroSpanRef.current,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.6,
-              },
-            },
-          );
-        }
-
-        // 4. Traction strip staggered entrance + kinetic numeric roll-up
+        // 3. Traction strip staggered entrance + kinetic numeric roll-up
         if (statsRef.current) {
           gsap.from(statsRef.current.querySelectorAll(".sf-stat-item"), {
             y: 22,
@@ -121,7 +100,7 @@ export default function App() {
           });
         }
 
-        // 5. Three Hard Research Problems scroll-triggered architectural cascade
+        // 4. Three Hard Research Problems scroll-triggered architectural cascade
         if (researchRef.current) {
           gsap.from(researchRef.current.querySelectorAll(".sf-research-reveal"), {
             y: 26,
@@ -138,7 +117,7 @@ export default function App() {
           });
         }
 
-        // 6. Three-Audience Ledger row-by-row scroll reveal
+        // 5. Three-Audience Ledger row-by-row scroll reveal
         if (partnersRef.current) {
           gsap.from(partnersRef.current.querySelector(".sf-partners-heading"), {
             y: 24,
@@ -171,7 +150,7 @@ export default function App() {
             });
         }
 
-        // 7. October 1 Essay & Team Pedigree asymmetric spread + institution cascade
+        // 6. October 1 Essay & Team Pedigree asymmetric spread + institution cascade
         if (essayRef.current) {
           gsap.from(essayRef.current.querySelector(".sf-essay-card"), {
             y: 28,
@@ -239,46 +218,58 @@ export default function App() {
     <div ref={rootRef} className="min-h-screen bg-[var(--sf-white)] text-[var(--sf-ink)]">
       <a
         href="#top"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[var(--sf-white)] focus:text-[var(--sf-red)] focus:px-4 focus:py-2 focus:font-optima focus:text-[15.5px] focus:font-medium focus:shadow-lg"
+        className="sf-squircle-sm sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[var(--sf-white)] focus:text-[var(--sf-red)] focus:px-4 focus:py-2 focus:font-optima focus:text-[15.5px] focus:font-medium focus:shadow-lg"
       >
         Skip to main content
       </a>
 
       {/* Sticky Golden Gate Vermilion Navbar (#CC3200) */}
       <header className="sf-red-focus sticky top-0 z-40 bg-[var(--sf-red)] border-b border-[var(--sf-white-hairline)] shadow-[0_4px_20px_rgba(158,37,0,0.14)]">
-        <div className="mx-auto max-w-[1140px] px-4 sm:px-12 lg:px-16 h-[68px] sm:h-[74px] flex items-center justify-between gap-3 sm:gap-6">
+        <div className="mx-auto max-w-[1060px] px-5 sm:px-14 lg:px-20 h-[72px] sm:h-[78px] flex items-center justify-between gap-4 sm:gap-5">
           <a
             href="#top"
             translate="no"
-            className="inline-flex items-center gap-2 sm:gap-3 text-[var(--sf-white)] no-underline whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-2.5 sm:gap-3 text-[var(--sf-white)] no-underline whitespace-nowrap shrink-0 leading-none"
           >
             <BridgeMark className="h-6 w-8 sm:h-7 sm:w-9 text-[var(--sf-white)] shrink-0" />
-            <span className="font-optima text-[16px] sm:text-[18.5px] font-medium tracking-[0.01em]">
+            <span className="font-optima text-[17.5px] sm:text-[20.5px] font-medium tracking-[0.005em] leading-none">
               San Francisco Data
             </span>
           </a>
 
           <nav
             aria-label="Primary"
-            className="hidden md:flex items-center gap-9 font-optima text-[16px] font-medium text-[var(--sf-white-muted)]"
+            className="hidden md:flex items-center gap-5 lg:gap-6 font-optima text-[17.5px] font-medium text-[var(--sf-white-muted)]"
           >
-            <a href="#refinery" className="hover:text-[var(--sf-white)] transition-colors">
+            <a
+              href="#refinery"
+              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
+            >
               How it works
             </a>
-            <a href="#research" className="hover:text-[var(--sf-white)] transition-colors">
+            <a
+              href="#research"
+              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
+            >
               Research
             </a>
-            <a href="#partners" className="hover:text-[var(--sf-white)] transition-colors">
+            <a
+              href="#partners"
+              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
+            >
               Partners
             </a>
-            <a href="#essay" className="hover:text-[var(--sf-white)] transition-colors">
+            <a
+              href="#essay"
+              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
+            >
               Essay
             </a>
             <a
               href={SFDATA_LINKS.careers}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-[var(--sf-white)] transition-colors"
+              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
             >
               Careers
             </a>
@@ -288,35 +279,35 @@ export default function App() {
             href={SFDATA_LINKS.xBrandon}
             target="_blank"
             rel="noreferrer"
-            className="sf-pressable inline-flex items-center gap-1.5 bg-[var(--sf-white)] text-[var(--sf-red)] px-3 py-2 sm:px-5 sm:py-2.5 font-optima text-[14px] sm:text-[15.5px] font-medium hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
+            className="sf-pressable sf-squircle-sm inline-flex items-center gap-1.5 bg-[var(--sf-white)] text-[var(--sf-red)] px-3.5 py-2 sm:px-5 sm:py-2.5 font-optima text-[15.5px] sm:text-[17px] font-medium leading-none hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
           >
             <span>Partner with us</span>
-            <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" strokeWidth={2} />
+            <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" strokeWidth={2} />
           </a>
         </div>
 
         {/* Compact Mobile Section Nav Strip */}
         <nav
           aria-label="Mobile sections"
-          className="md:hidden border-t border-[var(--sf-white-hairline)] px-4 py-2.5 flex items-center justify-between gap-4 overflow-x-auto font-optima text-[14.5px] font-medium text-[var(--sf-white-muted)]"
+          className="md:hidden border-t border-[var(--sf-white-hairline)] px-5 py-2.5 flex items-center justify-between gap-4 overflow-x-auto font-optima text-[15.5px] font-medium text-[var(--sf-white-muted)]"
         >
-          <a href="#refinery" className="hover:text-[var(--sf-white)] whitespace-nowrap">
+          <a href="#refinery" className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap">
             How it works
           </a>
-          <a href="#research" className="hover:text-[var(--sf-white)] whitespace-nowrap">
+          <a href="#research" className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap">
             Research
           </a>
-          <a href="#partners" className="hover:text-[var(--sf-white)] whitespace-nowrap">
+          <a href="#partners" className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap">
             Partners
           </a>
-          <a href="#essay" className="hover:text-[var(--sf-white)] whitespace-nowrap">
+          <a href="#essay" className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap">
             Essay
           </a>
           <a
             href={SFDATA_LINKS.careers}
             target="_blank"
             rel="noreferrer"
-            className="hover:text-[var(--sf-white)] whitespace-nowrap"
+            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
           >
             Careers
           </a>
@@ -331,68 +322,27 @@ export default function App() {
       </header>
 
       <main id="top">
-        {/* Centered Luminous White Hero with Vermilion Accents & Golden Gate Span */}
+        {/* Centered Sculptural White Hero */}
         <section className="relative overflow-hidden bg-[var(--sf-white)]">
-          <div className="mx-auto max-w-[1140px] px-6 sm:px-12 lg:px-16 pt-18 pb-14 lg:pt-26 lg:pb-20">
-            <div className="mx-auto max-w-[860px] text-center">
-              <h1 className="sf-hero-stagger font-optima text-[clamp(2.8rem,5.9vw,5rem)] font-medium leading-[1.04] tracking-[-0.025em] text-[var(--sf-ink)] text-balance">
+          <div className="mx-auto max-w-[1060px] px-6 sm:px-14 lg:px-20 pt-24 pb-24 lg:pt-36 lg:pb-32">
+            <div className="mx-auto max-w-[820px] text-center">
+              <h1 className="sf-hero-stagger font-optima text-[clamp(2.9rem,6vw,5.15rem)] font-medium leading-[1.04] tracking-[-0.025em] text-[var(--sf-ink)] text-balance">
                 The marketplace for{" "}
                 <span className="text-[var(--sf-red)]">proprietary AI data.</span>
               </h1>
 
-              <p className="sf-hero-stagger mx-auto mt-7 font-garamond text-[clamp(1.3rem,2.1vw,1.62rem)] leading-[1.52] text-[var(--sf-ink)] max-w-[54ch]">
+              <p className="sf-hero-stagger mx-auto mt-8 font-garamond text-[clamp(1.35rem,2.2vw,1.7rem)] leading-[1.54] text-[var(--sf-ink-muted)] max-w-[52ch]">
                 San Francisco Data turns production traces into RL environments. As models surpass
                 human intelligence, we believe the best training data comes from where models fail
                 on real work, not from tasks built to break them.
               </p>
-
-              <p className="sf-hero-stagger mx-auto mt-4 font-garamond text-[clamp(1.15rem,1.5vw,1.32rem)] leading-[1.58] text-[var(--sf-ink-muted)] max-w-[56ch]">
-                We partner with companies whose agents are pushed past their limits and turn those
-                failures into training environments to continuously push the frontier.
-              </p>
-
-              <div className="sf-hero-stagger mt-10 flex flex-wrap items-center justify-center gap-4 font-optima">
-                <a
-                  href="#refinery"
-                  className="sf-pressable inline-flex items-center gap-2 bg-[var(--sf-red)] text-[var(--sf-white)] px-6 py-3.5 text-[16px] font-medium hover:bg-[var(--sf-red-hover)]"
-                >
-                  <span>See how traces become RL</span>
-                  <ArrowDownRight className="h-4 w-4" aria-hidden="true" strokeWidth={2} />
-                </a>
-                <a
-                  href={SFDATA_LINKS.careers}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="sf-pressable inline-flex items-center gap-2 border border-[var(--sf-hairline-strong)] bg-[var(--sf-white)] text-[var(--sf-ink)] px-6 py-3.5 text-[16px] font-medium hover:border-[var(--sf-red)] hover:text-[var(--sf-red)]"
-                >
-                  <span>Explore open roles</span>
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" strokeWidth={1.75} />
-                </a>
-                <a
-                  href={SFDATA_LINKS.essay}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-3.5 text-[16px] font-medium text-[var(--sf-red)] underline decoration-[var(--sf-red-border)] hover:decoration-[var(--sf-red)] transition-colors"
-                >
-                  <span>Read the October 1 essay</span>
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" strokeWidth={1.75} />
-                </a>
-              </div>
-            </div>
-
-            {/* Centered Golden Gate Suspension Bridge Visualization (Vermilion on White) */}
-            <div
-              ref={heroSpanRef}
-              className="sf-hero-stagger mt-14 lg:mt-16 border-t border-b border-[var(--sf-hairline)] pt-5 pb-3 will-change-transform"
-            >
-              <SuspensionCanvas theme="light" activeStage={0} height={240} />
             </div>
           </div>
         </section>
 
         {/* Centered Kinetic Traction Strip on Subtle Warm Paper */}
         <section className="bg-[var(--sf-paper)] border-t border-b border-[var(--sf-hairline)]">
-          <div className="mx-auto max-w-[1140px] px-6 sm:px-12 lg:px-16">
+          <div className="mx-auto max-w-[1060px] px-6 sm:px-14 lg:px-20">
             <div
               ref={statsRef}
               className="grid grid-cols-2 gap-x-8 gap-y-2 lg:gap-0 lg:grid-cols-4 lg:divide-x lg:divide-[var(--sf-hairline)]"
@@ -400,7 +350,7 @@ export default function App() {
               {KINETIC_METRICS.map((item) => (
                 <div
                   key={item.label}
-                  className="sf-stat-item py-9 lg:py-11 lg:px-8 text-center flex flex-col items-center"
+                  className="sf-stat-item py-9 lg:py-11 lg:px-6 text-center flex flex-col items-center"
                 >
                   <div
                     data-target={item.target}
@@ -424,7 +374,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Interactive Visual Trace-to-RL Pipeline Diagram on Crisp White */}
+        {/* Interactive Visual Trace-to-RL Pipeline Diagram & Deep-Dive on Crisp White */}
         <TraceRefineryEngine />
 
         {/* Three Hard Research Problems: Hairline-Divided Architectural Columns */}
@@ -433,7 +383,7 @@ export default function App() {
           ref={researchRef}
           className="bg-[var(--sf-paper)] border-t border-b border-[var(--sf-hairline)] py-24 lg:py-32"
         >
-          <div className="mx-auto max-w-[1140px] px-6 sm:px-12 lg:px-16">
+          <div className="mx-auto max-w-[1060px] px-6 sm:px-14 lg:px-20">
             <div className="mx-auto max-w-[700px] text-center">
               <h2 className="sf-research-reveal font-optima text-[clamp(2rem,3.5vw,3rem)] font-medium leading-[1.1] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
                 Three hard research problems define this work.
@@ -444,7 +394,7 @@ export default function App() {
               {HARD_PROBLEMS.map((problem) => (
                 <div
                   key={problem.title}
-                  className="sf-research-reveal py-8 lg:py-10 lg:px-10 first:lg:pl-0 last:lg:pr-0 flex flex-col"
+                  className="sf-research-reveal py-8 lg:py-10 lg:px-9 first:lg:pl-0 last:lg:pr-0 flex flex-col"
                 >
                   <h3 className="font-optima text-[1.45rem] font-medium leading-[1.24] text-[var(--sf-red)] text-balance">
                     {problem.title}
@@ -464,7 +414,7 @@ export default function App() {
           ref={partnersRef}
           className="bg-[var(--sf-white)] text-[var(--sf-ink)] py-24 lg:py-32"
         >
-          <div className="mx-auto max-w-[1140px] px-6 sm:px-12 lg:px-16">
+          <div className="mx-auto max-w-[1060px] px-6 sm:px-14 lg:px-20">
             <div className="max-w-[700px]">
               <h2 className="sf-partners-heading font-optima text-[clamp(2rem,3.5vw,3rem)] font-medium leading-[1.1] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
                 Built for trace partners, frontier labs, and research engineers.
@@ -475,7 +425,7 @@ export default function App() {
               {AUDIENCE_PATHS.map((row) => (
                 <div
                   key={row.audience}
-                  className="sf-audience-row grid grid-cols-1 gap-6 py-11 lg:grid-cols-12 lg:gap-12 items-start"
+                  className="sf-audience-row grid grid-cols-1 gap-6 py-11 lg:grid-cols-12 lg:gap-10 items-start"
                 >
                   <div className="lg:col-span-3">
                     <h3 className="font-optima text-[1.4rem] font-medium leading-[1.25] text-[var(--sf-red)]">
@@ -517,10 +467,10 @@ export default function App() {
           ref={essayRef}
           className="bg-[var(--sf-paper)] border-t border-[var(--sf-hairline)] py-24 lg:py-32"
         >
-          <div className="mx-auto max-w-[1140px] px-6 sm:px-12 lg:px-16">
+          <div className="mx-auto max-w-[1060px] px-6 sm:px-14 lg:px-20">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-stretch">
               {/* Left: Crisp White Essay Monograph */}
-              <article className="sf-essay-card lg:col-span-7 bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-8 sm:p-11 lg:p-12 flex flex-col justify-between">
+              <article className="sf-essay-card sf-squircle lg:col-span-7 bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-8 sm:p-11 lg:p-12 flex flex-col justify-between">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[var(--sf-hairline)]">
                     <img
@@ -529,7 +479,7 @@ export default function App() {
                       width={40}
                       height={40}
                       loading="lazy"
-                      className="h-10 w-10 object-cover"
+                      className="sf-squircle-xs h-10 w-10 object-cover"
                     />
                     <span className="font-garamond text-[17.5px] text-[var(--sf-ink-muted)] tabular-nums">
                       October 1, 2026 · Brandon Guo &amp; Faiz Siddiqi
@@ -572,7 +522,7 @@ export default function App() {
               </article>
 
               {/* Right: Team Pedigree & Hiring Panel */}
-              <aside className="sf-team-card lg:col-span-5 bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-8 sm:p-11 flex flex-col justify-between">
+              <aside className="sf-team-card sf-squircle lg:col-span-5 bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-8 sm:p-11 flex flex-col justify-between">
                 <div>
                   <h2 className="font-optima text-[clamp(1.65rem,2.4vw,2.15rem)] font-medium leading-[1.18] text-[var(--sf-ink)] text-balance">
                     Team &amp; research pedigree
@@ -612,7 +562,7 @@ export default function App() {
                     href={SFDATA_LINKS.careers}
                     target="_blank"
                     rel="noreferrer"
-                    className="sf-pressable mt-6 inline-flex items-center gap-2 bg-[var(--sf-red)] text-[var(--sf-white)] px-6 py-3.5 font-optima text-[16px] font-medium hover:bg-[var(--sf-red-hover)]"
+                    className="sf-pressable sf-squircle-sm mt-6 inline-flex items-center gap-2 bg-[var(--sf-red)] text-[var(--sf-white)] px-6 py-3.5 font-optima text-[16px] font-medium hover:bg-[var(--sf-red-hover)]"
                   >
                     <span>View all open roles on Ashby</span>
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" strokeWidth={2} />
@@ -626,7 +576,7 @@ export default function App() {
 
       {/* Bookend Golden Gate Vermilion Footer */}
       <footer className="sf-red-focus bg-[var(--sf-red)] text-[var(--sf-white-muted)]">
-        <div className="mx-auto max-w-[1140px] px-6 sm:px-12 lg:px-16 py-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto max-w-[1060px] px-6 sm:px-14 lg:px-20 py-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-3 font-garamond text-[17.5px]">
             <BridgeMark className="h-5 w-7 text-[var(--sf-white)] shrink-0" />
             <StreetcarIcon className="h-4 w-6 text-[var(--sf-white)] shrink-0" />
