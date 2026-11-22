@@ -184,30 +184,30 @@
 /* Constant left-to-right vermilion glow sweep on hero accent phrase */
 @keyframes sf-glow-sweep {
   0% {
-    background-position: 140% 50%;
+    background-position: 150% 50%;
   }
   100% {
-    background-position: -140% 50%;
+    background-position: -150% 50%;
   }
 }
 
 .sf-glow-text {
   background-image: linear-gradient(
-    102deg,
+    100deg,
     #cc3200 0%,
-    #cc3200 34%,
-    #ff7d52 48%,
-    #ffb499 50%,
-    #ff7d52 52%,
-    #cc3200 66%,
+    #cc3200 32%,
+    #ff6b3d 44%,
+    #ffd7c7 50%,
+    #ff6b3d 56%,
+    #cc3200 68%,
     #cc3200 100%
   );
-  background-size: 240% 100%;
+  background-size: 260% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: sf-glow-sweep 4.4s linear infinite;
-  filter: drop-shadow(0 0 18px rgba(204, 50, 0, 0.22));
+  animation: sf-glow-sweep 3.2s linear infinite;
+  filter: drop-shadow(0 0 22px rgba(255, 107, 61, 0.34));
 }
 
 /* Vertical counter-scrolling logo columns */
