@@ -120,10 +120,31 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: "0.05em"
+  wordmark:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "24px"
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: "0.005em"
+  founder-name:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 500
+    lineHeight: 1.15
+    letterSpacing: "0em"
+  footer-heading:
+    fontFamily: "Optima, Optima Nova, Candara, sans-serif"
+    fontSize: "1.75rem"
+    fontWeight: 500
+    lineHeight: 1.15
+    letterSpacing: "0em"
 rounded:
   none: "0px"
   focus: "2px"
   scrollbar: "4px"
+  squircle-xs: "6px"
+  squircle-sm: "8px"
+  squircle: "12px"
   full: "9999px"
 spacing:
   xs: "4px"
@@ -212,7 +233,7 @@ Display headlines, navigation, controls, and metric numerals are set in humanist
 - Luminous pure white (`#ffffff`) primary surface alternating with warm archival paper (`#faf8f6`) secondary bands, bookended by Golden Gate Vermilion (`#cc3200`) header and footer bars.
 - High-contrast typographic triad: `Optima` for display, headings, metrics, and UI chrome; `EB Garamond` for editorial prose and italic blockquotes; `Azeret Mono` confined to trace payloads, filenames, and verifier badges.
 - Isolated dark carbon (`#141311`) trace inspector embedded inside the white Trace Refinery deep-dive panel for high-legibility code and telemetry inspection.
-- Sharp 0px architectural geometry divided by 1px hairline rules, with restrained ambient shadows only on the sticky vermilion navbar, active stage tab, and refinery panel.
+- Soft squircle geometry (`12px` panels, `8px` controls, `6px` chips, with `corner-shape: squircle`) divided by 1px hairline rules. Ambient shadows stay on the sticky vermilion navbar, the active stage tab, and the refinery panel.
 - Reduced-motion-safe GSAP reveals and an interactive HTML5 Canvas Golden Gate suspension bridge visualizing traces transforming into verified RL environments.
 
 ## Colors
@@ -283,9 +304,9 @@ A luminous editorial palette—pure white and warm archival paper—bookended by
 
 ## Layout
 
-All sections align to a single architectural container (`max-w-[1140px]`, centered with `mx-auto`) and responsive horizontal gutters (`px-6 sm:px-12 lg:px-16`, or `24px` mobile / `48px` tablet / `64px` desktop; the navbar uses `px-4 sm:px-12 lg:px-16` for tighter mobile fit).
+All sections align to a single architectural container (`max-w-[1680px]`, centered with `mx-auto`) and responsive horizontal gutters (`px-4 sm:px-6 lg:px-8` on the page; the navbar uses the same gutters, plus `env(safe-area-inset-*)` on the header sides and footer bottom).
 
-- **Hero Frame:** Centered `860px` max reading column (`pt-18 pb-14 lg:pt-26 lg:pb-20`), followed by the full-container `SuspensionCanvas` (`240px` height) framed by top and bottom 1px hairlines.
+- **Hero Frame:** Asymmetric split. Left: “Backed by” a16z speedrun and Khosla Ventures, then the Optima thesis and an EB Garamond lead (`max-w-[56ch]`). The accent phrase “proprietary AI data” stays inside the vermilion family (`#9e2500` to `#e04a16`) with a slow shimmer; it never fades toward paper white. Right: “Built by people from” counter-scrolling pedigree columns that pause on hover, keyboard focus, or the Pause control, and stop entirely under `prefers-reduced-motion`.
 - **Vertical Section Rhythm:** Generous `96px` mobile / `128px` desktop vertical padding (`py-24 lg:py-32`) on Refinery, Research, Partners, and Essay/Pedigree bands, alternating `#ffffff` and `#faf8f6` surfaces separated by 1px horizontal hairlines.
 - **Architectural Grids:**
   - Traction Strip: 2 columns mobile → 4 columns `lg` (`1024px+`) with 1px vertical dividers.
@@ -310,10 +331,10 @@ Surfaces are primarily flat and separated by 1px architectural hairlines (`rgba(
 
 ## Shapes
 
-Crisp `0px` architectural rectilinearity defines the form language across buttons, pipeline stage tabs, the refinery deep-dive container, dark carbon trace inspector, monograph and pedigree panels, and status chips. Functional radius exceptions are minimal:
-- **Focus Indicator (`2px`):** Keyboard `:focus-visible` outline (`2px solid #cc3200`, `3px` offset; switches to `#ffffff` inside `.sf-red-focus` vermilion bands).
+Panels, stage tabs, the refinery container, founder portraits, and buttons use a small squircle: `12px` for panels (`.sf-squircle`), `8px` for buttons and portraits (`.sf-squircle-sm`), `6px` for chips and icon buttons (`.sf-squircle-xs`), with `corner-shape: squircle` where the browser supports it. Functional extras:
+- **Focus Indicator (`2px`):** Keyboard `:focus-visible` outline (`2px solid #cc3200`, `3px` offset, `2px` radius; switches to `#ffffff` inside `.sf-red-focus` vermilion bands).
 - **Scrollbar Thumb (`4px`):** Custom 8px scrollbar thumb.
-- **Pipeline Flow Chevron (`9999px`):** Circular `24px` white directional arrow badge centered between desktop pipeline stage tabs.
+- **Pipeline Flow Chevron (`9999px`):** Circular directional arrow badge centered between desktop pipeline stage zones.
 
 ## Components
 
@@ -337,7 +358,7 @@ Components feel like precision-printed civic instruments—sharp 0px corners, 1p
 - **Internal Padding:** `32px–48px` (`p-8 sm:p-11 lg:p-12`) for monograph/pedigree panels; `24px–36px` (`p-6 sm:p-8 lg:p-9`) for the trace inspector body.
 
 ### Navigation
-- **Sticky Vermilion Bookend Header:** Full-bleed `#cc3200` with `1px` white hairline bottom border and soft vermilion shadow. `68px` mobile / `74px` desktop height (`h-[68px] sm:h-[74px]`), `max-w-[1140px]` inner container. Left: inline SVG `BridgeMark` + `Optima` 500 wordmark. Center (`md+`): 5 links (`gap-9`) in `rgba(255, 245, 240, 0.9)` transitioning to `#ffffff`. Right: inverted white CTA button. Below `768px`, a compact horizontal scrollable section strip sits beneath a `1px` white hairline.
+- **Sticky Vermilion Bookend Header:** Full-bleed `#cc3200` with a soft vermilion shadow. Inner row is `64px` mobile / `82px` from `sm`. Left: inline SVG `BridgeMark` + `Optima` 500 wordmark. From `1280px`, five section links sit in the bar; the current section is white with a `2px` white underline (`aria-current`). Below that, the same links are a horizontally scrolling strip, each target at least `44px` tall. The “Partner with us” label shortens to “Partner” only under `360px`. A `2px` reading-progress track (white at 25%, fill at 90%) runs along the bottom of the header and is separate from the current-section underline. Anchor jumps clear the real header height.
 - **Vermilion Bookend Footer:** Full-bleed `#cc3200`, `48px` vertical padding (`py-12`), pairing `BridgeMark`, `StreetcarIcon`, Financial District address, and copyright in `EB Garamond` (`17.5px`) with 4 external links in `Optima` (`15.5px`).
 
 ### Trace Refinery Engine & Suspension Canvas
@@ -349,12 +370,12 @@ Components feel like precision-printed civic instruments—sharp 0px corners, 1p
 ### Do:
 - **Do** alternate main reading bands between `#ffffff` and `#faf8f6` separated by 1px hairlines (`rgba(17, 16, 14, 0.11)`), framed by `#cc3200` vermilion bookends for header and footer.
 - **Do** pair `Optima` (500) for headings, navigation, buttons, metrics, and UI labels with `EB Garamond` (400) for prose and quotes, keeping `Azeret Mono` confined to the dark carbon trace inspector.
-- **Do** align all sections to the `1140px` architectural container with `px-6 sm:px-12 lg:px-16` horizontal gutters.
+- **Do** align all sections to the `1680px` architectural container with `px-4 sm:px-6 lg:px-8` horizontal gutters.
 - **Do** apply `.sf-red-focus` on vermilion surfaces so keyboard `:focus-visible` outlines switch to `#ffffff` for accessible contrast.
 - **Do** gate all GSAP entrance reveals, scroll parallax, and stage animations inside `gsap.matchMedia()` for `(prefers-reduced-motion: no-preference)`.
 
 ### Don't:
-- **Don't** round primary buttons, stage tabs, panels, or status chips beyond `0px`; restrict radius to `2px` focus rings, `4px` scrollbar thumbs, and `9999px` pipeline flow chevrons.
+- **Don't** round past the squircle scale (`12px` / `8px` / `6px`); keep focus rings at `2px`, scrollbar thumbs at `4px`, and circular controls at `9999px`.
 - **Don't** place raw `#cc3200` small text on the `#141311` dark carbon inspector; use `#ff8566` or `#ffa68f` for AA contrast.
 - **Don't** add uppercase eyebrow/kicker labels above section headings or decorative gradients behind editorial bands.
 - **Don't** use Verifier Emerald (`#4ade80`) outside genuine passing RL verifier or consent-verified telemetry states.
