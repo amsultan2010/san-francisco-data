@@ -181,6 +181,44 @@
   corner-shape: squircle;
 }
 
+/* Infinite logo marquee rail */
+@keyframes sf-logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.sf-marquee-viewport {
+  mask-image: linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+}
+
+.sf-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: sf-logo-marquee 30s linear infinite;
+  will-change: transform;
+}
+
+.sf-logo-tint {
+  background-color: var(--sf-red);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-marquee-track {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .sf-pressable {
     transition-property: background-color, border-color, color, box-shadow, transform;
