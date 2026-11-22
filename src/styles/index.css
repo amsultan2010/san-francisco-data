@@ -54,28 +54,29 @@
   --sf-red: #cc3200;
   --sf-red-hover: #a82900;
   --sf-red-deep: #9e2500;
-  --sf-red-surface: #b82c00;
+  --sf-red-tint: #fff4f0;
+  --sf-red-border: rgba(204, 50, 0, 0.24);
   --sf-white: #ffffff;
-  --sf-white-soft: #fff6f2;
-  --sf-white-muted: rgba(255, 245, 240, 0.88);
+  --sf-paper: #faf8f6;
+  --sf-white-muted: rgba(255, 245, 240, 0.9);
   --sf-white-hairline: rgba(255, 255, 255, 0.24);
   --sf-white-hairline-strong: rgba(255, 255, 255, 0.45);
   --sf-ink: #11100e;
-  --sf-ink-muted: #4a4642;
-  --sf-hairline: rgba(17, 16, 14, 0.13);
-  --sf-hairline-strong: rgba(17, 16, 14, 0.26);
-  --sf-terminal: #121110;
-  --sf-terminal-bar: #1a1816;
+  --sf-ink-muted: #46423e;
+  --sf-hairline: rgba(17, 16, 14, 0.11);
+  --sf-hairline-strong: rgba(17, 16, 14, 0.22);
+  --sf-terminal: #141311;
+  --sf-terminal-bar: #1d1b18;
   --sf-terminal-ink: #f8f5f2;
-  --sf-terminal-muted: #c2bab2;
+  --sf-terminal-muted: #c8c0b8;
   --sf-terminal-hairline: rgba(255, 255, 255, 0.13);
   --sf-verified-dark: #4ade80;
 }
 
 @layer base {
   html {
-    background-color: var(--sf-red);
-    color: var(--sf-white);
+    background-color: var(--sf-white);
+    color: var(--sf-ink);
     font-family: "EB Garamond", Georgia, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -85,18 +86,18 @@
 
   body {
     margin: 0;
-    background-color: var(--sf-red);
-    color: var(--sf-white);
+    background-color: var(--sf-white);
+    color: var(--sf-ink);
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: #11100e;
+    background-color: var(--sf-red);
     color: #ffffff;
   }
 
   :focus-visible {
-    outline: 2px solid #ffffff;
+    outline: 2px solid var(--sf-red);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -112,16 +113,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--sf-red-deep);
+    background: var(--sf-paper);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(17, 16, 14, 0.22);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.65);
+    background: var(--sf-red);
   }
 }
 
@@ -143,8 +144,8 @@
   font-variant-numeric: tabular-nums;
 }
 
-.sf-white-focus :focus-visible {
-  outline-color: var(--sf-red);
+.sf-red-focus :focus-visible {
+  outline-color: #ffffff;
 }
 
 @media (prefers-reduced-motion: reduce) {
