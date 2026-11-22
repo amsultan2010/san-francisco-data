@@ -196,17 +196,14 @@ export const HARD_PROBLEMS = [
 export const AUDIENCE_PATHS = [
   {
     audience: "AI-agent companies",
-    heading: "Monetize edge-case failures without losing your moat.",
-    body: "You keep full ownership of your data, distribution, and customer trust. San Francisco Data handles permissions, redaction, and signal filtering, sharing proceeds when frontier labs extract training value no single company could unlock alone.",
+    heading: "Monetize edge-case failures without losing your moat",
   },
   {
     audience: "Frontier AI labs",
-    heading: "Train where models actually break in the real economy.",
-    body: "Synthetic benchmarks and contractor tasks saturate as models surpass human experts. Production traces move continuously with the frontier because real users push deployed agents past their limits every day.",
+    heading: "Train where models actually break in the real economy",
   },
   {
     audience: "Research engineers",
-    heading: "Engineer the feedback loop between deployment and training.",
-    body: "Join a focused, in-person team on Kearny Street in San Francisco's Financial District working 5 days a week to build deterministic environments and verifiers for 20+ frontier labs.",
+    heading: "Engineer the feedback loop between deployment and training",
   },
 ] as const;

@@ -311,15 +311,15 @@ export default function App() {
         <section className="relative overflow-hidden bg-[var(--sf-white)]">
           <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14 pt-16 pb-16 lg:pt-24 lg:pb-20">
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-12 items-center">
-              {/* Left Column: Backed by + Hero Title with Glowing Accent + Specific Lead */}
+              {/* Left Column: Backed by (centered between VC logos) + Hero Title with Glowing Accent + Lead */}
               <div className="lg:col-span-7 pt-4 lg:pt-8">
-                <div className="sf-hero-stagger">
-                  <div className="font-optima text-[15px] font-medium text-[var(--sf-ink-muted)]">
+                <div className="sf-hero-stagger inline-flex flex-col items-center">
+                  <div className="font-optima text-[17.5px] font-medium text-[var(--sf-ink-muted)] text-center">
                     Backed by:
                   </div>
                   <div
                     aria-label="Backed by a16z speedrun and Khosla Ventures"
-                    className="mt-3 flex flex-wrap items-center gap-7 sm:gap-9"
+                    className="mt-3 flex flex-wrap items-center justify-center gap-7 sm:gap-9"
                   >
                     {BACKER_LOGOS.map((logo, idx) => (
                       <div key={logo.name} className="inline-flex items-center gap-7 sm:gap-9">
@@ -345,12 +345,12 @@ export default function App() {
                   </div>
                 </div>
 
-                <h1 className="sf-hero-stagger mt-10 font-optima text-[clamp(2.85rem,5.6vw,5.25rem)] font-medium leading-[1.03] tracking-[-0.025em] text-[var(--sf-ink)] text-balance">
+                <h1 className="sf-hero-stagger mt-10 font-optima text-[clamp(2.9rem,5.7vw,5.35rem)] font-medium leading-[1.03] tracking-[-0.025em] text-[var(--sf-ink)] text-balance">
                   The marketplace for{" "}
-                  <span className="sf-glow-text">proprietary AI data.</span>
+                  <span className="sf-glow-text">proprietary AI data</span>
                 </h1>
 
-                <p className="sf-hero-stagger mt-7 font-garamond text-[clamp(1.3rem,1.9vw,1.65rem)] leading-[1.52] text-[var(--sf-ink-muted)] max-w-[54ch]">
+                <p className="sf-hero-stagger mt-7 font-garamond text-[clamp(1.38rem,2vw,1.72rem)] leading-[1.52] text-[var(--sf-ink-muted)] max-w-[54ch]">
                   San Francisco Data turns real production traces from deployed AI agents into
                   reinforcement learning environments. As models surpass human intelligence, the
                   strongest training signal comes from where agents fail on real economic work, not
@@ -358,7 +358,7 @@ export default function App() {
                 </p>
               </div>
 
-              {/* Right Column: Dual Counter-Scrolling Vertical Logo Columns */}
+              {/* Right Column: Dual Counter-Scrolling Vertical Logo Columns (tighter vertical rhythm) */}
               <div
                 aria-label="Research and engineering institutions represented by our team"
                 className="sf-hero-rail lg:col-span-5"
@@ -367,17 +367,17 @@ export default function App() {
                   <div className="sf-vmarquee-viewport h-[360px] sm:h-[420px] lg:h-[470px] overflow-hidden grid grid-cols-2 gap-6 sm:gap-8">
                     {/* Column 1: scrolls upward */}
                     <div className="overflow-hidden">
-                      <div className="sf-vmarquee-up gap-10 py-4">
+                      <div className="sf-vmarquee-up gap-4 py-2">
                         {[0, 1].map((dup) => (
                           <div
                             key={`col1-${dup}`}
                             aria-hidden={dup === 1}
-                            className="flex flex-col items-center gap-10 pb-10 shrink-0"
+                            className="flex flex-col items-center gap-4 pb-4 shrink-0"
                           >
                             {PEDIGREE_COL_1.map((logo) => (
                               <div
                                 key={`c1-${dup}-${logo.name}`}
-                                className="flex items-center justify-center h-16 w-full"
+                                className="flex items-center justify-center h-14 w-full"
                               >
                                 <span
                                   role={dup === 0 ? "img" : undefined}
@@ -399,17 +399,17 @@ export default function App() {
 
                     {/* Column 2: scrolls downward */}
                     <div className="overflow-hidden border-l border-[var(--sf-hairline)] pl-6 sm:pl-8">
-                      <div className="sf-vmarquee-down gap-10 py-4">
+                      <div className="sf-vmarquee-down gap-4 py-2">
                         {[0, 1].map((dup) => (
                           <div
                             key={`col2-${dup}`}
                             aria-hidden={dup === 1}
-                            className="flex flex-col items-center gap-10 pb-10 shrink-0"
+                            className="flex flex-col items-center gap-4 pb-4 shrink-0"
                           >
                             {PEDIGREE_COL_2.map((logo) => (
                               <div
                                 key={`c2-${dup}-${logo.name}`}
-                                className="flex items-center justify-center h-16 w-full"
+                                className="flex items-center justify-center h-14 w-full"
                               >
                                 <span
                                   role={dup === 0 ? "img" : undefined}
@@ -447,10 +447,10 @@ export default function App() {
           <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 items-start">
               <div className="sf-research-heading lg:col-span-4">
-                <h2 className="font-optima text-[clamp(2rem,3.3vw,2.95rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
-                  Three hard research problems define this work.
+                <h2 className="font-optima text-[clamp(2.1rem,3.4vw,3rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
+                  Three hard research problems define this work
                 </h2>
-                <p className="mt-4 font-garamond text-[19px] leading-[1.58] text-[var(--sf-ink-muted)]">
+                <p className="mt-4 font-garamond text-[20.5px] leading-[1.56] text-[var(--sf-ink-muted)]">
                   Raw agent logs only become frontier RL signal once filtering, faithful world
                   reconstruction, and verifier rigor are solved together.
                 </p>
@@ -463,10 +463,10 @@ export default function App() {
                     key={problem.title}
                     className="sf-research-card sf-squircle bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-7 flex flex-col justify-between"
                   >
-                    <h3 className="font-optima text-[1.35rem] font-medium leading-[1.24] text-[var(--sf-red)]">
+                    <h3 className="font-optima text-[1.45rem] font-medium leading-[1.22] text-[var(--sf-red)]">
                       {problem.title}
                     </h3>
-                    <p className="mt-4 font-garamond text-[18.5px] leading-[1.6] text-[var(--sf-ink-muted)]">
+                    <p className="mt-4 font-garamond text-[20px] leading-[1.58] text-[var(--sf-ink-muted)]">
                       {problem.body}
                     </p>
                   </div>
@@ -476,37 +476,28 @@ export default function App() {
           </div>
         </section>
 
-        {/* Wide 3-Column Audience Triptych (No Redundant External Links) */}
+        {/* Wide 3-Column Audience Triptych (Centered Title, Header + Subheader Only) */}
         <section
           id="partners"
           ref={partnersRef}
           className="bg-[var(--sf-white)] text-[var(--sf-ink)] py-20 lg:py-24"
         >
           <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <h2 className="sf-partners-heading font-optima text-[clamp(2rem,3.4vw,3rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] max-w-[24ch] text-balance">
-                Built for trace partners, frontier labs, and research engineers.
-              </h2>
-              <p className="font-garamond text-[19px] leading-[1.55] text-[var(--sf-ink-muted)] max-w-[44ch]">
-                One marketplace aligning deployed agent companies, frontier training labs, and the
-                engineers turning failures into verifiable environments.
-              </p>
-            </div>
+            <h2 className="sf-partners-heading mx-auto text-center font-optima text-[clamp(2.1rem,3.5vw,3.1rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] max-w-[28ch] text-balance">
+              Built for trace partners, frontier labs, and research engineers
+            </h2>
 
-            <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
+            <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
               {AUDIENCE_PATHS.map((item) => (
                 <div
                   key={item.audience}
-                  className="sf-triptych-col border-t-2 border-[var(--sf-red)] pt-6 flex flex-col"
+                  className="sf-triptych-col border-t-2 border-[var(--sf-red)] pt-7 flex flex-col"
                 >
-                  <h3 className="font-optima text-[1.45rem] font-medium leading-[1.22] text-[var(--sf-red)]">
+                  <h3 className="font-optima text-[1.55rem] font-medium leading-[1.2] text-[var(--sf-red)]">
                     {item.audience}
                   </h3>
-                  <p className="mt-3 font-optima text-[1.2rem] font-medium leading-[1.34] text-[var(--sf-ink)]">
+                  <p className="mt-3 font-optima text-[1.35rem] font-medium leading-[1.35] text-[var(--sf-ink)]">
                     {item.heading}
-                  </p>
-                  <p className="mt-3 font-garamond text-[19px] leading-[1.6] text-[var(--sf-ink-muted)]">
-                    {item.body}
                   </p>
                 </div>
               ))}
@@ -514,44 +505,44 @@ export default function App() {
           </div>
         </section>
 
-        {/* Combined Side-by-Side Spread: Compact Essay (Left) + Alternating Founders (Right) */}
+        {/* Combined Side-by-Side Spread: Compact Essay (Left) + Alternating Founders (Right) — Flush Top & Bottom */}
         <section
           id="essay"
           ref={editorialSpreadRef}
           className="bg-[var(--sf-paper)] border-t border-[var(--sf-hairline)] py-20 lg:py-24"
         >
           <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 items-start">
-              {/* Left: Compact Essay Card (No logo, no October 1 header) */}
-              <article className="sf-essay-card sf-squircle lg:col-span-5 bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-8 sm:p-10 flex flex-col justify-between">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 items-stretch">
+              {/* Left: Compact Essay Card (Flush with top of Brandon & bottom of Faiz) */}
+              <article className="sf-essay-card sf-squircle lg:col-span-5 h-full bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-8 sm:p-10 flex flex-col justify-between">
                 <div>
-                  <h2 className="font-optima text-[clamp(1.75rem,2.6vw,2.35rem)] font-medium leading-[1.12] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
+                  <h2 className="font-optima text-[clamp(1.85rem,2.7vw,2.45rem)] font-medium leading-[1.12] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
                     Production traces and the future of data
                   </h2>
 
-                  <blockquote className="mt-6 pl-5 border-l border-[var(--sf-red)] font-garamond italic text-[1.35rem] leading-[1.52] text-[var(--sf-ink)]">
+                  <blockquote className="mt-7 pl-5 border-l-2 border-[var(--sf-red)] font-garamond italic text-[1.45rem] leading-[1.52] text-[var(--sf-ink)]">
                     “The economy itself can become the largest source of training data for advanced
                     AI, building a continuous connection between AI deployed across the economy and
                     the training processes that determine what AI can do next.”
                   </blockquote>
 
-                  <p className="mt-5 font-garamond text-[18.5px] leading-[1.62] text-[var(--sf-ink-muted)]">
+                  <p className="mt-6 font-garamond text-[20.5px] leading-[1.6] text-[var(--sf-ink-muted)]">
                     Our thesis explains why contractor-generated training tasks hit a ceiling as
                     models surpass human experts, and why coding agents are the starting wedge for
                     turning live production failures into RL environments.
                   </p>
                 </div>
 
-                <div className="mt-7 pt-5 border-t border-[var(--sf-hairline)]">
+                <div className="mt-8 pt-6 border-t border-[var(--sf-hairline)]">
                   <a
                     href={SFDATA_LINKS.essay}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-center gap-2 font-optima text-[16px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] underline transition-colors"
+                    className="group inline-flex items-center gap-2 font-optima text-[18px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] underline transition-colors"
                   >
                     <span>Read the full essay on sfdata.com</span>
                     <ArrowUpRight
-                      className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="h-4.5 w-4.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       aria-hidden="true"
                       strokeWidth={2}
                     />
@@ -559,51 +550,46 @@ export default function App() {
                 </div>
               </article>
 
-              {/* Right: Alternating Founders Showcase (Brandon left-img / right-bullets, Faiz left-bullets / right-img) */}
-              <div id="founders" className="lg:col-span-7 flex flex-col gap-6">
+              {/* Right: Alternating Founders Showcase (Top flush with Essay top, Bottom flush with Essay bottom) */}
+              <div id="founders" className="lg:col-span-7 h-full grid grid-rows-2 gap-6">
                 {FOUNDERS.map((founder, idx) => {
                   const isReversed = idx % 2 === 1;
                   return (
                     <article
                       key={founder.name}
-                      className="sf-founder-row sf-squircle bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-6 sm:p-8"
+                      className="sf-founder-row sf-squircle h-full bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-5 sm:p-6 flex items-center"
                     >
                       <div
-                        className={`flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center ${
+                        className={`w-full flex flex-col sm:flex-row gap-6 sm:gap-7 items-center ${
                           isReversed ? "sm:flex-row-reverse" : ""
                         }`}
                       >
                         <img
                           src={founder.image}
                           alt={founder.name}
-                          width={136}
-                          height={136}
+                          width={208}
+                          height={208}
                           loading="lazy"
-                          className="sf-squircle-sm h-[120px] w-[120px] sm:h-[136px] sm:w-[136px] object-cover shrink-0 border border-[var(--sf-hairline)]"
+                          className="sf-squircle-sm h-[176px] w-[176px] sm:h-[208px] sm:w-[208px] object-cover shrink-0 border border-[var(--sf-hairline)]"
                         />
 
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center justify-between gap-3">
-                            <div>
-                              <h3 className="font-optima text-[1.4rem] font-medium leading-[1.2] text-[var(--sf-ink)]">
-                                {founder.name}
-                              </h3>
-                              <p className="mt-0.5 font-optima text-[15px] font-medium text-[var(--sf-red)]">
-                                {founder.role}
-                              </p>
-                            </div>
+                          <div className="flex flex-wrap items-center gap-3">
+                            <h3 className="font-optima text-[1.55rem] font-medium leading-[1.15] text-[var(--sf-ink)]">
+                              {founder.name}
+                            </h3>
 
-                            <div className="flex items-center gap-3.5">
+                            <div className="inline-flex items-center gap-2">
                               <a
                                 href={founder.xHref}
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label={`${founder.name} on X`}
-                                className="sf-pressable sf-squircle-xs p-2 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-paper)] inline-flex items-center justify-center"
+                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-paper)] inline-flex items-center justify-center"
                               >
                                 <span
                                   aria-hidden="true"
-                                  className="sf-logo-tint block h-[18px] w-[18px]"
+                                  className="sf-logo-tint block h-full w-full"
                                   style={{
                                     maskImage: "url(/logos/x.png)",
                                     WebkitMaskImage: "url(/logos/x.png)",
@@ -615,11 +601,11 @@ export default function App() {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label={`${founder.name} on LinkedIn`}
-                                className="sf-pressable sf-squircle-xs p-2 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-paper)] inline-flex items-center justify-center"
+                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-paper)] inline-flex items-center justify-center"
                               >
                                 <span
                                   aria-hidden="true"
-                                  className="sf-logo-tint block h-[18px] w-[18px]"
+                                  className="sf-logo-tint block h-full w-full"
                                   style={{
                                     maskImage: "url(/logos/linkedin.png)",
                                     WebkitMaskImage: "url(/logos/linkedin.png)",
@@ -629,7 +615,11 @@ export default function App() {
                             </div>
                           </div>
 
-                          <ul className="mt-4 space-y-2 list-disc pl-5 font-garamond text-[18px] leading-[1.52] text-[var(--sf-ink-muted)] marker:text-[var(--sf-red)]">
+                          <p className="mt-1 font-optima text-[17.5px] font-medium text-[var(--sf-red)]">
+                            {founder.role}
+                          </p>
+
+                          <ul className="mt-3.5 space-y-2 list-disc pl-5 font-garamond text-[19.5px] leading-[1.48] text-[var(--sf-ink-muted)] marker:text-[var(--sf-red)]">
                             {founder.bullets.map((bullet) => (
                               <li key={bullet}>{bullet}</li>
                             ))}
@@ -645,45 +635,41 @@ export default function App() {
         </section>
       </main>
 
-      {/* Bookend Golden Gate Vermilion Footer — Pedigree + Hiring + Links */}
+      {/* Bookend Golden Gate Vermilion Footer */}
       <footer className="sf-red-focus bg-[var(--sf-red)] text-[var(--sf-white)]">
-        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14 pt-14 pb-10">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-12 pb-10 border-b border-[var(--sf-white-hairline)] items-start">
-            <div className="md:col-span-6">
-              <h2 className="font-optima text-[1.6rem] font-medium leading-[1.2] text-[var(--sf-white)]">
-                Team &amp; research pedigree
-              </h2>
-              <p className="mt-3 font-garamond text-[18.5px] leading-[1.6] text-[var(--sf-white-muted)] max-w-[52ch]">
+        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14 pt-16 pb-12">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-12 pb-12 border-b border-[var(--sf-white-hairline)] items-center">
+            <div className="md:col-span-7">
+              <p className="font-garamond text-[21.5px] sm:text-[23px] leading-[1.56] text-[var(--sf-white-muted)]">
                 We are a small, in-person research engineering team in San Francisco’s Financial
                 District, backed by a $30M seed round led by Khosla Ventures and a16z speedrun,
                 building RL environments and evaluations for 20+ frontier labs.
               </p>
             </div>
 
-            <div className="md:col-span-6 md:pl-8">
-              <h2 className="font-optima text-[1.6rem] font-medium leading-[1.2] text-[var(--sf-white)]">
-                Join us in San Francisco
+            <div className="md:col-span-5 md:pl-10">
+              <h2 className="font-optima text-[1.95rem] font-medium leading-[1.15] text-[var(--sf-white)]">
+                Join us!
               </h2>
-              <p className="mt-3 font-garamond text-[18.5px] leading-[1.6] text-[var(--sf-white-muted)]">
-                We’re hiring exceptional research engineers, in person 5 days a week on Kearny
-                Street.
+              <p className="mt-2.5 font-garamond text-[21.5px] sm:text-[22.5px] leading-[1.5] text-[var(--sf-white-muted)]">
+                We’re hiring exceptional research engineers.
               </p>
               <a
                 href={SFDATA_LINKS.careers}
                 target="_blank"
                 rel="noreferrer"
-                className="sf-pressable sf-squircle-sm mt-5 inline-flex items-center gap-2 bg-[var(--sf-white)] text-[var(--sf-red)] px-5 py-3 font-optima text-[15.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)]"
+                className="sf-pressable sf-squircle-sm mt-5 inline-flex items-center gap-2 bg-[var(--sf-white)] text-[var(--sf-red)] px-6 py-3.5 font-optima text-[17.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)]"
               >
                 <span>View open roles on Ashby</span>
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" strokeWidth={2} />
+                <ArrowUpRight className="h-4.5 w-4.5" aria-hidden="true" strokeWidth={2} />
               </a>
             </div>
           </div>
 
           <div className="pt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between text-[var(--sf-white-muted)]">
-            <div className="flex flex-wrap items-center gap-3 font-garamond text-[17px]">
-              <BridgeMark className="h-5 w-7 text-[var(--sf-white)] shrink-0" />
-              <StreetcarIcon className="h-4 w-6 text-[var(--sf-white)] shrink-0" />
+            <div className="flex flex-wrap items-center gap-3.5 font-garamond text-[20px] sm:text-[21px]">
+              <BridgeMark className="h-6 w-8 text-[var(--sf-white)] shrink-0" />
+              <StreetcarIcon className="h-5 w-7 text-[var(--sf-white)] shrink-0" />
               <span className="text-[var(--sf-white)]">
                 Kearny Street, Financial District · San Francisco
               </span>
@@ -691,7 +677,7 @@ export default function App() {
               <span translate="no">© 2026 San Francisco Data</span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 font-optima text-[15.5px]">
+            <div className="flex flex-wrap items-center gap-7 font-optima text-[18.5px] sm:text-[19.5px]">
               <a
                 href={SFDATA_LINKS.essay}
                 target="_blank"
