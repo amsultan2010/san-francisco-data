@@ -240,7 +240,7 @@ export function TraceRefineryEngine() {
                     {stage.shortTitle}
                   </div>
                   <div
-                    className={`mt-0.5 sm:mt-1 font-garamond text-[14.5px] sm:text-[19px] leading-[1.28] ${
+                    className={`mt-0.5 sm:mt-1 font-garamond text-[16px] sm:text-[19px] leading-[1.28] ${
                       isActive ? "text-[var(--sf-white-muted)]" : "text-[var(--sf-ink-muted)]"
                     }`}
                   >
@@ -288,7 +288,7 @@ export function TraceRefineryEngine() {
 
                 <div className="refinery-animate-item mt-5 sm:mt-6 border-t border-[var(--sf-hairline)] divide-y divide-[var(--sf-hairline)]">
                   <div className="py-3.5 sm:py-4">
-                    <div className="font-optima text-[15px] sm:text-[16px] font-medium text-[var(--sf-ink-muted)]">
+                    <div className="font-optima text-[16px] font-medium text-[var(--sf-ink-muted)]">
                       Goes in
                     </div>
                     <p className="mt-1 font-garamond text-[18.5px] sm:text-[19.5px] leading-[1.45] text-[var(--sf-ink)]">
@@ -296,7 +296,7 @@ export function TraceRefineryEngine() {
                     </p>
                   </div>
                   <div className="py-3.5 sm:py-4">
-                    <div className="font-optima text-[15px] sm:text-[16px] font-medium text-[var(--sf-red)]">
+                    <div className="font-optima text-[16px] font-medium text-[var(--sf-red)]">
                       Comes out
                     </div>
                     <p className="mt-1 font-garamond text-[18.5px] sm:text-[19.5px] font-medium leading-[1.45] text-[var(--sf-ink)]">
@@ -314,7 +314,7 @@ export function TraceRefineryEngine() {
                       activeIndex === 0 ? REFINERY_STAGES.length - 1 : activeIndex - 1,
                     )
                   }
-                  className="sf-pressable inline-flex items-center gap-1.5 font-optima text-[16px] sm:text-[17.5px] font-medium text-[var(--sf-ink-muted)] hover:text-[var(--sf-red)] cursor-pointer"
+                  className="sf-pressable inline-flex items-center gap-1.5 min-h-11 font-optima text-[16px] sm:text-[17.5px] font-medium text-[var(--sf-ink-muted)] hover:text-[var(--sf-red)] cursor-pointer"
                 >
                   <ChevronLeft className="h-4 w-4" aria-hidden="true" strokeWidth={2} />
                   <span>Previous</span>
@@ -325,7 +325,7 @@ export function TraceRefineryEngine() {
                   onClick={() =>
                     handleManualSelect((activeIndex + 1) % REFINERY_STAGES.length)
                   }
-                  className="sf-pressable inline-flex items-center gap-1.5 font-optima text-[16px] sm:text-[17.5px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] cursor-pointer"
+                  className="sf-pressable inline-flex items-center gap-1.5 min-h-11 font-optima text-[16px] sm:text-[17.5px] font-medium text-[var(--sf-red)] hover:text-[var(--sf-red-hover)] cursor-pointer"
                 >
                   <span>
                     {activeIndex === REFINERY_STAGES.length - 1
@@ -355,7 +355,7 @@ export function TraceRefineryEngine() {
                     </span>
                   </div>
                   <span
-                    className={`sf-squircle-xs inline-flex items-center gap-1.5 font-mono-trace text-[11.5px] sm:text-[12.5px] font-medium px-2.5 sm:px-3 py-1 border shrink-0 whitespace-nowrap ${
+                    className={`sf-squircle-xs inline-flex items-center gap-1.5 font-mono-trace text-[12.5px] font-medium px-2.5 sm:px-3 py-1 border shrink-0 whitespace-nowrap ${
                       activeStage.statusTone === "signal"
                         ? "border-[rgba(255,133,102,0.5)] text-[#FFA68F] bg-[rgba(204,50,0,0.22)]"
                         : activeStage.statusTone === "verified"
@@ -375,7 +375,7 @@ export function TraceRefineryEngine() {
                       className="refinery-trace-line flex items-start gap-2.5 sm:gap-4"
                     >
                       <span
-                        className={`text-[11px] sm:text-[12.5px] font-medium uppercase tracking-[0.06em] select-none w-8 sm:w-10 shrink-0 pt-[2px] ${
+                        className={`text-[12.5px] font-medium uppercase tracking-[0.06em] select-none w-8 sm:w-10 shrink-0 pt-[2px] ${
                           line.tone === "red"
                             ? "text-[#FF8566]"
                             : line.tone === "verified"

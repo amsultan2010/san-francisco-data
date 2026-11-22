@@ -1,4 +1,4 @@
-import { useEffect, useRef, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -25,6 +25,14 @@ if (typeof window !== "undefined") {
 const COL_1_HALF = [...PEDIGREE_COL_1, ...PEDIGREE_COL_1];
 const COL_2_HALF = [...PEDIGREE_COL_2, ...PEDIGREE_COL_2];
 
+const NAV_LINKS = [
+  { id: "refinery", label: "How it works" },
+  { id: "research", label: "Research" },
+  { id: "essay", label: "Essay" },
+  { id: "founders", label: "Founders" },
+  { id: "partners", label: "Partners" },
+] as const;
+
 export default function App() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
@@ -32,6 +40,9 @@ export default function App() {
   const researchRef = useRef<HTMLElement | null>(null);
   const editorialSpreadRef = useRef<HTMLElement | null>(null);
   const partnersRef = useRef<HTMLElement | null>(null);
+  const [activeNav, setActiveNav] = useState<string>("");
+  const [marqueePaused, setMarqueePaused] = useState(false);
+  const [motionOk, setMotionOk] = useState(true);
 
   // Slow, high-inertia Lenis smooth scrolling synced directly with GSAP ScrollTrigger
   useEffect(() => {
@@ -61,6 +72,38 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setMotionOk(!mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    const ids = NAV_LINKS.map((link) => link.id);
+    let last = "";
+    const update = () => {
+      const header = document.querySelector("header")?.getBoundingClientRect().height ?? 96;
+      let current = "";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= header + 40) current = id;
+      }
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) current = ids[ids.length - 1];
+      if (current !== last) {
+        last = current;
+        setActiveNav(current);
+      }
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
   const handleSmoothAnchor = (e: MouseEvent<HTMLAnchorElement>, targetId: string) => {
     const reduced =
       typeof window !== "undefined" &&
@@ -68,12 +111,12 @@ export default function App() {
     if (reduced) return;
     e.preventDefault();
     if (lenisRef.current) {
-      lenisRef.current.scrollTo(targetId, { offset: -84, duration: 1.65 });
+      lenisRef.current.scrollTo(targetId, { duration: 1.65 });
       return;
     }
     gsap.to(window, {
       duration: 1.35,
-      scrollTo: { y: targetId, offsetY: 84 },
+      scrollTo: { y: targetId, offsetY: 96 },
       ease: "power3.inOut",
     });
   };
@@ -229,7 +272,7 @@ export default function App() {
 
       {/* Sticky Golden Gate Vermilion Navbar (#CC3200) */}
       <header className="sf-red-focus sticky top-0 z-40 bg-[var(--sf-red)] border-b border-[var(--sf-white-hairline)] shadow-[0_4px_20px_rgba(158,37,0,0.14)]">
-        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 h-[64px] sm:h-[82px] flex items-center justify-between gap-3 sm:gap-6">
+        <div className="mx-auto max-w-[1680px] ps-[max(1rem,env(safe-area-inset-left))] pe-[max(1rem,env(safe-area-inset-right))] sm:px-6 lg:px-8 h-[64px] sm:h-[82px] flex items-center justify-between gap-3 sm:gap-6">
           <a
             href="#top"
             translate="no"
@@ -237,59 +280,40 @@ export default function App() {
             className="inline-flex items-center gap-2 sm:gap-3 text-[var(--sf-white)] no-underline whitespace-nowrap shrink-0 leading-none"
           >
             <BridgeMark className="h-5 w-7 sm:h-8 sm:w-10 text-[var(--sf-white)] shrink-0" />
-            <span className="font-optima text-[17.5px] sm:text-[24px] font-medium tracking-[0.005em] leading-none">
+            <span className="font-optima text-[16px] min-[360px]:text-[17.5px] sm:text-[24px] font-medium tracking-[0.005em] leading-none">
               San Francisco Data
             </span>
           </a>
 
           <nav
             aria-label="Primary"
-            className="hidden md:flex items-center gap-6 lg:gap-9 font-optima text-[20px] font-medium text-[var(--sf-white-muted)]"
+            className="hidden xl:flex items-center gap-8 font-optima text-[20px] font-medium text-[var(--sf-white-muted)]"
           >
-            <a
-              href="#refinery"
-              onClick={(e) => handleSmoothAnchor(e, "#refinery")}
-              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
-            >
-              How it works
-            </a>
-            <a
-              href="#research"
-              onClick={(e) => handleSmoothAnchor(e, "#research")}
-              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
-            >
-              Research
-            </a>
-            <a
-              href="#essay"
-              onClick={(e) => handleSmoothAnchor(e, "#essay")}
-              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
-            >
-              Essay
-            </a>
-            <a
-              href="#founders"
-              onClick={(e) => handleSmoothAnchor(e, "#founders")}
-              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
-            >
-              Founders
-            </a>
-            <a
-              href="#partners"
-              onClick={(e) => handleSmoothAnchor(e, "#partners")}
-              className="inline-flex items-center leading-none whitespace-nowrap hover:text-[var(--sf-white)] transition-colors"
-            >
-              Partners
-            </a>
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                aria-current={activeNav === link.id ? "true" : undefined}
+                onClick={(e) => handleSmoothAnchor(e, `#${link.id}`)}
+                className={`inline-flex items-center min-h-11 leading-none whitespace-nowrap border-b-2 pb-0.5 transition-colors hover:text-[var(--sf-white)] ${
+                  activeNav === link.id
+                    ? "border-[var(--sf-white)] text-[var(--sf-white)]"
+                    : "border-transparent"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <a
             href={SFDATA_LINKS.xBrandon}
             target="_blank"
             rel="noreferrer"
-            className="sf-pressable sf-squircle-sm inline-flex items-center gap-1 sm:gap-1.5 bg-[var(--sf-white)] text-[var(--sf-red)] px-3 py-2 sm:px-5 sm:py-3 font-optima text-[14.5px] sm:text-[19.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
+            className="sf-pressable sf-squircle-sm inline-flex items-center gap-1 sm:gap-1.5 min-h-11 bg-[var(--sf-white)] text-[var(--sf-red)] px-3 py-2 sm:px-5 sm:py-3 font-optima text-[14.5px] sm:text-[19.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
           >
-            <span>Partner with us</span>
+            <span className="max-[359px]:hidden">Partner with us</span>
+            <span className="hidden max-[359px]:inline">Partner</span>
             <ArrowUpRight className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5 shrink-0" aria-hidden="true" strokeWidth={2} />
           </a>
         </div>
@@ -297,51 +321,32 @@ export default function App() {
         {/* Compact Mobile Section Nav Strip */}
         <nav
           aria-label="Mobile sections"
-          className="md:hidden border-t border-[var(--sf-white-hairline)] px-4 py-2.5 flex items-center justify-between gap-3 overflow-x-auto font-optima text-[15px] font-medium text-[var(--sf-white-muted)]"
+          className="sf-mobile-nav xl:hidden border-t border-[var(--sf-white-hairline)] px-2 flex items-stretch gap-1 overflow-x-auto font-optima text-[16px] font-medium text-[var(--sf-white-muted)]"
         >
-          <a
-            href="#refinery"
-            onClick={(e) => handleSmoothAnchor(e, "#refinery")}
-            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
-          >
-            How it works
-          </a>
-          <a
-            href="#research"
-            onClick={(e) => handleSmoothAnchor(e, "#research")}
-            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
-          >
-            Research
-          </a>
-          <a
-            href="#essay"
-            onClick={(e) => handleSmoothAnchor(e, "#essay")}
-            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
-          >
-            Essay
-          </a>
-          <a
-            href="#founders"
-            onClick={(e) => handleSmoothAnchor(e, "#founders")}
-            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
-          >
-            Founders
-          </a>
-          <a
-            href="#partners"
-            onClick={(e) => handleSmoothAnchor(e, "#partners")}
-            className="inline-flex items-center leading-none hover:text-[var(--sf-white)] whitespace-nowrap"
-          >
-            Partners
-          </a>
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              aria-current={activeNav === link.id ? "true" : undefined}
+              onClick={(e) => handleSmoothAnchor(e, `#${link.id}`)}
+              className={`inline-flex items-center min-h-11 px-2.5 leading-none border-b-2 hover:text-[var(--sf-white)] whitespace-nowrap ${
+                activeNav === link.id
+                  ? "border-[var(--sf-white)] text-[var(--sf-white)]"
+                  : "border-transparent"
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
 
-        {/* Scroll-scrubbed reading progress hairline */}
-        <div
-          ref={scrollProgressRef}
-          aria-hidden="true"
-          className="h-[2px] w-full bg-[var(--sf-white)]/85 origin-left scale-x-0"
-        />
+        {/* Scroll-scrubbed reading progress */}
+        <div aria-hidden="true" className="relative h-[2px] w-full bg-[var(--sf-white)]/25">
+          <div
+            ref={scrollProgressRef}
+            className="absolute inset-0 bg-[var(--sf-white)]/90 origin-left scale-x-0"
+          />
+        </div>
       </header>
 
       <main id="top">
@@ -354,16 +359,16 @@ export default function App() {
                 <div className="sf-hero-stagger flex justify-center sm:justify-start">
                   <div
                     aria-label="Backed by a16z speedrun and Khosla Ventures"
-                    className="inline-grid grid-cols-[auto_1px_auto] gap-x-5 sm:gap-x-9 gap-y-1.5 items-center max-w-full"
+                    className="inline-flex max-w-full flex-col items-center gap-3 sm:items-start"
                   >
-                    <div className="col-start-2 justify-self-center whitespace-nowrap font-optima text-[16px] sm:text-[18px] font-medium text-[var(--sf-ink-muted)]">
+                    <div className="whitespace-nowrap font-optima text-[16px] sm:text-[18px] font-medium text-[var(--sf-ink-muted)]">
                       Backed by:
                     </div>
-
+                    <div className="inline-grid grid-cols-[auto_1px_auto] items-center gap-x-5 sm:gap-x-9">
                     <span
                       role="img"
                       aria-label={BACKER_LOGOS[0].name}
-                      className="sf-logo-tint row-start-2 col-start-1 justify-self-end inline-block max-w-[122px] sm:max-w-none"
+                      className="sf-logo-tint col-start-1 justify-self-end inline-block max-w-[122px] sm:max-w-none"
                       style={{
                         width: `${BACKER_LOGOS[0].widthPx}px`,
                         height: `${BACKER_LOGOS[0].heightPx}px`,
@@ -374,13 +379,13 @@ export default function App() {
 
                     <span
                       aria-hidden="true"
-                      className="row-start-2 col-start-2 h-7 sm:h-8 w-[1px] bg-[var(--sf-hairline-strong)]"
+                      className="col-start-2 h-7 sm:h-8 w-[1px] bg-[var(--sf-hairline-strong)]"
                     />
 
                     <span
                       role="img"
                       aria-label={BACKER_LOGOS[1].name}
-                      className="sf-logo-tint row-start-2 col-start-3 justify-self-start inline-block max-w-[100px] sm:max-w-none"
+                      className="sf-logo-tint col-start-3 justify-self-start inline-block max-w-[100px] sm:max-w-none"
                       style={{
                         width: `${BACKER_LOGOS[1].widthPx}px`,
                         height: `${BACKER_LOGOS[1].heightPx}px`,
@@ -388,6 +393,7 @@ export default function App() {
                         WebkitMaskImage: `url(${BACKER_LOGOS[1].src})`,
                       }}
                     />
+                    </div>
                   </div>
                 </div>
 
@@ -407,10 +413,20 @@ export default function App() {
               {/* Right Column: "Built by people from:" + Shorter Seamless Infinite Counter-Scrolling Logo Columns */}
               <div
                 aria-label="Research and engineering institutions represented by our team"
-                className="sf-hero-rail lg:col-span-5"
+                className={`sf-hero-rail lg:col-span-5 ${marqueePaused ? "is-paused" : ""}`}
               >
-                <div className="mb-2.5 sm:mb-3 text-center font-optima text-[16.5px] sm:text-[18px] font-medium text-[var(--sf-ink-muted)]">
-                  Built by people from:
+                <div className="relative mb-2.5 sm:mb-3 text-center font-optima text-[16.5px] sm:text-[18px] font-medium text-[var(--sf-ink-muted)]">
+                  <div>Built by people from:</div>
+                  {motionOk && (
+                    <button
+                      type="button"
+                      aria-pressed={marqueePaused}
+                      onClick={() => setMarqueePaused((paused) => !paused)}
+                      className="sf-pressable absolute right-0 top-1/2 inline-flex min-h-11 -translate-y-1/2 items-center px-2 font-optima text-[16px] font-medium text-[var(--sf-ink-muted)] hover:text-[var(--sf-red)]"
+                    >
+                      {marqueePaused ? "Play" : "Pause"}
+                    </button>
+                  )}
                 </div>
                 <div className="sf-squircle border border-[var(--sf-hairline)] bg-[var(--sf-paper)] px-3 sm:px-7 py-2.5 sm:py-3">
                   <div className="sf-vmarquee-viewport h-[240px] sm:h-[330px] lg:h-[360px] overflow-hidden grid grid-cols-2 gap-3 sm:gap-7">
@@ -518,7 +534,7 @@ export default function App() {
                 {HARD_PROBLEMS.map((problem) => (
                   <div
                     key={problem.title}
-                    className="sf-research-card sf-squircle bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-6 sm:p-7 flex flex-col justify-between"
+                    className="sf-research-card sf-squircle bg-[var(--sf-white)] border border-[var(--sf-hairline)] p-6 sm:p-7 flex flex-col"
                   >
                     <h3 className="font-optima text-[1.35rem] sm:text-[1.48rem] font-medium leading-[1.22] text-[var(--sf-red)]">
                       {problem.title}
@@ -537,7 +553,7 @@ export default function App() {
         <section
           id="essay"
           ref={editorialSpreadRef}
-          className="bg-[var(--sf-white)] py-14 sm:py-20 lg:py-24"
+          className="overflow-x-clip bg-[var(--sf-white)] py-14 sm:py-20 lg:py-24"
         >
           <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-8 items-stretch">
@@ -620,7 +636,7 @@ export default function App() {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label={`${founder.name} on X`}
-                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-white)] inline-flex items-center justify-center"
+                                className="sf-pressable sf-squircle-xs h-11 w-11 p-2.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-white)] inline-flex items-center justify-center"
                               >
                                 <span
                                   aria-hidden="true"
@@ -636,7 +652,7 @@ export default function App() {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label={`${founder.name} on LinkedIn`}
-                                className="sf-pressable sf-squircle-xs h-[34px] w-[34px] p-1.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-white)] inline-flex items-center justify-center"
+                                className="sf-pressable sf-squircle-xs h-11 w-11 p-2.5 border border-[var(--sf-hairline)] hover:border-[var(--sf-red-border)] bg-[var(--sf-white)] inline-flex items-center justify-center"
                               >
                                 <span
                                   aria-hidden="true"
@@ -705,7 +721,7 @@ export default function App() {
 
       {/* Bookend Golden Gate Vermilion Footer */}
       <footer className="sf-red-focus bg-[var(--sf-red)] text-[var(--sf-white)]">
-        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 pt-12 pb-10 sm:pt-16 sm:pb-12">
+        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 pt-12 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:pt-16 sm:pb-12">
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-12 pb-10 sm:pb-12 border-b border-[var(--sf-white-hairline)] items-center">
             <div className="md:col-span-7">
               <p className="font-garamond text-[19.5px] sm:text-[23.5px] leading-[1.54] text-[var(--sf-white-muted)]">

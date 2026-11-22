@@ -96,8 +96,16 @@
     overflow-x: hidden;
   }
 
-  section[id] {
-    scroll-margin-top: 96px;
+  section[id],
+  #founders {
+    scroll-margin-top: 148px;
+  }
+
+  @media (min-width: 1280px) {
+    section[id],
+    #founders {
+      scroll-margin-top: 96px;
+    }
   }
 
   a,
@@ -113,7 +121,7 @@
   :focus-visible {
     outline: 2px solid var(--sf-red);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 
   a {
@@ -192,37 +200,31 @@
 @keyframes sf-glow-aura {
   0%,
   100% {
-    filter: drop-shadow(0 0 14px rgba(204, 50, 0, 0.28))
-      drop-shadow(0 0 34px rgba(255, 118, 64, 0.2));
+    filter: drop-shadow(0 0 10px rgba(204, 50, 0, 0.18));
   }
   50% {
-    filter: drop-shadow(0 0 22px rgba(255, 92, 40, 0.5))
-      drop-shadow(0 0 48px rgba(255, 180, 120, 0.34));
+    filter: drop-shadow(0 0 16px rgba(224, 72, 25, 0.32));
   }
 }
 
 .sf-glow-text {
   background-image: linear-gradient(
     104deg,
-    #b82b00 0%,
-    #cc3200 18%,
-    #ff6a33 31%,
-    #ffd5b8 38%,
-    #fff4eb 42%,
-    #ff8c42 47%,
-    #cc3200 58%,
-    #e6400a 72%,
-    #ffb07c 80%,
-    #cc3200 90%,
+    #9e2500 0%,
+    #cc3200 24%,
+    #d94312 38%,
+    #e04a16 46%,
+    #d94312 54%,
+    #cc3200 70%,
     #b82b00 100%
   );
-  background-size: 300% 100%;
+  background-size: 280% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: #cc3200;
   animation:
-    sf-glow-sweep 4.2s linear infinite,
-    sf-glow-aura 2.8s ease-in-out infinite;
+    sf-glow-sweep 7.5s linear infinite,
+    sf-glow-aura 3.6s ease-in-out infinite;
 }
 
 /* Vertical counter-scrolling logo columns */
@@ -245,8 +247,8 @@
 }
 
 .sf-vmarquee-viewport {
-  mask-image: linear-gradient(to bottom, transparent, #000 56px, #000 calc(100% - 56px), transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #11100e 56px, #11100e calc(100% - 56px), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #11100e 56px, #11100e calc(100% - 56px), transparent);
 }
 
 .sf-vmarquee-up {
@@ -261,6 +263,28 @@
   flex-direction: column;
   animation: sf-vmarquee-down 24s linear infinite;
   will-change: transform;
+}
+
+@media (hover: hover) {
+  .sf-hero-rail:hover .sf-vmarquee-up,
+  .sf-hero-rail:hover .sf-vmarquee-down {
+    animation-play-state: paused;
+  }
+}
+
+.sf-hero-rail:focus-within .sf-vmarquee-up,
+.sf-hero-rail:focus-within .sf-vmarquee-down,
+.sf-hero-rail.is-paused .sf-vmarquee-up,
+.sf-hero-rail.is-paused .sf-vmarquee-down {
+  animation-play-state: paused;
+}
+
+.sf-mobile-nav {
+  scrollbar-width: none;
+}
+
+.sf-mobile-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .sf-logo-tint {
