@@ -151,7 +151,7 @@
 }
 
 .font-mono-trace {
-  font-family: "Optima", "Optima Nova", Candara, sans-serif;
+  font-family: "Azeret Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-variant-numeric: tabular-nums;
 }
 

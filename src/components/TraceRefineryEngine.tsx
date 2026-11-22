@@ -350,12 +350,12 @@ export function TraceRefineryEngine() {
                       aria-hidden="true"
                       strokeWidth={1.75}
                     />
-                    <span className="font-mono-trace text-[13.5px] sm:text-[14.5px] text-[var(--sf-terminal-muted)] break-all sm:truncate">
+                    <span className="font-mono-trace text-[12px] sm:text-[13.5px] text-[var(--sf-terminal-muted)] break-all sm:truncate">
                       {activeStage.codeTitle}
                     </span>
                   </div>
                   <span
-                    className={`sf-squircle-xs inline-flex items-center gap-1.5 font-mono-trace text-[12.5px] sm:text-[13.5px] px-2.5 sm:px-3 py-1 border shrink-0 whitespace-nowrap ${
+                    className={`sf-squircle-xs inline-flex items-center gap-1.5 font-mono-trace text-[11.5px] sm:text-[12.5px] font-medium px-2.5 sm:px-3 py-1 border shrink-0 whitespace-nowrap ${
                       activeStage.statusTone === "signal"
                         ? "border-[rgba(255,133,102,0.5)] text-[#FFA68F] bg-[rgba(204,50,0,0.22)]"
                         : activeStage.statusTone === "verified"
@@ -368,14 +368,14 @@ export function TraceRefineryEngine() {
                   </span>
                 </div>
 
-                <div className="p-4 sm:p-8 space-y-3 sm:space-y-4 font-mono-trace text-[14px] sm:text-[15.5px] leading-[1.65]">
+                <div className="p-4 sm:p-8 space-y-2.5 sm:space-y-3.5 font-mono-trace text-[12.5px] sm:text-[14px] leading-[1.68] tracking-[-0.01em]">
                   {activeStage.lines.map((line, i) => (
                     <div
                       key={`${activeStage.id}-${i}`}
-                      className="refinery-trace-line flex items-start gap-3 sm:gap-4"
+                      className="refinery-trace-line flex items-start gap-2.5 sm:gap-4"
                     >
                       <span
-                        className={`text-[12.5px] sm:text-[13.5px] uppercase tracking-wider select-none w-9 sm:w-10 shrink-0 pt-[2px] ${
+                        className={`text-[11px] sm:text-[12.5px] font-medium uppercase tracking-[0.06em] select-none w-8 sm:w-10 shrink-0 pt-[2px] ${
                           line.tone === "red"
                             ? "text-[#FF8566]"
                             : line.tone === "verified"
@@ -407,10 +407,10 @@ export function TraceRefineryEngine() {
                 aria-live="polite"
                 className="px-4 sm:px-8 py-3.5 sm:py-4 border-t border-[var(--sf-terminal-hairline)] bg-[rgba(255,255,255,0.03)] flex items-center justify-between gap-3"
               >
-                <span className="font-garamond text-[17.5px] sm:text-[19.5px] text-[var(--sf-terminal-muted)]">
+                <span className="font-mono-trace text-[12px] sm:text-[13px] leading-[1.45] text-[var(--sf-terminal-muted)]">
                   {activeStage.outcomeNote}
                 </span>
-                <span className="font-mono-trace text-[13.5px] sm:text-[14.5px] text-[#FF8566] shrink-0 tabular-nums">
+                <span className="font-mono-trace text-[12px] sm:text-[13.5px] font-medium text-[#FF8566] shrink-0 tabular-nums">
                   {activeIndex + 1} / {REFINERY_STAGES.length}
                 </span>
               </div>
