@@ -172,7 +172,8 @@ export function TraceRefineryEngine() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-6">
             <h2 className="refinery-header-reveal font-optima text-[clamp(2.1rem,3.6vw,3.2rem)] font-medium leading-[1.08] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
-              We partner with companies who push their agents past their limits
+              We partner with companies who{" "}
+              <span className="text-[var(--sf-red)]">push their agents past their limits</span>
             </h2>
           </div>
           <div className="lg:col-span-6 lg:text-right">

@@ -229,22 +229,22 @@ export default function App() {
 
       {/* Sticky Golden Gate Vermilion Navbar (#CC3200) */}
       <header className="sf-red-focus sticky top-0 z-40 bg-[var(--sf-red)] border-b border-[var(--sf-white-hairline)] shadow-[0_4px_20px_rgba(158,37,0,0.14)]">
-        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 h-[72px] sm:h-[78px] flex items-center justify-between gap-4 sm:gap-6">
+        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8 h-[76px] sm:h-[82px] flex items-center justify-between gap-4 sm:gap-6">
           <a
             href="#top"
             translate="no"
             onClick={(e) => handleSmoothAnchor(e, "#top")}
             className="inline-flex items-center gap-2.5 sm:gap-3 text-[var(--sf-white)] no-underline whitespace-nowrap shrink-0 leading-none"
           >
-            <BridgeMark className="h-6 w-8 sm:h-7 sm:w-9 text-[var(--sf-white)] shrink-0" />
-            <span className="font-optima text-[18px] sm:text-[21px] font-medium tracking-[0.005em] leading-none">
+            <BridgeMark className="h-7 w-9 sm:h-8 sm:w-10 text-[var(--sf-white)] shrink-0" />
+            <span className="font-optima text-[21px] sm:text-[24px] font-medium tracking-[0.005em] leading-none">
               San Francisco Data
             </span>
           </a>
 
           <nav
             aria-label="Primary"
-            className="hidden md:flex items-center gap-5 lg:gap-8 font-optima text-[18px] font-medium text-[var(--sf-white-muted)]"
+            className="hidden md:flex items-center gap-6 lg:gap-9 font-optima text-[20px] font-medium text-[var(--sf-white-muted)]"
           >
             <a
               href="#refinery"
@@ -287,17 +287,17 @@ export default function App() {
             href={SFDATA_LINKS.xBrandon}
             target="_blank"
             rel="noreferrer"
-            className="sf-pressable sf-squircle-sm inline-flex items-center gap-1.5 bg-[var(--sf-white)] text-[var(--sf-red)] px-3.5 py-2 sm:px-5 sm:py-2.5 font-optima text-[16px] sm:text-[17.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
+            className="sf-pressable sf-squircle-sm inline-flex items-center gap-1.5 bg-[var(--sf-white)] text-[var(--sf-red)] px-4 py-2.5 sm:px-5 sm:py-3 font-optima text-[18px] sm:text-[19.5px] font-medium leading-none hover:bg-[var(--sf-red-tint)] whitespace-nowrap shrink-0"
           >
             <span>Partner with us</span>
-            <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" strokeWidth={2} />
+            <ArrowUpRight className="h-4.5 w-4.5 shrink-0" aria-hidden="true" strokeWidth={2} />
           </a>
         </div>
 
         {/* Compact Mobile Section Nav Strip */}
         <nav
           aria-label="Mobile sections"
-          className="md:hidden border-t border-[var(--sf-white-hairline)] px-4 py-2.5 flex items-center justify-between gap-4 overflow-x-auto font-optima text-[16px] font-medium text-[var(--sf-white-muted)]"
+          className="md:hidden border-t border-[var(--sf-white-hairline)] px-4 py-2.5 flex items-center justify-between gap-4 overflow-x-auto font-optima text-[17.5px] font-medium text-[var(--sf-white-muted)]"
         >
           <a
             href="#refinery"
@@ -402,13 +402,16 @@ export default function App() {
                 </p>
               </div>
 
-              {/* Right Column: Truly Seamless Infinite Counter-Scrolling Vertical Logo Columns */}
+              {/* Right Column: "Built by people from:" + Shorter Seamless Infinite Counter-Scrolling Logo Columns */}
               <div
                 aria-label="Research and engineering institutions represented by our team"
                 className="sf-hero-rail lg:col-span-5"
               >
+                <div className="mb-3 text-center font-optima text-[18px] font-medium text-[var(--sf-ink-muted)]">
+                  Built by people from:
+                </div>
                 <div className="sf-squircle border border-[var(--sf-hairline)] bg-[var(--sf-paper)] px-5 sm:px-7 py-3">
-                  <div className="sf-vmarquee-viewport h-[360px] sm:h-[420px] lg:h-[470px] overflow-hidden grid grid-cols-2 gap-5 sm:gap-7">
+                  <div className="sf-vmarquee-viewport h-[290px] sm:h-[330px] lg:h-[360px] overflow-hidden grid grid-cols-2 gap-5 sm:gap-7">
                     {/* Column 1: seamlessly infinite upward scroll */}
                     <div className="overflow-hidden">
                       <div className="sf-vmarquee-up">
@@ -421,7 +424,7 @@ export default function App() {
                             {COL_1_HALF.map((logo, idx) => (
                               <div
                                 key={`c1-${half}-${idx}-${logo.name}`}
-                                className="flex items-center justify-center h-[72px] pb-4 w-full shrink-0"
+                                className="flex items-center justify-center h-[80px] pb-4 w-full shrink-0"
                               >
                                 <span
                                   role={half === 0 && idx < PEDIGREE_COL_1.length ? "img" : undefined}
@@ -457,7 +460,7 @@ export default function App() {
                             {COL_2_HALF.map((logo, idx) => (
                               <div
                                 key={`c2-${half}-${idx}-${logo.name}`}
-                                className="flex items-center justify-center h-[72px] pb-4 w-full shrink-0"
+                                className="flex items-center justify-center h-[80px] pb-4 w-full shrink-0"
                               >
                                 <span
                                   role={half === 0 && idx < PEDIGREE_COL_2.length ? "img" : undefined}
@@ -540,7 +543,8 @@ export default function App() {
               <article className="sf-essay-card sf-squircle lg:col-span-5 h-full bg-[var(--sf-paper)] border border-[var(--sf-hairline)] p-8 sm:p-10 flex flex-col justify-between">
                 <div>
                   <h2 className="font-optima text-[clamp(1.9rem,2.7vw,2.5rem)] font-medium leading-[1.12] tracking-[-0.02em] text-[var(--sf-ink)] text-balance">
-                    Production traces and the future of data
+                    Production traces and{" "}
+                    <span className="text-[var(--sf-red)]">the future of data</span>
                   </h2>
 
                   <blockquote className="mt-7 pl-5 border-l-2 border-[var(--sf-red)] font-garamond text-[1.48rem] leading-[1.52] text-[var(--sf-ink)]">
@@ -590,15 +594,19 @@ export default function App() {
                         <img
                           src={founder.image}
                           alt={founder.name}
-                          width={212}
-                          height={212}
+                          width={232}
+                          height={232}
                           loading="lazy"
-                          className="sf-squircle-sm h-[180px] w-[180px] sm:h-[212px] sm:w-[212px] object-cover shrink-0 border border-[var(--sf-hairline)]"
+                          className="sf-squircle-sm h-[200px] w-[200px] sm:h-[232px] sm:w-[232px] object-cover shrink-0 border border-[var(--sf-hairline)]"
                         />
 
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-3">
-                            <h3 className="font-optima text-[1.58rem] font-medium leading-[1.15] text-[var(--sf-ink)]">
+                          <div
+                            className={`flex flex-wrap items-center gap-3 ${
+                              isReversed ? "sm:flex-row-reverse sm:justify-start" : ""
+                            }`}
+                          >
+                            <h3 className="font-optima text-[1.6rem] font-medium leading-[1.15] text-[var(--sf-ink)]">
                               {founder.name}
                             </h3>
 
@@ -638,7 +646,11 @@ export default function App() {
                             </div>
                           </div>
 
-                          <p className="mt-1 font-optima text-[18px] font-medium text-[var(--sf-red)]">
+                          <p
+                            className={`mt-1 font-optima text-[18px] font-medium text-[var(--sf-red)] ${
+                              isReversed ? "sm:text-right" : ""
+                            }`}
+                          >
                             {founder.role}
                           </p>
 
@@ -699,7 +711,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className="md:col-span-5 md:pl-10">
+            <div className="md:col-span-5 md:pl-10 md:text-right md:flex md:flex-col md:items-end">
               <h2 className="font-optima text-[2rem] font-medium leading-[1.15] text-[var(--sf-white)]">
                 Join us!
               </h2>
@@ -718,7 +730,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between text-[var(--sf-white-muted)]">
+          <div className="pt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-[var(--sf-white-muted)]">
             <div className="flex flex-wrap items-center gap-3.5 font-garamond text-[20px] sm:text-[21.5px]">
               <BridgeMark className="h-6 w-8 text-[var(--sf-white)] shrink-0" />
               <StreetcarIcon className="h-5 w-7 text-[var(--sf-white)] shrink-0" />
@@ -729,7 +741,11 @@ export default function App() {
               <span translate="no">© 2026 San Francisco Data</span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-7 font-optima text-[19px] sm:text-[20px]">
+            <span aria-hidden="true" className="hidden lg:inline text-[var(--sf-white-hairline-strong)]">
+              |
+            </span>
+
+            <div className="flex flex-wrap items-center gap-6 font-optima text-[19px] sm:text-[20px]">
               <a
                 href={SFDATA_LINKS.essay}
                 target="_blank"
