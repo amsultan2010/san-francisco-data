@@ -18,26 +18,29 @@ export interface LogoAsset {
 }
 
 export const BACKER_LOGOS: LogoAsset[] = [
-  { name: "a16z speedrun", src: "/logos/a16z-speedrun.png", heightPx: 26, widthPx: 90 },
-  { name: "Khosla Ventures", src: "/logos/khosla-ventures.png", heightPx: 24, widthPx: 74 },
+  { name: "a16z speedrun", src: "/logos/a16z-speedrun.png", heightPx: 42, widthPx: 145 },
+  { name: "Khosla Ventures", src: "/logos/khosla-ventures.png", heightPx: 38, widthPx: 118 },
 ];
 
-export const PEDIGREE_LOGOS: LogoAsset[] = [
-  { name: "Mercor", src: "/logos/mercor.png", heightPx: 28, widthPx: 82 },
-  { name: "Etched", src: "/logos/etched.png", heightPx: 24, widthPx: 102 },
-  { name: "Google", src: "/logos/google.png", heightPx: 30, widthPx: 56 },
-  { name: "Google DeepMind", src: "/logos/deepmind.png", heightPx: 26, widthPx: 112 },
-  { name: "NVIDIA", src: "/logos/nvidia.png", heightPx: 24, widthPx: 130 },
-  { name: "Stanford SAIL", src: "/logos/stanford-sail.png", heightPx: 34, widthPx: 74 },
-  { name: "UC Berkeley RISELab", src: "/logos/berkeley-rise.png", heightPx: 32, widthPx: 66 },
-  { name: "Terminal-Bench", src: "/logos/terminal-bench.png", heightPx: 26, widthPx: 116 },
+export const PEDIGREE_COL_1: LogoAsset[] = [
+  { name: "Mercor", src: "/logos/mercor.png", heightPx: 44, widthPx: 128 },
+  { name: "Google", src: "/logos/google.png", heightPx: 48, widthPx: 112 },
+  { name: "NVIDIA", src: "/logos/nvidia.png", heightPx: 34, widthPx: 176 },
+  { name: "UC Berkeley RISELab", src: "/logos/berkeley-rise.png", heightPx: 50, widthPx: 110 },
+];
+
+export const PEDIGREE_COL_2: LogoAsset[] = [
+  { name: "Etched", src: "/logos/etched.png", heightPx: 36, widthPx: 152 },
+  { name: "Google DeepMind", src: "/logos/deepmind.png", heightPx: 38, widthPx: 164 },
+  { name: "Stanford SAIL", src: "/logos/stanford-sail.png", heightPx: 52, widthPx: 114 },
+  { name: "Terminal-Bench", src: "/logos/terminal-bench.png", heightPx: 38, widthPx: 168 },
 ];
 
 export interface FounderProfile {
   name: string;
   role: string;
   image: string;
-  bio: string;
+  bullets: string[];
   xHref: string;
   linkedinHref: string;
 }
@@ -47,7 +50,11 @@ export const FOUNDERS: FounderProfile[] = [
     name: "Brandon Guo",
     role: "Co-founder & CEO",
     image: "/founders/brandon-guo.png",
-    bio: "Previously helped grow Mercor's code team to $100M in annualized revenue run rate before co-founding San Francisco Data to turn real production agent failures into frontier RL environments.",
+    bullets: [
+      "Previously grew Mercor's code team to $100M in annualized revenue run rate.",
+      "Leads trace-supply partnerships with AI-agent companies and frontier labs.",
+      "Co-author of San Francisco Data's thesis on production traces and RL.",
+    ],
     xHref: SFDATA_LINKS.xBrandon,
     linkedinHref: SFDATA_LINKS.linkedinBrandon,
   },
@@ -55,7 +62,11 @@ export const FOUNDERS: FounderProfile[] = [
     name: "Faiz Siddiqi",
     role: "Co-founder & CTO",
     image: "/founders/faiz-siddiqi.png",
-    bio: "Previously scaled Mercor's code team alongside Brandon to $100M ARR. Leads research engineering at San Francisco Data, building deterministic sandboxes and ungameable verifiers for 20+ frontier labs.",
+    bullets: [
+      "Previously scaled Mercor's code team alongside Brandon to $100M ARR.",
+      "Leads research engineering for sandbox reconstruction and reward verifiers.",
+      "Built evaluation and RL infrastructure used across 20+ frontier AI labs.",
+    ],
     xHref: SFDATA_LINKS.xFaiz,
     linkedinHref: SFDATA_LINKS.linkedinFaiz,
   },
@@ -66,7 +77,6 @@ export interface RefineryStage {
   shortTitle: string;
   shortTag: string;
   title: string;
-  summary: string;
   detail: string;
   inputLabel: string;
   outputLabel: string;
@@ -85,14 +95,13 @@ export const REFINERY_STAGES: RefineryStage[] = [
   {
     id: "capture",
     shortTitle: "Raw Trace",
-    shortTag: "Agent fails live",
-    title: "Capture real production failures",
-    summary: "Real chronology of an AI agent pushed past its limit on real economic work.",
+    shortTag: "Real failure logged",
+    title: "Capture live agent failures",
     detail:
-      "Every partner-permissioned session records the user's request, repository context, tool calls, and mid-session corrections. Today, the majority of economically valuable traces come from coding agents.",
-    inputLabel: "Live coding-agent session hitting a subtle production bug",
-    outputLabel: "Timestamped failure trace showing exact model limitation",
-    outcomeNote: "Illustrative example · Boundary failure captured in production",
+      "Partner-permissioned sessions capture the user's request, repository state, tool calls, and mid-session corrections whenever an agent hits a real capability wall.",
+    inputLabel: "Deployed coding-agent session hitting a subtle production bug",
+    outputLabel: "Complete failure trace showing where and why the model broke",
+    outcomeNote: "Illustrative example · Real capability boundary captured",
     statusLabel: "Boundary failure",
     statusTone: "signal",
     codeTitle: "trace_8f2a9c.jsonl · illustrative trace",
@@ -107,14 +116,13 @@ export const REFINERY_STAGES: RefineryStage[] = [
   {
     id: "filter",
     shortTitle: "Filter & Sanitize",
-    shortTag: "Strip PII & noise",
-    title: "Permission, redact & isolate signal",
-    summary: "Separate genuine model limits from noise, broken tooling, and private data.",
+    shortTag: "Drop noise & PII",
+    title: "Enforce permissions & isolate signal",
     detail:
-      "SF Data never claims ownership of underlying data. We work with source companies to enforce permissions, strip customer secrets and proprietary material, and discard broken-tool or repetitive sessions.",
-    inputLabel: "Unfiltered partner traces containing secrets, noise, and dead ends",
-    outputLabel: "Consent-verified, redacted, high-signal failure candidate",
-    outcomeNote: "6 sensitive values redacted · Genuine capability boundary confirmed",
+      "We never claim ownership of partner data. Our pipeline strips customer secrets and proprietary material, discards broken tooling or routine tasks, and keeps only true model limits.",
+    inputLabel: "Unfiltered agent logs mixed with secrets, noise, and dead ends",
+    outputLabel: "Consent-verified, redacted session with high training signal",
+    outcomeNote: "6 sensitive fields redacted · Capability boundary confirmed",
     statusLabel: "Sanitized · high signal",
     statusTone: "neutral",
     codeTitle: "filter_pipeline.log · illustrative pass",
@@ -123,19 +131,18 @@ export const REFINERY_STAGES: RefineryStage[] = [
       { prefix: "PII", text: "redacted 3 env tokens, 1 tenant hostname, 2 customer IDs", tone: "muted" },
       { prefix: "SIG", text: "environment_broken: false · repetitive_pattern: false", tone: "muted" },
       { prefix: "SIG", text: "failure_class: implicit_resource_lifecycle_bug · signal: 0.94", tone: "default" },
-      { prefix: "OUT", text: "promoted to deterministic environment reconstruction", tone: "verified" },
+      { prefix: "OUT", text: "promoted to deterministic sandbox reconstruction", tone: "verified" },
     ],
   },
   {
     id: "reconstruct",
     shortTitle: "Reconstruct Env",
-    shortTag: "Freeze sandbox",
-    title: "Reconstruct a deterministic sandbox",
-    summary: "Rebuild enough of the original world so any frontier model can attempt the same work.",
+    shortTag: "Deterministic world",
+    title: "Rebuild the exact working environment",
     detail:
-      "We recover both explicit and implicit user objectives and snapshot an isolated, reproducible container, preserving the nuance and mid-session constraints that made the original attempt hard.",
-    inputLabel: "Sanitized multi-turn trace with implicit user requirements",
-    outputLabel: "Isolated, 100% reproducible container ready for RL rollouts",
+      "We recover both explicit prompts and implicit user constraints, then freeze a self-contained container so any frontier model can re-attempt the exact same engineering problem.",
+    inputLabel: "Redacted multi-turn trace with implicit user requirements",
+    outputLabel: "Isolated, 100% reproducible sandbox ready for RL rollouts",
     outcomeNote: "32/32 baseline rollouts deterministic · Network isolated",
     statusLabel: "Sandbox ready",
     statusTone: "neutral",
@@ -151,13 +158,12 @@ export const REFINERY_STAGES: RefineryStage[] = [
   {
     id: "verify",
     shortTitle: "RL Verifier",
-    shortTag: "Grade real outcome",
-    title: "Write ungameable behavioral verifiers",
-    summary: "Grade the exact outcome the user needed, closing shortcuts models try to exploit.",
+    shortTag: "Ungameable reward",
+    title: "Grade the true outcome, not a loophole",
     detail:
-      "Verifiers inspect real behavioral invariants under adversarial load so frontier labs can run reinforcement learning directly against real-world failure modes without reward hacking.",
-    inputLabel: "Reconstructed sandbox vulnerable to superficial test shortcuts",
-    outputLabel: "Audited RL environment + reward verifier shipped to frontier labs",
+      "Behavioral verifiers check real system invariants under adversarial load so frontier labs can run reinforcement learning directly on real-world failures without reward hacking.",
+    inputLabel: "Reproducible sandbox vulnerable to superficial test shortcuts",
+    outputLabel: "Audited RL environment and verifier shipped to frontier labs",
     outcomeNote: "Reward-hacking audit passed · 0.00 false-positive rate",
     statusLabel: "RL reward verified",
     statusTone: "verified",
@@ -174,39 +180,33 @@ export const REFINERY_STAGES: RefineryStage[] = [
 
 export const HARD_PROBLEMS = [
   {
-    title: "Selecting signal over noise",
-    body: "Finding the rare production sessions that expose genuine model limitations rather than broken local tooling, ambiguous prompts, or repetitive boilerplate.",
+    title: "Isolating true model failures",
+    body: "Most production logs are noisy: broken local tools, vague prompts, or repetitive boilerplate. Finding the rare sessions where a frontier model genuinely fails requires deep automated filtering.",
   },
   {
-    title: "Reconstructing real work faithfully",
-    body: "Turning messy, multi-turn sessions into reproducible sandboxes without stripping away the implicit objectives and user corrections that made the task hard.",
+    title: "Preserving implicit work context",
+    body: "Real tasks rarely live in a single prompt. Reconstructing a faithful sandbox means capturing the hidden constraints, repo state, and mid-session corrections that made the task hard.",
   },
   {
-    title: "Preventing reward hacking",
-    body: "Engineering verifiers that grade the exact outcome the user needed, closing off shortcuts and test loopholes that frontier models routinely exploit during RL.",
+    title: "Closing reward-hacking loopholes",
+    body: "Frontier models exploit weak unit tests during RL. Every verifier must check the true behavioral invariant the user actually needed under adversarial execution.",
   },
 ] as const;
 
 export const AUDIENCE_PATHS = [
   {
-    audience: "For AI-agent companies",
-    heading: "Monetize production traces without surrendering your edge.",
-    body: "We do not claim ownership of your underlying data. SF Data handles partner permissions, redaction, and filtering, and shares proceeds when frontier labs extract more training value than any single company could capture alone. Your distribution, network effects, and customer trust stay yours.",
-    ctaLabel: "Reach the founders on X",
-    ctaHref: SFDATA_LINKS.xBrandon,
+    audience: "AI-agent companies",
+    heading: "Monetize edge-case failures without losing your moat.",
+    body: "You keep full ownership of your data, distribution, and customer trust. San Francisco Data handles permissions, redaction, and signal filtering, sharing proceeds when frontier labs extract training value no single company could unlock alone.",
   },
   {
-    audience: "For frontier AI labs",
-    heading: "Train on where models actually fail across the economy.",
-    body: "As models surpass human experts, contractor-generated tasks become a race to the bottom. Production traces move continuously with the frontier because users keep pushing deployed agents past their limits, starting today with coding agents.",
-    ctaLabel: "Read the October 1 thesis",
-    ctaHref: SFDATA_LINKS.essay,
+    audience: "Frontier AI labs",
+    heading: "Train where models actually break in the real economy.",
+    body: "Synthetic benchmarks and contractor tasks saturate as models surpass human experts. Production traces move continuously with the frontier because real users push deployed agents past their limits every day.",
   },
   {
-    audience: "For research engineers",
-    heading: "Build the continuous link between deployed AI and training.",
-    body: "We are a small, in-person team on Kearny Street in San Francisco's Financial District, working 5 days a week, building environments and evaluations for 20+ frontier labs.",
-    ctaLabel: "View open roles on Ashby",
-    ctaHref: SFDATA_LINKS.careers,
+    audience: "Research engineers",
+    heading: "Engineer the feedback loop between deployment and training.",
+    body: "Join a focused, in-person team on Kearny Street in San Francisco's Financial District working 5 days a week to build deterministic environments and verifiers for 20+ frontier labs.",
   },
 ] as const;

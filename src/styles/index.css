@@ -181,25 +181,70 @@
   corner-shape: squircle;
 }
 
-/* Infinite logo marquee rail */
-@keyframes sf-logo-marquee {
+/* Constant left-to-right vermilion glow sweep on hero accent phrase */
+@keyframes sf-glow-sweep {
+  0% {
+    background-position: 140% 50%;
+  }
+  100% {
+    background-position: -140% 50%;
+  }
+}
+
+.sf-glow-text {
+  background-image: linear-gradient(
+    102deg,
+    #cc3200 0%,
+    #cc3200 34%,
+    #ff7d52 48%,
+    #ffb499 50%,
+    #ff7d52 52%,
+    #cc3200 66%,
+    #cc3200 100%
+  );
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sf-glow-sweep 4.4s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(204, 50, 0, 0.22));
+}
+
+/* Vertical counter-scrolling logo columns */
+@keyframes sf-vmarquee-up {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(0, -50%, 0);
   }
 }
 
-.sf-marquee-viewport {
-  mask-image: linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+@keyframes sf-vmarquee-down {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.sf-marquee-track {
+.sf-vmarquee-viewport {
+  mask-image: linear-gradient(to bottom, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+}
+
+.sf-vmarquee-up {
   display: flex;
-  width: max-content;
-  animation: sf-logo-marquee 30s linear infinite;
+  flex-direction: column;
+  animation: sf-vmarquee-up 24s linear infinite;
+  will-change: transform;
+}
+
+.sf-vmarquee-down {
+  display: flex;
+  flex-direction: column;
+  animation: sf-vmarquee-down 24s linear infinite;
   will-change: transform;
 }
 
@@ -211,12 +256,6 @@
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sf-marquee-track {
-    animation: none;
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -234,5 +273,17 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .sf-glow-text {
+    animation: none;
+    background-image: none;
+    color: var(--sf-red);
+    filter: none;
+  }
+
+  .sf-vmarquee-up,
+  .sf-vmarquee-down {
+    animation: none;
   }
 }
