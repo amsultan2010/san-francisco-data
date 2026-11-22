@@ -13,12 +13,16 @@ interface TracePipelineCanvasProps {
 
 const STAGE_CENTERS = [0.125, 0.375, 0.625, 0.875] as const;
 
+const MOBILE_CANVAS_HEIGHT = 468;
+
 const STAGE_ARIA_LABELS = [
   "Raw Trace",
   "Filter & Sanitize",
   "Reconstruct Env",
   "RL Verifier",
 ] as const;
+
+const STAGE_STEP_CODES = ["01", "02", "03", "04"] as const;
 
 function clamp(v: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, v));
@@ -103,7 +107,7 @@ export function TracePipelineCanvas({
     runningRef.current = true;
   }, [runTrigger]);
 
-  const effectiveHeight = isMobile ? 392 : height;
+  const effectiveHeight = isMobile ? MOBILE_CANVAS_HEIGHT : height;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -122,7 +126,7 @@ export function TracePipelineCanvas({
       width = container.clientWidth || 1400;
       mobileMode = width < 640;
       setIsMobile(mobileMode);
-      const h = mobileMode ? 392 : height;
+      const h = mobileMode ? MOBILE_CANVAS_HEIGHT : height;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(h * dpr);
       canvas.style.width = `${width}px`;
@@ -151,125 +155,182 @@ export function TracePipelineCanvas({
     };
 
     const drawMobileVertical = (w: number, h: number, p: number, currentStage: number) => {
-      const padY = 12;
-      const innerH = h - padY * 2 - 4;
+      const padTop = 14;
+      const padBottom = 18;
+      const innerH = h - padTop - padBottom;
       const rowH = innerH / 4;
-      const cx = w * 0.5;
+      const spineX = 28;
+      const cardX = 52;
+      const cardW = w - cardX - 14;
+      const cardCx = cardX + cardW * 0.5;
 
       drawBackdrop(w, h);
 
-      // Active row glow & frame
-      const activeCy = padY + (currentStage + 0.5) * rowH;
-      const zoneGlow = ctx.createRadialGradient(cx, activeCy, 8, cx, activeCy, w * 0.48);
+      // Soft ambient glow behind active row
+      const activeCy = padTop + (currentStage + 0.5) * rowH;
+      const zoneGlow = ctx.createRadialGradient(cardCx, activeCy, 8, cardCx, activeCy, w * 0.52);
       zoneGlow.addColorStop(
         0,
-        currentStage === 3 ? "rgba(21, 128, 61, 0.11)" : "rgba(204, 50, 0, 0.09)",
+        currentStage === 3 ? "rgba(21, 128, 61, 0.11)" : "rgba(204, 50, 0, 0.095)",
       );
       zoneGlow.addColorStop(1, "rgba(204, 50, 0, 0)");
       ctx.fillStyle = zoneGlow;
       ctx.fillRect(0, 0, w, h);
 
-      for (let i = 0; i < 4; i++) {
-        const ry = padY + i * rowH;
-        if (i === currentStage) {
-          drawRoundedRect(ctx, 10, ry + 4, w - 20, rowH - 8, 12);
-          ctx.fillStyle = "rgba(255, 255, 255, 0.52)";
-          ctx.fill();
-          ctx.strokeStyle =
-            i === 3 ? "rgba(21, 128, 61, 0.28)" : "rgba(204, 50, 0, 0.24)";
-          ctx.lineWidth = 1.3;
-          ctx.stroke();
-        }
-        if (i > 0) {
-          ctx.strokeStyle = "rgba(17, 16, 14, 0.07)";
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(18, ry);
-          ctx.lineTo(w - 18, ry);
-          ctx.stroke();
-        }
-      }
-
-      // Vertical center rail
-      const railTop = padY + rowH * 0.45;
-      const railBot = padY + innerH - rowH * 0.45;
+      // Left vertical spine rail
+      const railTop = padTop + rowH * 0.5;
+      const railBot = padTop + rowH * 3.5;
       const filledY = railTop + clamp(p, 0, 1) * (railBot - railTop);
 
       ctx.strokeStyle = "rgba(17, 16, 14, 0.11)";
-      ctx.lineWidth = 3.5;
+      ctx.lineWidth = 3;
       ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.moveTo(cx, railTop);
-      ctx.lineTo(cx, railBot);
+      ctx.moveTo(spineX, railTop);
+      ctx.lineTo(spineX, railBot);
       ctx.stroke();
 
       const railGrad = ctx.createLinearGradient(0, railTop, 0, railBot);
       railGrad.addColorStop(0, "#CC3200");
-      railGrad.addColorStop(0.75, "#E04819");
+      railGrad.addColorStop(0.72, "#E04819");
       railGrad.addColorStop(1, "#15803D");
       ctx.strokeStyle = railGrad;
-      ctx.lineWidth = 3.5;
+      ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(cx, railTop);
-      ctx.lineTo(cx, filledY);
+      ctx.moveTo(spineX, railTop);
+      ctx.lineTo(spineX, filledY);
       ctx.stroke();
 
-      // Downward chevron connectors between rows
-      for (let i = 1; i <= 3; i++) {
-        const ay = padY + i * rowH;
-        const reached = filledY >= ay - 2;
-        ctx.save();
+      // Traveling luminous bead along spine
+      if (p > 0.01 && p < 0.995) {
+        const beadGlow = ctx.createRadialGradient(spineX, filledY, 2, spineX, filledY, 13);
+        beadGlow.addColorStop(0, "rgba(204, 50, 0, 0.34)");
+        beadGlow.addColorStop(1, "rgba(204, 50, 0, 0)");
+        ctx.fillStyle = beadGlow;
         ctx.beginPath();
-        ctx.arc(cx, ay, 10, 0, Math.PI * 2);
-        ctx.fillStyle = "#FFFFFF";
+        ctx.arc(spineX, filledY, 13, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = reached
-          ? i === 3 && p >= 0.78
-            ? "#15803D"
-            : "#CC3200"
-          : "rgba(17, 16, 14, 0.16)";
-        ctx.lineWidth = 1.4;
-        ctx.stroke();
 
-        ctx.strokeStyle = reached
-          ? i === 3 && p >= 0.78
+        ctx.beginPath();
+        ctx.arc(spineX, filledY, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#CC3200";
+        ctx.fill();
+      }
+
+      // Stage cards & numbered spine nodes
+      for (let i = 0; i < 4; i++) {
+        const ry = padTop + i * rowH;
+        const rCy = ry + rowH * 0.5;
+        const isCurrent = i === currentStage;
+        const isReached = i < currentStage || (i === 3 && p >= 0.78);
+        const isVerifiedActive = i === 3 && (isCurrent || p >= 0.78);
+
+        // Card container
+        ctx.save();
+        drawRoundedRect(ctx, cardX, ry + 5, cardW, rowH - 10, 11);
+        if (isCurrent) {
+          ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+          ctx.shadowColor = isVerifiedActive
+            ? "rgba(21, 128, 61, 0.1)"
+            : "rgba(204, 50, 0, 0.09)";
+          ctx.shadowBlur = 14;
+          ctx.shadowOffsetY = 3;
+          ctx.fill();
+          ctx.shadowColor = "transparent";
+          ctx.strokeStyle = isVerifiedActive
+            ? "rgba(21, 128, 61, 0.34)"
+            : "rgba(204, 50, 0, 0.28)";
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = "rgba(255, 255, 255, 0.48)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(17, 16, 14, 0.08)";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        // Card stage title header
+        ctx.fillStyle = isCurrent
+          ? isVerifiedActive
             ? "#15803D"
             : "#CC3200"
-          : "rgba(17, 16, 14, 0.34)";
-        ctx.lineWidth = 1.8;
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
+          : isReached
+            ? "#11100E"
+            : "#5A544E";
+        ctx.font = "500 12.5px Optima, sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(STAGE_ARIA_LABELS[i], cardX + 12, ry + 19);
+        ctx.restore();
+
+        // Spine numbered node
+        ctx.save();
+        if (isCurrent) {
+          ctx.beginPath();
+          ctx.arc(spineX, rCy, 16, 0, Math.PI * 2);
+          ctx.fillStyle = isVerifiedActive
+            ? "rgba(21, 128, 61, 0.14)"
+            : "rgba(204, 50, 0, 0.13)";
+          ctx.fill();
+        }
+
         ctx.beginPath();
-        ctx.moveTo(cx - 3.5, ay - 2);
-        ctx.lineTo(cx, ay + 2.5);
-        ctx.lineTo(cx + 3.5, ay - 2);
-        ctx.stroke();
+        ctx.arc(spineX, rCy, 11.5, 0, Math.PI * 2);
+        if (isCurrent) {
+          ctx.fillStyle = isVerifiedActive ? "#15803D" : "#CC3200";
+          ctx.fill();
+        } else if (isReached) {
+          ctx.fillStyle = "#FFF4F0";
+          ctx.fill();
+          ctx.strokeStyle = "#CC3200";
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(17, 16, 14, 0.18)";
+          ctx.lineWidth = 1.25;
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = isCurrent
+          ? "#FFFFFF"
+          : isReached
+            ? "#CC3200"
+            : "rgba(17, 16, 14, 0.48)";
+        ctx.font = '500 10px "Azeret Mono", ui-monospace, monospace';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(STAGE_STEP_CODES[i], spineX, rCy + 0.5);
         ctx.restore();
       }
 
-      // Row 1: Noise | Failure | PII horizontal row
-      const r1Y = padY + rowH * 0.5;
-      const pillW = Math.min(96, (w - 56) / 3);
-      const pillH = 34;
-      const gap = 8;
-      const startX = cx - (pillW * 3 + gap * 2) / 2;
+      // Row 1 (Raw Trace): Noise | Failure | PII tactile pills
+      const r1VisY = padTop + rowH * 0.64;
+      const pillGap = 7;
+      const innerCardW = cardW - 24;
+      const pillW = Math.min(90, (innerCardW - pillGap * 2) / 3);
+      const pillH = 32;
+      const pillsTotalW = pillW * 3 + pillGap * 2;
+      const pillsStartX = cardCx - pillsTotalW / 2;
 
       [
         { label: "Noise", primary: false },
         { label: "Failure", primary: true },
         { label: "PII", primary: false },
       ].forEach((pill, idx) => {
-        const x = startX + idx * (pillW + gap);
-        const y = r1Y - pillH / 2;
+        const x = pillsStartX + idx * (pillW + pillGap);
+        const y = r1VisY - pillH / 2;
         ctx.save();
-        drawRoundedRect(ctx, x, y, pillW, pillH, 9);
+        drawRoundedRect(ctx, x, y, pillW, pillH, 8);
         if (pill.primary) {
           const g = ctx.createLinearGradient(x, y, x + pillW, y + pillH);
           g.addColorStop(0, "#D93800");
           g.addColorStop(1, "#B52B00");
           ctx.fillStyle = g;
-          ctx.shadowColor = "rgba(204, 50, 0, 0.25)";
-          ctx.shadowBlur = 12;
+          ctx.shadowColor = "rgba(204, 50, 0, 0.24)";
+          ctx.shadowBlur = 10;
           ctx.shadowOffsetY = 3;
           ctx.fill();
           ctx.shadowColor = "transparent";
@@ -277,154 +338,223 @@ export function TracePipelineCanvas({
           ctx.fillStyle = "#FFFFFF";
           ctx.fill();
           ctx.strokeStyle = "rgba(17, 16, 14, 0.14)";
-          ctx.lineWidth = 1.2;
+          ctx.lineWidth = 1.15;
           ctx.stroke();
         }
+
+        ctx.beginPath();
+        ctx.arc(x + 11, r1VisY, 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = pill.primary ? "rgba(255, 255, 255, 0.9)" : "rgba(17, 16, 14, 0.24)";
+        ctx.fill();
+
         ctx.fillStyle = pill.primary ? "#FFFFFF" : "#554F4A";
-        ctx.font = "500 14px Optima, sans-serif";
+        ctx.font = "500 13px Optima, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(pill.label, x + pillW / 2, r1Y + 0.5);
+        ctx.fillText(pill.label, x + pillW / 2 + 4, r1VisY + 0.5);
         ctx.restore();
       });
 
-      // Row 2: Horizontal Filter Bar + Clean Signal pill
-      const r2Y = padY + rowH * 1.5;
+      // Row 2 (Filter & Sanitize): Left-to-right lens -> Signal capsule
+      const r2VisY = padTop + rowH * 1.64;
       const s2Active = p >= 0.24;
       const s2t = easeOutCubic((p - 0.24) / 0.24);
-      const barW = Math.min(220, w - 64);
+      const lensX = cardX + cardW * 0.38;
+      const lensH = 44;
 
       ctx.save();
-      drawRoundedRect(ctx, cx - barW / 2, r2Y - 22, barW, 12, 6);
-      ctx.fillStyle = s2Active ? "rgba(204, 50, 0, 0.2)" : "rgba(17, 16, 14, 0.06)";
+      // Incoming stream line & noise dots on left
+      ctx.strokeStyle = s2Active ? "rgba(204, 50, 0, 0.35)" : "rgba(17, 16, 14, 0.12)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cardX + 16, r2VisY);
+      ctx.lineTo(lensX - 10, r2VisY);
+      ctx.stroke();
+
+      // Deflected noise dots
+      const dropShift = s2Active ? s2t * 10 : 0;
+      ctx.globalAlpha = s2Active ? clamp(0.75 - s2t * 0.35, 0.3, 0.75) : 0.35;
+      [
+        { x: lensX - 24, y: r2VisY - 12 - dropShift * 0.4 },
+        { x: lensX - 20, y: r2VisY + 13 + dropShift * 0.5 },
+      ].forEach((dot) => {
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = "#A39B93";
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      // Vertical filter lens
+      if (s2Active) {
+        const beamGlow = ctx.createRadialGradient(lensX, r2VisY, 2, lensX, r2VisY, 34);
+        beamGlow.addColorStop(0, "rgba(204, 50, 0, 0.22)");
+        beamGlow.addColorStop(1, "rgba(204, 50, 0, 0)");
+        ctx.fillStyle = beamGlow;
+        ctx.fillRect(lensX - 34, r2VisY - 26, 68, 52);
+      }
+
+      drawRoundedRect(ctx, lensX - 6, r2VisY - lensH / 2, 12, lensH, 6);
+      ctx.fillStyle = s2Active ? "rgba(204, 50, 0, 0.22)" : "rgba(17, 16, 14, 0.06)";
       ctx.fill();
       ctx.strokeStyle = s2Active ? "#CC3200" : "rgba(17, 16, 14, 0.2)";
       ctx.lineWidth = 1.6;
       ctx.stroke();
 
-      if (s2Active) {
-        // Deflected noise dots moving outward
-        ctx.globalAlpha = clamp(0.85 - s2t * 0.4, 0.25, 0.85);
-        [-barW * 0.42 - s2t * 14, barW * 0.42 + s2t * 14].forEach((dx) => {
-          ctx.beginPath();
-          ctx.arc(cx + dx, r2Y + 8, 5, 0, Math.PI * 2);
-          ctx.fillStyle = "#A39B93";
-          ctx.fill();
-        });
-        ctx.globalAlpha = 1;
+      // Clean signal line + Signal capsule on right
+      const sigW = Math.min(98, cardW * 0.38);
+      const sigH = 32;
+      const sigX = lensX + 20 + (s2Active ? s2t * 8 : 0);
 
-        // Clean Signal pill centered below filter bar
-        drawRoundedRect(ctx, cx - 50, r2Y - 2, 100, 32, 8);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.shadowColor = "rgba(204, 50, 0, 0.14)";
+      ctx.strokeStyle = s2Active ? "#CC3200" : "rgba(17, 16, 14, 0.14)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(lensX + 8, r2VisY);
+      ctx.lineTo(sigX - 2, r2VisY);
+      ctx.stroke();
+
+      ctx.globalAlpha = s2Active ? 1 : 0.45;
+      drawRoundedRect(ctx, sigX, r2VisY - sigH / 2, sigW, sigH, 8);
+      ctx.fillStyle = "#FFFFFF";
+      if (s2Active) {
+        ctx.shadowColor = "rgba(204, 50, 0, 0.16)";
         ctx.shadowBlur = 10;
         ctx.shadowOffsetY = 3;
-        ctx.fill();
-        ctx.shadowColor = "transparent";
-        ctx.strokeStyle = "#CC3200";
-        ctx.lineWidth = 1.6;
-        ctx.stroke();
-
-        ctx.fillStyle = "#CC3200";
-        ctx.font = "500 14px Optima, sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("Signal", cx, r2Y + 14.5);
       }
+      ctx.fill();
+      ctx.shadowColor = "transparent";
+      ctx.strokeStyle = s2Active ? "#CC3200" : "rgba(17, 16, 14, 0.2)";
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+
+      ctx.fillStyle = s2Active ? "#CC3200" : "#554F4A";
+      ctx.font = "500 13px Optima, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("Signal", sigX + sigW / 2, r2VisY + 0.5);
       ctx.restore();
 
-      // Row 3: Sandbox Container
-      const r3Y = padY + rowH * 2.5;
-      const boxW = Math.min(220, w - 64);
-      const boxH = 66;
+      // Row 3 (Reconstruct Env): Compact Sandbox Container
+      const r3VisY = padTop + rowH * 2.64;
+      const boxW = Math.min(248, cardW - 24);
+      const boxH = 50;
+      const boxX = cardX + 12;
+      const boxY = r3VisY - boxH / 2;
       const s3Active = p >= 0.5;
       const s3t = easeOutCubic((p - 0.5) / 0.22);
 
       ctx.save();
-      drawRoundedRect(ctx, cx - boxW / 2, r3Y - boxH / 2, boxW, boxH, 10);
+      drawRoundedRect(ctx, boxX, boxY, boxW, boxH, 9);
       ctx.fillStyle = "#FFFFFF";
-      ctx.shadowColor = s3Active ? "rgba(17, 16, 14, 0.11)" : "rgba(17, 16, 14, 0.04)";
-      ctx.shadowBlur = 14;
-      ctx.shadowOffsetY = 4;
+      ctx.shadowColor = s3Active ? "rgba(17, 16, 14, 0.1)" : "rgba(17, 16, 14, 0.04)";
+      ctx.shadowBlur = 12;
+      ctx.shadowOffsetY = 3;
       ctx.fill();
       ctx.shadowColor = "transparent";
-      ctx.strokeStyle = s3Active ? "#11100E" : "rgba(17, 16, 14, 0.18)";
-      ctx.lineWidth = s3Active ? 1.8 : 1.2;
+      ctx.strokeStyle = s3Active ? "#11100E" : "rgba(17, 16, 14, 0.16)";
+      ctx.lineWidth = s3Active ? 1.6 : 1.15;
       ctx.stroke();
 
       ctx.fillStyle = s3Active ? "rgba(204, 50, 0, 0.08)" : "rgba(17, 16, 14, 0.04)";
-      drawRoundedRect(ctx, cx - boxW / 2 + 1, r3Y - boxH / 2 + 1, boxW - 2, 24, 9);
+      drawRoundedRect(ctx, boxX + 1, boxY + 1, boxW - 2, 19, 8);
       ctx.fill();
 
-      const dotY = r3Y - boxH / 2 + 13;
+      const dotY = boxY + 10.5;
       [0, 1, 2].forEach((d) => {
         ctx.beginPath();
-        ctx.arc(cx - boxW / 2 + 14 + d * 9, dotY, 2.6, 0, Math.PI * 2);
+        ctx.arc(boxX + 12 + d * 8, dotY, 2.3, 0, Math.PI * 2);
         ctx.fillStyle = d === 0 && s3Active ? "#CC3200" : "rgba(17, 16, 14, 0.2)";
         ctx.fill();
       });
 
       ctx.fillStyle = s3Active ? "#CC3200" : "rgba(17, 16, 14, 0.45)";
-      ctx.font = "500 13.5px Optima, sans-serif";
+      ctx.font = "500 12px Optima, sans-serif";
       ctx.textAlign = "right";
       ctx.textBaseline = "middle";
-      ctx.fillText("Sandbox", cx + boxW / 2 - 12, dotY + 0.5);
+      ctx.fillText("Sandbox", boxX + boxW - 10, dotY + 0.5);
 
-      const sBarW = boxW - 28;
-      const sBarX = cx - sBarW / 2;
+      const sBarW = boxW - 24;
+      const sBarX = boxX + 12;
       ctx.fillStyle = "rgba(17, 16, 14, 0.09)";
-      drawRoundedRect(ctx, sBarX, r3Y + 1, sBarW, 8, 4);
+      drawRoundedRect(ctx, sBarX, boxY + 26, sBarW, 6.5, 3.25);
       ctx.fill();
-      drawRoundedRect(ctx, sBarX, r3Y + 15, sBarW * 0.72, 8, 4);
+      drawRoundedRect(ctx, sBarX, boxY + 37, sBarW * 0.7, 6.5, 3.25);
       ctx.fill();
 
       if (s3Active) {
-        ctx.fillStyle = "#CC3200";
-        drawRoundedRect(ctx, sBarX, r3Y + 1, Math.max(8, sBarW * s3t), 8, 4);
+        const barGrad = ctx.createLinearGradient(sBarX, 0, sBarX + sBarW, 0);
+        barGrad.addColorStop(0, "#CC3200");
+        barGrad.addColorStop(1, "#FF6A3D");
+        ctx.fillStyle = barGrad;
+        drawRoundedRect(ctx, sBarX, boxY + 26, Math.max(8, sBarW * s3t), 6.5, 3.25);
         ctx.fill();
         ctx.fillStyle = "#11100E";
-        drawRoundedRect(ctx, sBarX, r3Y + 15, Math.max(8, sBarW * 0.72 * s3t), 8, 4);
+        drawRoundedRect(ctx, sBarX, boxY + 37, Math.max(8, sBarW * 0.7 * s3t), 6.5, 3.25);
         ctx.fill();
       }
       ctx.restore();
 
-      // Row 4: Emerald Verifier Medallion
-      const r4Y = padY + rowH * 3.5;
+      // Row 4 (RL Verifier): Left-aligned Emerald Medallion + compact status readout
+      const r4VisY = padTop + rowH * 3.64;
       const s4Active = p >= 0.76;
       const s4t = easeOutCubic((p - 0.76) / 0.2);
-      const badgeR = 26;
+      const badgeR = 20;
+      const badgeCx = cardX + 34;
 
       ctx.save();
       if (s4Active) {
         ctx.beginPath();
-        ctx.arc(cx, r4Y, badgeR + 8 + s4t * 6, 0, Math.PI * 2);
+        ctx.arc(badgeCx, r4VisY, badgeR + 6 + s4t * 5, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(21, 128, 61, ${0.14 * s4t})`;
         ctx.fill();
       }
 
       ctx.beginPath();
-      ctx.arc(cx, r4Y, badgeR, 0, Math.PI * 2);
-      ctx.fillStyle = s4Active ? "#15803D" : "#FFFFFF";
-      ctx.shadowColor = s4Active ? "rgba(21, 128, 61, 0.3)" : "rgba(17, 16, 14, 0.06)";
-      ctx.shadowBlur = 14;
-      ctx.shadowOffsetY = 4;
-      ctx.fill();
-      ctx.shadowColor = "transparent";
-      if (!s4Active) {
+      ctx.arc(badgeCx, r4VisY, badgeR, 0, Math.PI * 2);
+      if (s4Active) {
+        const vGrad = ctx.createLinearGradient(
+          badgeCx - badgeR,
+          r4VisY - badgeR,
+          badgeCx + badgeR,
+          r4VisY + badgeR,
+        );
+        vGrad.addColorStop(0, "#16A34A");
+        vGrad.addColorStop(1, "#15803D");
+        ctx.fillStyle = vGrad;
+        ctx.shadowColor = "rgba(21, 128, 61, 0.28)";
+        ctx.shadowBlur = 12;
+        ctx.shadowOffsetY = 3;
+        ctx.fill();
+        ctx.shadowColor = "transparent";
+      } else {
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fill();
         ctx.strokeStyle = "rgba(17, 16, 14, 0.2)";
-        ctx.lineWidth = 1.8;
+        ctx.lineWidth = 1.6;
         ctx.stroke();
       }
 
       ctx.strokeStyle = s4Active ? "#FFFFFF" : "rgba(17, 16, 14, 0.25)";
-      ctx.lineWidth = 3.5;
+      ctx.lineWidth = 3;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.beginPath();
-      ctx.moveTo(cx - 10, r4Y + 1);
-      ctx.lineTo(cx - 3, r4Y + 8);
-      ctx.lineTo(cx + 11, r4Y - 8);
+      ctx.moveTo(badgeCx - 8, r4VisY + 1);
+      ctx.lineTo(badgeCx - 2, r4VisY + 7);
+      ctx.lineTo(badgeCx + 9, r4VisY - 6);
       ctx.stroke();
+
+      // Status text beside medallion (leaves right corner clear for Replay button)
+      const textX = badgeCx + badgeR + 14;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = s4Active ? "#15803D" : "#5A544E";
+      ctx.font = "500 13.5px Optima, sans-serif";
+      ctx.fillText(s4Active ? "Reward verified" : "Awaiting verifier", textX, r4VisY - 7);
+
+      ctx.fillStyle = s4Active ? "rgba(21, 128, 61, 0.8)" : "rgba(17, 16, 14, 0.45)";
+      ctx.font = '400 10.5px "Azeret Mono", ui-monospace, monospace';
+      ctx.fillText(s4Active ? "fp_rate: 0.00" : "pending audit", textX, r4VisY + 9);
       ctx.restore();
 
       // Bottom progress bar
@@ -829,7 +959,7 @@ export function TracePipelineCanvas({
       const p = progressRef.current;
       const currentStage =
         manualRef.current !== null ? manualRef.current : Math.min(3, Math.floor(p * 4));
-      const h = mobileMode ? 392 : height;
+      const h = mobileMode ? MOBILE_CANVAS_HEIGHT : height;
 
       ctx.clearRect(0, 0, width, h);
       if (mobileMode) {
@@ -879,9 +1009,9 @@ export function TracePipelineCanvas({
         <button
           type="button"
           onClick={onReplay}
-          className="sf-pressable sf-squircle-xs absolute right-3.5 bottom-3.5 z-10 inline-flex items-center gap-1.5 bg-[var(--sf-white)]/95 border border-[var(--sf-red-border)] px-3 py-1.5 sm:px-3.5 sm:py-2 font-optima text-[14.5px] sm:text-[15.5px] font-medium text-[var(--sf-red)] hover:bg-[var(--sf-red)] hover:text-[var(--sf-white)] shadow-sm cursor-pointer"
+          className="sf-pressable sf-squircle-xs absolute right-4 bottom-5 sm:right-3.5 sm:bottom-3.5 z-10 inline-flex items-center gap-1.5 bg-[var(--sf-white)]/95 border border-[var(--sf-red-border)] px-2.5 py-1 sm:px-3.5 sm:py-2 font-optima text-[13px] sm:text-[15.5px] font-medium text-[var(--sf-red)] hover:bg-[var(--sf-red)] hover:text-[var(--sf-white)] shadow-sm cursor-pointer"
         >
-          <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" strokeWidth={2} />
+          <RotateCcw className="h-3 w-3 sm:h-3.5 sm:w-3.5" aria-hidden="true" strokeWidth={2} />
           <span>Replay</span>
         </button>
       )}
