@@ -10,20 +10,59 @@ export const SFDATA_LINKS = {
   linkedinCompany: "https://www.linkedin.com/company/sanfranciscodata",
 } as const;
 
-export const TEAM_INSTITUTIONS = [
-  "Mercor",
-  "Etched",
-  "Google",
-  "Google DeepMind",
-  "Nvidia",
-  "Stanford SAIL",
-  "Berkeley RISE",
-  "TerminalBench",
-] as const;
+export interface LogoAsset {
+  name: string;
+  src: string;
+  heightPx: number;
+  widthPx: number;
+}
+
+export const BACKER_LOGOS: LogoAsset[] = [
+  { name: "a16z speedrun", src: "/logos/a16z-speedrun.png", heightPx: 26, widthPx: 90 },
+  { name: "Khosla Ventures", src: "/logos/khosla-ventures.png", heightPx: 24, widthPx: 74 },
+];
+
+export const PEDIGREE_LOGOS: LogoAsset[] = [
+  { name: "Mercor", src: "/logos/mercor.png", heightPx: 28, widthPx: 82 },
+  { name: "Etched", src: "/logos/etched.png", heightPx: 24, widthPx: 102 },
+  { name: "Google", src: "/logos/google.png", heightPx: 30, widthPx: 56 },
+  { name: "Google DeepMind", src: "/logos/deepmind.png", heightPx: 26, widthPx: 112 },
+  { name: "NVIDIA", src: "/logos/nvidia.png", heightPx: 24, widthPx: 130 },
+  { name: "Stanford SAIL", src: "/logos/stanford-sail.png", heightPx: 34, widthPx: 74 },
+  { name: "UC Berkeley RISELab", src: "/logos/berkeley-rise.png", heightPx: 32, widthPx: 66 },
+  { name: "Terminal-Bench", src: "/logos/terminal-bench.png", heightPx: 26, widthPx: 116 },
+];
+
+export interface FounderProfile {
+  name: string;
+  role: string;
+  image: string;
+  bio: string;
+  xHref: string;
+  linkedinHref: string;
+}
+
+export const FOUNDERS: FounderProfile[] = [
+  {
+    name: "Brandon Guo",
+    role: "Co-founder & CEO",
+    image: "/founders/brandon-guo.png",
+    bio: "Previously helped grow Mercor's code team to $100M in annualized revenue run rate before co-founding San Francisco Data to turn real production agent failures into frontier RL environments.",
+    xHref: SFDATA_LINKS.xBrandon,
+    linkedinHref: SFDATA_LINKS.linkedinBrandon,
+  },
+  {
+    name: "Faiz Siddiqi",
+    role: "Co-founder & CTO",
+    image: "/founders/faiz-siddiqi.png",
+    bio: "Previously scaled Mercor's code team alongside Brandon to $100M ARR. Leads research engineering at San Francisco Data, building deterministic sandboxes and ungameable verifiers for 20+ frontier labs.",
+    xHref: SFDATA_LINKS.xFaiz,
+    linkedinHref: SFDATA_LINKS.linkedinFaiz,
+  },
+];
 
 export interface RefineryStage {
   id: string;
-  step: string;
   shortTitle: string;
   shortTag: string;
   title: string;
@@ -45,7 +84,6 @@ export interface RefineryStage {
 export const REFINERY_STAGES: RefineryStage[] = [
   {
     id: "capture",
-    step: "01",
     shortTitle: "Raw Trace",
     shortTag: "Agent fails live",
     title: "Capture real production failures",
@@ -68,7 +106,6 @@ export const REFINERY_STAGES: RefineryStage[] = [
   },
   {
     id: "filter",
-    step: "02",
     shortTitle: "Filter & Sanitize",
     shortTag: "Strip PII & noise",
     title: "Permission, redact & isolate signal",
@@ -91,7 +128,6 @@ export const REFINERY_STAGES: RefineryStage[] = [
   },
   {
     id: "reconstruct",
-    step: "03",
     shortTitle: "Reconstruct Env",
     shortTag: "Freeze sandbox",
     title: "Reconstruct a deterministic sandbox",
@@ -114,7 +150,6 @@ export const REFINERY_STAGES: RefineryStage[] = [
   },
   {
     id: "verify",
-    step: "04",
     shortTitle: "RL Verifier",
     shortTag: "Grade real outcome",
     title: "Write ungameable behavioral verifiers",
@@ -170,7 +205,7 @@ export const AUDIENCE_PATHS = [
   {
     audience: "For research engineers",
     heading: "Build the continuous link between deployed AI and training.",
-    body: "We are a small, in-person team on Kearny Street in San Francisco's Financial District, working 5 days a week. Our team has previously engineered and operated at Mercor, Etched, Google, Google DeepMind, Nvidia, Stanford SAIL, and Berkeley RISE, co-authored TerminalBench, and built environments and evals for 20+ frontier labs.",
+    body: "We are a small, in-person team on Kearny Street in San Francisco's Financial District, working 5 days a week, building environments and evaluations for 20+ frontier labs.",
     ctaLabel: "View open roles on Ashby",
     ctaHref: SFDATA_LINKS.careers,
   },
